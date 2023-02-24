@@ -16,7 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 public class VehicleDto {
 
+    private Long id;
 
+    private String modelNo;
     private String vehicleCode;
 
     private List<VehicleDefect> vehicleDefect;

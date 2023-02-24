@@ -19,7 +19,9 @@ public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NonNull
+
+    private String modelNo;
+
     private String code;
     @OneToMany
     private List<VehicleDefect> vehicleDefect;

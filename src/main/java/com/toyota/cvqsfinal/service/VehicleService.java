@@ -1,12 +1,19 @@
 package com.toyota.cvqsfinal.service;
 
+import com.toyota.cvqsfinal.dto.GetVehiclePageable;
 import com.toyota.cvqsfinal.dto.VehicleDto;
 import com.toyota.cvqsfinal.entity.Vehicle;
 import com.toyota.cvqsfinal.repository.VehicleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -20,8 +27,8 @@ public class VehicleService {
     public VehicleDto vehicleSave(VehicleDto vehicleSaveDto, String token){
         if (vehicleRepository.findByCodeAndDeletedFalse(vehicleSaveDto.getVehicleCode()) == null){
             log.info(jwtService.findUsername(token)+" Vehicle Saved : (VEHICLE CODE) " + vehicleSaveDto.getVehicleCode());
-            vehicleRepository.save(Vehicle.builder().code(vehicleSaveDto.getVehicleCode()).build());
-            return VehicleDto.builder().vehicleCode(vehicleSaveDto.getVehicleCode()).build();
+            vehicleRepository.save(Vehicle.builder().code(vehicleSaveDto.getVehicleCode()).modelNo(vehicleSaveDto.getModelNo()).build());
+            return VehicleDto.builder().vehicleCode(vehicleSaveDto.getVehicleCode()).modelNo(vehicleSaveDto.getModelNo()).build();
         }
         else {
             log.info(jwtService.findUsername(token)+" Vehicle not be saved : (VEHICLE CODE) " + vehicleSaveDto.getVehicleCode());
@@ -36,7 +43,11 @@ public class VehicleService {
             return null;
         }
         else {
-            return VehicleDto.builder().vehicleDefect(vehicle.getVehicleDefect()).vehicleCode(vehicle.getCode()).build();
+            return VehicleDto.builder()
+                    .vehicleDefect(vehicle.getVehicleDefect())
+                    .vehicleCode(vehicle.getCode())
+                    .modelNo(vehicle.getModelNo())
+                    .build();
         }
 
     }
@@ -58,6 +69,7 @@ public class VehicleService {
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(id);
         if (vehicle != null){
             vehicle.setCode(vehicleDto.getVehicleCode());
+            vehicle.setModelNo(vehicle.getModelNo());
             vehicle.setVehicleDefect(vehicleDto.getVehicleDefect());
             log.info("Vehicle Updated : (id) " + id);
             vehicleRepository.save(vehicle);
@@ -76,6 +88,18 @@ public class VehicleService {
             return;
         }
         log.error(jwtService.findUsername(token)+" Vehicle Not Found! (id)" + vehicleId );
+    }
+
+    public List<Vehicle> getVehiclesWithPagination(GetVehiclePageable getVehiclePageable){
+        Sort sort;
+        if (getVehiclePageable.getSortType().equals("ASC")){
+            sort = Sort.by(Sort.Direction.ASC, "id");
+        }
+        else {
+            sort = Sort.by(Sort.Direction.DESC, "id");
+        }
+        Pageable pageable = PageRequest.of(getVehiclePageable.getPage(), getVehiclePageable.getPageSize(), sort);
+        return vehicleRepository.findAllByCodeLikeAndModelNoLikeAndDeletedFalse("%"+getVehiclePageable.getVehicleCode()+"%","%"+getVehiclePageable.getModelNo()+"%",pageable).get().collect(Collectors.toList());
     }
 
 }

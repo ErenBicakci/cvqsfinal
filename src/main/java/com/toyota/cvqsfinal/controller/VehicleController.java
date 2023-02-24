@@ -1,12 +1,17 @@
 package com.toyota.cvqsfinal.controller;
 
+import com.toyota.cvqsfinal.dto.GetVehiclePageable;
 import com.toyota.cvqsfinal.dto.VehicleDto;
 import com.toyota.cvqsfinal.entity.Vehicle;
 import com.toyota.cvqsfinal.service.VehicleService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@Slf4j
 @RestController
 @RequestMapping("/api/vehicle")
 @RequiredArgsConstructor
@@ -36,6 +41,11 @@ public class VehicleController {
     @PutMapping("/updatevehicle/{id}")
     void updateVehicle(@PathVariable Long id,@RequestBody VehicleDto vehicleDto,@RequestHeader (name="Authorization") String token){
         vehicleService.vehicleUpdate(id,vehicleDto,token.substring(7));
+    }
+
+    @PostMapping("/getvehicles")
+    ResponseEntity<List<Vehicle>> getVehicles(@RequestBody GetVehiclePageable getVehiclePageable, @RequestHeader (name="Authorization") String token){
+        return ResponseEntity.ok(vehicleService.getVehiclesWithPagination(getVehiclePageable));
     }
 
 
