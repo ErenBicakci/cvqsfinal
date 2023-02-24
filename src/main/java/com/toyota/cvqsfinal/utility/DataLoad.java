@@ -14,6 +14,12 @@ public class DataLoad implements ApplicationRunner {
     @Autowired
     private RoleRepository roleRepository;
 
+    /**
+     *
+     * Uygulama ayağa kalkarken eğer Roller yok ise Rolleri Oluşturur
+     *
+     *
+     */
     @Override
     public void run(ApplicationArguments args) throws Exception {
         //Role Save
