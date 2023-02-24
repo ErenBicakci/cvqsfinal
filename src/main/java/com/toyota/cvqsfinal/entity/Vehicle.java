@@ -1,0 +1,28 @@
+package com.toyota.cvqsfinal.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.lang.NonNull;
+
+import java.util.List;
+
+@Data
+@Builder
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+public class Vehicle {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NonNull
+    private String code;
+    @OneToMany
+    private List<VehicleDefect> vehicleDefect;
+
+    private boolean deleted;
+}
