@@ -20,6 +20,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)throws Exception{
         httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
+                .requestMatchers("/api/login/**").permitAll()
+                .requestMatchers("/api/usermanagement/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/api/dashboard/**").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .sessionManagement()

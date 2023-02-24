@@ -57,7 +57,7 @@ public class UserManagementController {
         return ResponseEntity.ok(responseObject);
     }
 
-    @GetMapping("/delrole/{username}/{role}")
+    @DeleteMapping("/delrole/{username}/{role}")
     private void userDelRole(@PathVariable String username,@PathVariable String role){
         userManagementService.userDelRole(username,role);
     }
