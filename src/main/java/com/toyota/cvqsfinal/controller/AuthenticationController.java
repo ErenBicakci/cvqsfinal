@@ -1,7 +1,6 @@
 package com.toyota.cvqsfinal.controller;
 
 import com.toyota.cvqsfinal.dto.UserDto;
-import com.toyota.cvqsfinal.dto.UserRequest;
 import com.toyota.cvqsfinal.service.AuthenticationService;
 import com.toyota.cvqsfinal.service.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +19,21 @@ public class AuthenticationController {
 
     @PostMapping("/save")
     public ResponseEntity<String> save (@RequestBody UserDto userDto){
-
-        return authenticationService.save(userDto);
+        String responseObject = authenticationService.save(userDto);
+        if (responseObject == null){
+            return ResponseEntity.status(400).body(null);
+        }
+        return ResponseEntity.ok(responseObject);
     }
 
 
     @PostMapping("/auth")
-    public ResponseEntity<String> auth(@RequestBody UserRequest userRequest){
-        return authenticationService.auth(userRequest);
+    public ResponseEntity<String> auth(@RequestBody UserDto userDto){
+        String responseObject = authenticationService.auth(userDto);
+        if (responseObject == null){
+            return ResponseEntity.status(400).body(null);
+        }
+        return ResponseEntity.ok(responseObject);
     }
 
     @GetMapping
