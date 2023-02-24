@@ -22,6 +22,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/api/login/**").permitAll()
                 .requestMatchers("/api/usermanagement/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/api/listing/**").hasAuthority("ROLE_TEAMLEADER")
+                .requestMatchers("/api/vehicle/**").hasAuthority("ROLE_OPERATOR")
+
                 .requestMatchers("/api/dashboard/**").permitAll()
                 .anyRequest().permitAll()
                 .and()

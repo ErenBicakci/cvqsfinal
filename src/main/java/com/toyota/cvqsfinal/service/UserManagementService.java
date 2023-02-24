@@ -37,7 +37,11 @@ public class UserManagementService {
     public void deleteUser(String username, String token){
         log.info(jwtService.findUsername(token)+" User deletion request : (USERNAME) " +username);
         try {
-            User user = userRepository.findByUsername(username).orElseThrow();
+            User user = userRepository.findByUsernameAndDeletedFalse(username);
+            if (user == null){
+                log.warn(jwtService.findUsername(token)+" user not found " +username);
+                return;
+            }
             if (user.isDeleted()){
                 log.warn(jwtService.findUsername(token)+" Tried to delete deleted user " +username);
                 return;
@@ -82,7 +86,12 @@ public class UserManagementService {
         if (roleRepository.findByName(role) == null){
             return null;
         }
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username Not Found!"));
+        User user = userRepository.findByUsernameAndDeletedFalse(username);
+        if (user == null)
+        {
+            log.debug("Username Not Found!");
+            return null;
+        }
         List<Role> roles = new ArrayList<>();
         for (int i = 0;i < user.getRoles().size();i++){
             if (role.equals(user.getRoles().get(i).getName())){
@@ -105,7 +114,12 @@ public class UserManagementService {
             return;
         }
 
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username Not Found!"));
+        User user = userRepository.findByUsernameAndDeletedFalse(username);
+
+        if (user == null){
+            log.debug("Username Not Found!");
+            return;
+        }
 
         List<Role> roles = new ArrayList<>();
         int counter = 0;

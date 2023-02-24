@@ -43,10 +43,7 @@ public class VehicleController {
         vehicleService.vehicleUpdate(id,vehicleDto,token.substring(7));
     }
 
-    @PostMapping("/getvehicles")
-    ResponseEntity<List<Vehicle>> getVehicles(@RequestBody GetVehiclePageable getVehiclePageable, @RequestHeader (name="Authorization") String token){
-        return ResponseEntity.ok(vehicleService.getVehiclesWithPagination(getVehiclePageable));
-    }
+
 
 
 }
