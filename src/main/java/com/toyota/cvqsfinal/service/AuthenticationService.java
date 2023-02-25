@@ -48,13 +48,17 @@ public class AuthenticationService {
     public String auth(UserDto userRequest) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userRequest.getUsername(),userRequest.getPassword()));
-            User user = userRepository.findByUsername(userRequest.getUsername()).orElseThrow();
+            User user = userRepository.findByUsernameAndDeletedFalse(userRequest.getUsername());
+            if (user == null){
+                log.info("Deleted user login request");
+                return null;
+            }
             String token = jwtService.generateToken(user);
             log.info("User Signed In : (USERNAME) " + userRequest.getUsername());
             return token;
         }
         catch (AuthenticationException e){
-            log.warn("Attempted to login with wrong information : (USERNAME) " + userRequest.getUsername() + " (PASSWORD) " + stringManipulation.passwordHide(userRequest.getPassword()) );
+            log.info("Attempted to login with wrong information : (USERNAME) " + userRequest.getUsername() + " (PASSWORD) " + stringManipulation.passwordHide(userRequest.getPassword()) );
             return null;
         }
         catch (Exception e){

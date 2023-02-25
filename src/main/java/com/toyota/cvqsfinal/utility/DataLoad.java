@@ -25,9 +25,9 @@ public class DataLoad implements ApplicationRunner {
         //Role Save
 
         if (roleRepository.findAll().size() == 0){
-            Role roleOperator = Role.builder().id(1L).name("ROLE_OPERATOR").build();
-            Role roleTeamLeader = Role.builder().id(2L).name("ROLE_TEAMLEADER").build();
-            Role roleAdmin = Role.builder().id(3L).name("ROLE_ADMIN").build();
+            Role roleOperator = Role.builder().name("ROLE_OPERATOR").build();
+            Role roleTeamLeader = Role.builder().name("ROLE_TEAMLEADER").build();
+            Role roleAdmin = Role.builder().name("ROLE_ADMIN").build();
 
             roleRepository.save(roleAdmin);
             roleRepository.save(roleTeamLeader);
