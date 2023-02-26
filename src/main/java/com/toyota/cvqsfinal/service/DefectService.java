@@ -3,11 +3,7 @@ package com.toyota.cvqsfinal.service;
 import com.toyota.cvqsfinal.dto.DefectDto;
 import com.toyota.cvqsfinal.dto.ImageDto;
 import com.toyota.cvqsfinal.entity.*;
-import com.toyota.cvqsfinal.repository.DefectLocationRepository;
-import com.toyota.cvqsfinal.repository.ImageRepository;
-import com.toyota.cvqsfinal.repository.VehicleDefectRepository;
-import com.toyota.cvqsfinal.repository.VehicleRepository;
-import com.toyota.cvqsfinal.utility.ImageOperations;
+import com.toyota.cvqsfinal.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,79 +12,62 @@ import org.springframework.stereotype.Service;
 
 import java.util.Base64;
 
-import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class DefectService {
     private final JwtService jwtService;
-    private final VehicleRepository vehicleRepository;
-    private final DefectLocationRepository defectLocationRepository;
-    private final VehicleDefectRepository vehicleDefectRepository;
     private final ImageRepository imageRepository;
-    private final ImageOperations imageOperations;
+    private final DefectRepository defectRepository;
 
 
-    public DefectDto defectSave(String username, Long vehicleId, DefectDto defectDto)throws  Exception{
-        Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleId);
-        if (vehicle != null){
+    public DefectDto defectSave(DefectDto defectDto)throws  Exception{
+
 
             byte[] imageData = Base64.getMimeDecoder().decode(defectDto.getImageDto().getData());
 
-            defectLocationRepository.saveAll(defectDto.getDefectLocations());
+
 
             Image image = Image.builder()
                     .contentType(defectDto.getImageDto().getType())
                     .data(imageData)
                     .name(defectDto.getName())
                     .build();
-            image.setData(imageOperations.markImage(image,defectDto.getDefectLocations()).getData());
 
             imageRepository.save(image);
 
-            VehicleDefect newDefect =
-                    VehicleDefect.builder()
+            Defect newDefect =
+                    Defect.builder()
                             .defectName(defectDto.getName())
-                            .defectLocations(defectDto.getDefectLocations())
                             .image(image)
                             .build();
-            vehicleDefectRepository.save(newDefect);
+            defectRepository.save(newDefect);
 
+            return  DefectDto.builder().imageDto(defectDto.getImageDto()).name(defectDto.getName()).build();
 
-
-            List<VehicleDefect> vehicleDefects = vehicle.getVehicleDefect();
-            vehicleDefects.add(newDefect);
-            vehicle.setVehicleDefect(vehicleDefects);
-            vehicleRepository.save(vehicle);
-            return  DefectDto.builder().imageDto(defectDto.getImageDto()).name(defectDto.getName()).defectLocations(defectDto.getDefectLocations()).build();
-        }
-        return null;
     }
 
     @Transactional
-    public void defectDelete(Long defectId,String username){
-
-        log.info(jwtService.findUsername(username) + "Send defect delete request : (id) " + defectId);
-        VehicleDefect vehicleDefect = vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(defectId);
-        if (vehicleDefect != null){
-            vehicleDefect.setDeleted(true);
-            vehicleDefect.getImage().setDeleted(true);
-            imageRepository.save(vehicleDefect.getImage());
-            vehicleDefectRepository.save(vehicleDefect);
-            log.info("Defect not found : (id) " + defectId);
+    public boolean defectDelete(Long defectId){
+        Defect defect = defectRepository.getDefectByIdAndDeletedFalse(defectId);
+        if (defect != null){
+            defect.setDeleted(true);
+            defect.getImage().setDeleted(true);
+            imageRepository.save(defect.getImage());
+            defectRepository.save(defect);
+            return true;
         }
-        log.debug("defect delted successfully");
+        return false;
     }
 
     @Transactional
     public DefectDto defectGet(Long defectId){
-        VehicleDefect vehicleDefect = vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(defectId);
-        if (vehicleDefect != null){
+        Defect defect = defectRepository.getDefectByIdAndDeletedFalse(defectId);
+        if (defect != null){
             return DefectDto.builder()
-                    .defectLocations(vehicleDefect.getDefectLocations())
-                    .name(vehicleDefect.getDefectName())
-                    .imageDto(ImageDto.builder().name(vehicleDefect.getImage().getName()).data("").type(vehicleDefect.getImage().getContentType()).build())
+                    .name(defect.getDefectName())
+                    .imageDto(ImageDto.builder().name(defect.getImage().getName()).data("").type(defect.getImage().getContentType()).build())
                     .build();
         }
         return null;
@@ -98,7 +77,7 @@ public class DefectService {
     public ByteArrayResource getImage(Long defectId){
         try {
             final ByteArrayResource inputStream = new ByteArrayResource(
-                    vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(defectId).getImage().getData()
+                    defectRepository.getDefectByIdAndDeletedFalse(defectId).getImage().getData()
             );
             return inputStream;
         }
@@ -107,5 +86,24 @@ public class DefectService {
         }
 
     }
+
+    @Transactional
+    public DefectDto updateDefect(Long defectId,DefectDto defectDto){
+
+        Defect defect = defectRepository.getDefectByIdAndDeletedFalse(defectId);
+        if (defect != null){
+            defect.setDefectName(defect.getDefectName());
+            defect.getImage().setName(defectDto.getImageDto().getName());
+
+            byte[] imageData = Base64.getMimeDecoder().decode(defectDto.getImageDto().getData());
+
+            defect.getImage().setData(imageData);
+            defect.getImage().setContentType(defectDto.getImageDto().getType());
+            imageRepository.save(defect.getImage());
+            defectRepository.save(defect);
+        }
+        return null;
+    }
+
 
 }

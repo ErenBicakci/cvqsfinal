@@ -16,5 +16,5 @@ public class DefectDto {
 
     private ImageDto imageDto;
     private String name;
-    private List<DefectLocation> defectLocations;
+
 }

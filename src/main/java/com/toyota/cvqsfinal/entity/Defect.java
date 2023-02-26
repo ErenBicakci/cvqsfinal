@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.awt.*;
 import java.util.List;
 
 @Data
@@ -14,20 +13,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class VehicleDefect {
-
+public class Defect {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private Defect defect;
+    private String defectName;
 
-    @OneToMany
-    @JoinColumn(name = "vehicleDefect_id")
-    private List<DefectLocation> defectLocations;
+    @OneToOne
+    private Image image;
 
     private boolean deleted;
-
-
 }
