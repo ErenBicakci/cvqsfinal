@@ -14,6 +14,7 @@ import java.util.List;
 @Data
 public class DefectDto {
 
+    private Long id;
     private ImageDto imageDto;
     private String name;
 

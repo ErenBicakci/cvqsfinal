@@ -21,5 +21,5 @@ public class VehicleDto {
     private String modelNo;
     private String vehicleCode;
 
-    private List<VehicleDefect> vehicleDefect;
+    private List<VehicleDefectDto> vehicleDefectDtos;
 }

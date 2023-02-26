@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class VehicleDefectDto {
 
-
+    private Long id;
     private DefectDto defect;
 
     private List<DefectLocation> defectLocations;

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ImageDto {
 
+    private Long id;
     private String name;
     private String data;
     private String type;
