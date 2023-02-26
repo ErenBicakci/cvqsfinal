@@ -6,6 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.function.Function;
 
-@RequiredArgsConstructor
+@Log4j2
 @Service
+@RequiredArgsConstructor
 public class JwtService {
 
     @Value("${security.jwt.secret}")

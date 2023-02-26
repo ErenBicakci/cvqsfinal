@@ -5,7 +5,7 @@ import com.toyota.cvqsfinal.dto.VehicleDto;
 import com.toyota.cvqsfinal.entity.Vehicle;
 import com.toyota.cvqsfinal.repository.VehicleRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@Slf4j
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class VehicleService {

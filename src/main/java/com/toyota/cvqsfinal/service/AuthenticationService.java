@@ -6,8 +6,7 @@ import com.toyota.cvqsfinal.repository.RoleRepository;
 import com.toyota.cvqsfinal.repository.UserRepository;
 import com.toyota.cvqsfinal.utility.StringManipulation;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -15,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Slf4j
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {

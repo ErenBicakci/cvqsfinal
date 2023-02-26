@@ -6,16 +6,14 @@ import com.toyota.cvqsfinal.entity.User;
 import com.toyota.cvqsfinal.repository.RoleRepository;
 import com.toyota.cvqsfinal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j2
 @Service
-@Slf4j
 @RequiredArgsConstructor
 public class UserManagementService {
     private final UserRepository userRepository;

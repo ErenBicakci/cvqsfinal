@@ -5,13 +5,14 @@ import com.toyota.cvqsfinal.dto.VehicleDto;
 import com.toyota.cvqsfinal.entity.Vehicle;
 import com.toyota.cvqsfinal.service.VehicleService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j
+@Log4j2
 @RestController
 @RequestMapping("/api/vehicle")
 @RequiredArgsConstructor

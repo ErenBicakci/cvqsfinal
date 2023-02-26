@@ -6,14 +6,14 @@ import com.toyota.cvqsfinal.entity.*;
 import com.toyota.cvqsfinal.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
 
 
-@Slf4j
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class DefectService {

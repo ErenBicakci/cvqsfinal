@@ -4,11 +4,13 @@ import com.toyota.cvqsfinal.dto.UserDto;
 import com.toyota.cvqsfinal.entity.User;
 import com.toyota.cvqsfinal.service.UserManagementService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Log4j2
 @RestController
 @RequestMapping("/api/usermanagement")
 @RequiredArgsConstructor
