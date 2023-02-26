@@ -20,6 +20,8 @@ public class UserManagementService {
     private final RoleRepository roleRepository;
     private final JwtService jwtService;
 
+
+
     public List<UserDto> getUsers(){
         List<UserDto> users = new ArrayList<>();
         userRepository.findAllByDeletedFalse().stream()

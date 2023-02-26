@@ -23,14 +23,12 @@ public class VehicleService {
     private final VehicleRepository vehicleRepository;
     private final JwtService jwtService;
 
-    public VehicleDto vehicleSave(VehicleDto vehicleSaveDto, String token){
+    public VehicleDto vehicleSave(VehicleDto vehicleSaveDto){
         if (vehicleRepository.findByCodeAndDeletedFalse(vehicleSaveDto.getVehicleCode()) == null){
-            log.info(jwtService.findUsername(token)+" Vehicle Saved : (VEHICLE CODE) " + vehicleSaveDto.getVehicleCode());
             vehicleRepository.save(Vehicle.builder().code(vehicleSaveDto.getVehicleCode()).modelNo(vehicleSaveDto.getModelNo()).build());
             return VehicleDto.builder().vehicleCode(vehicleSaveDto.getVehicleCode()).modelNo(vehicleSaveDto.getModelNo()).build();
         }
         else {
-            log.info(jwtService.findUsername(token)+" Vehicle not be saved : (VEHICLE CODE) " + vehicleSaveDto.getVehicleCode());
             return null;
         }
     }
@@ -63,30 +61,27 @@ public class VehicleService {
 
     }
 
-    public void vehicleUpdate(Long id,VehicleDto vehicleDto,String token){
-        log.info(jwtService.findUsername(token)+" Send vehicle update request : (VEHICLE CODE) " + id);
+    public VehicleDto vehicleUpdate(Long id,VehicleDto vehicleDto){
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(id);
         if (vehicle != null){
             vehicle.setCode(vehicleDto.getVehicleCode());
             vehicle.setModelNo(vehicle.getModelNo());
             vehicle.setVehicleDefect(vehicleDto.getVehicleDefect());
-            log.info("Vehicle Updated : (id) " + id);
             vehicleRepository.save(vehicle);
+            return vehicleDto;
         }
-        log.info("Vehicle not found : (id) " + id);
-
+        return null;
     }
 
-    public void vehicleDelete(Long vehicleId, String token){
-        log.info(jwtService.findUsername(token)+" Send vehicle delete request : (VEHICLE CODE) " + vehicleId);
+    public boolean vehicleDelete(Long vehicleId, String token){
 
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleId);
         if (vehicle != null){
             vehicle.setDeleted(true);
             vehicleRepository.save(vehicle);
-            return;
+            return true;
         }
-        log.error(jwtService.findUsername(token)+" Vehicle Not Found! (id)" + vehicleId );
+        return false;
     }
 
     public List<Vehicle> getVehiclesWithPagination(GetVehiclePageable getVehiclePageable){
