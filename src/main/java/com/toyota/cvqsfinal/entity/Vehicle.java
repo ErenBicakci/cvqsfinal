@@ -24,6 +24,7 @@ public class Vehicle {
 
     private String code;
     @OneToMany
+    @JoinColumn(name = "vehicle_id")
     private List<VehicleDefect> vehicleDefect;
 
     private boolean deleted;

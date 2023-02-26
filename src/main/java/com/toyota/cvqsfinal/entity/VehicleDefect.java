@@ -26,6 +26,7 @@ public class VehicleDefect {
     private Image image;
 
     @OneToMany
+    @JoinColumn(name = "vehicleDefect_id")
     private List<DefectLocation> defectLocations;
 
     private boolean deleted;
