@@ -25,7 +25,7 @@ public class UserManagementController {
 
     @DeleteMapping("/deleteuser/{username}")
     private void deleteUser(@PathVariable String username, @RequestHeader(name="Authorization") String token){
-        userManagementService.deleteUser(username,token.substring(7));
+        userManagementService.deleteUser(username);
 
     }
 

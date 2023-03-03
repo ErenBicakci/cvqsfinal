@@ -18,7 +18,6 @@ import java.util.List;
 public class UserManagementService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final JwtService jwtService;
 
 
 
@@ -34,25 +33,20 @@ public class UserManagementService {
         return users;
     }
 
-    public void deleteUser(String username, String token){
-        log.info(jwtService.findUsername(token)+" User deletion request : (USERNAME) " +username);
+    public void deleteUser(String username){
         try {
             User user = userRepository.findByUsernameAndDeletedFalse(username);
             if (user == null){
-                log.warn(jwtService.findUsername(token)+" user not found " +username);
                 return;
             }
             if (user.isDeleted()){
-                log.warn(jwtService.findUsername(token)+" Tried to delete deleted user " +username);
                 return;
             }
             user.setDeleted(true);
             userRepository.save(user);
-            log.info(jwtService.findUsername(token)+" User Deleted " +username);
 
         }
         catch (Exception e){
-            log.warn(jwtService.findUsername(token)+" Request to delete non-existent user " +username);
 
         }
 

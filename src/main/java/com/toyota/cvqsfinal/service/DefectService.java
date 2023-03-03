@@ -17,7 +17,6 @@ import java.util.Base64;
 @Service
 @RequiredArgsConstructor
 public class DefectService {
-    private final JwtService jwtService;
     private final ImageRepository imageRepository;
     private final DefectRepository defectRepository;
 
