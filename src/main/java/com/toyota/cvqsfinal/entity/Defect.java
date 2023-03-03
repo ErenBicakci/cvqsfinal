@@ -1,5 +1,7 @@
 package com.toyota.cvqsfinal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.toyota.cvqsfinal.dto.DefectDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,9 +12,9 @@ import java.util.List;
 
 @Data
 @Builder
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 public class Defect {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +23,10 @@ public class Defect {
     private String defectName;
 
     @OneToOne
+    @JsonIgnore
     private Image image;
 
     private boolean deleted;
+
+
 }

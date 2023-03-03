@@ -50,7 +50,7 @@ public class VehicleController {
     @DeleteMapping("/deletevehicle/{id}")
     void deleteVehicle(@PathVariable Long id,@RequestHeader (name="Authorization") String token){
         log.info(jwtService.findUsername(token.substring(7))+" Send vehicle delete request : (VEHICLE CODE) " + id);
-
+            vehicleService.vehicleDelete(id);
         if (jwtService.findUsername(token.substring(7)) != null){
             return;
         }
@@ -58,18 +58,18 @@ public class VehicleController {
 
     }
 
-    @PutMapping("/updatevehicle/{id}")
-    ResponseEntity<VehicleDto> updateVehicle(@PathVariable Long id,@RequestBody VehicleDto vehicleDto,@RequestHeader (name="Authorization") String token){
-        log.info(jwtService.findUsername(token.substring(7))+" Send vehicle update request : (VEHICLE CODE) " + id);
+    @PutMapping("/updatevehicle")
+    ResponseEntity<VehicleDto> updateVehicle(@RequestBody VehicleDto vehicleDto,@RequestHeader (name="Authorization") String token){
+        log.info(jwtService.findUsername(token.substring(7))+" Send vehicle update request : (VEHICLE CODE) " + vehicleDto.getId());
 
-        VehicleDto vehicleDto1 = vehicleService.vehicleUpdate(id,vehicleDto);
+        VehicleDto vehicleDto1 = vehicleService.vehicleUpdate(vehicleDto);
         if (vehicleDto1 != null){
-            log.info(jwtService.findUsername(token.substring(7))+" Vehicle Updated : (id) " + id);
+            log.info(jwtService.findUsername(token.substring(7))+" Vehicle Updated : (id) " + vehicleDto.getId());
 
             return ResponseEntity.ok(vehicleDto1);
         }
 
-        log.info(jwtService.findUsername(token.substring(7))+" Vehicle not found : (id) " + id);
+        log.info(jwtService.findUsername(token.substring(7))+" Vehicle not found : (id) " + vehicleDto.getId());
 
         return ResponseEntity.status(400).body(null);
 

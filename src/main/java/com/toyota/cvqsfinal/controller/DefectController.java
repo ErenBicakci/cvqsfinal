@@ -62,7 +62,7 @@ public class DefectController {
 
         if (defectService.defectDelete(defectId)){
             log.info(jwtService.findUsername(token.substring(7)) + "defect successfully deleted ! : (defectId) " + defectId);
-
+            return;
         }
 
         log.error(jwtService.findUsername(token.substring(7)) + "defect not found!  : (defectId) " + defectId);
@@ -84,16 +84,16 @@ public class DefectController {
     }
 
     @PutMapping("/getdefect/{defectId}")
-    public ResponseEntity<DefectDto> defectUpdate(@PathVariable Long defectId, @RequestBody DefectDto defectDto, @RequestHeader (name="Authorization") String token)  {
-        log.info(jwtService.findUsername(token.substring(7)) + "send defect update request ! : (defectId) " + defectId);
+    public ResponseEntity<DefectDto> defectUpdate( @RequestBody DefectDto defectDto, @RequestHeader (name="Authorization") String token)  {
+        log.info(jwtService.findUsername(token.substring(7)) + "send defect update request ! : (defectId) " + defectDto.getId());
 
-        DefectDto defectDto1 = defectService.updateDefect(defectId,defectDto);
+        DefectDto defectDto1 = defectService.updateDefect(defectDto);
         if (defectDto1 != null){
-            log.info(jwtService.findUsername(token.substring(7)) + "defect successfully updated ! : (defectId) " + defectId);
+            log.info(jwtService.findUsername(token.substring(7)) + "defect successfully updated ! : (defectId) " + defectDto.getId());
 
             return ResponseEntity.ok(defectDto);
         }
-        log.error(jwtService.findUsername(token.substring(7)) + "defect not found ! : (defectId) " + defectId);
+        log.error(jwtService.findUsername(token.substring(7)) + "defect not found ! : (defectId) " + defectDto.getId());
 
         return ResponseEntity.status(400).body(null);
 

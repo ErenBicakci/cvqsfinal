@@ -1,9 +1,16 @@
 package com.toyota.cvqsfinal.service;
 
+import com.toyota.cvqsfinal.dto.DefectDto;
 import com.toyota.cvqsfinal.dto.GetVehiclePageable;
+import com.toyota.cvqsfinal.dto.VehicleDefectDto;
 import com.toyota.cvqsfinal.dto.VehicleDto;
+import com.toyota.cvqsfinal.entity.Defect;
 import com.toyota.cvqsfinal.entity.Vehicle;
+import com.toyota.cvqsfinal.entity.VehicleDefect;
+import com.toyota.cvqsfinal.repository.VehicleDefectRepository;
 import com.toyota.cvqsfinal.repository.VehicleRepository;
+import com.toyota.cvqsfinal.utility.DtoConvert;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +28,10 @@ import java.util.stream.Collectors;
 public class VehicleService {
 
     private final VehicleRepository vehicleRepository;
-    private final JwtService jwtService;
+
+    private final VehicleDefectRepository vehicleDefectRepository;
+
+    private final DtoConvert dtoConvert;
 
     public VehicleDto vehicleSave(VehicleDto vehicleSaveDto){
         if (vehicleRepository.findByCodeAndDeletedFalse(vehicleSaveDto.getVehicleCode()) == null){
@@ -33,6 +43,7 @@ public class VehicleService {
         }
     }
 
+    @Transactional
     public VehicleDto getVehicleFromId(Long vehicleId){
 
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleId);
@@ -41,7 +52,8 @@ public class VehicleService {
         }
         else {
             return VehicleDto.builder()
-                    .vehicleDefect(vehicle.getVehicleDefect())
+                    .vehicleDefectDtos(vehicle.getVehicleDefect().stream().filter(vehicleDefect -> !vehicleDefect.isDeleted()).collect(Collectors.toList()).stream().map(vehicleDefect -> dtoConvert.vehicleDefectToVehicleDefectDto(vehicleDefect)).collect(Collectors.toList()))
+                    .id(vehicle.getId())
                     .vehicleCode(vehicle.getCode())
                     .modelNo(vehicle.getModelNo())
                     .build();
@@ -61,23 +73,29 @@ public class VehicleService {
 
     }
 
-    public VehicleDto vehicleUpdate(Long id,VehicleDto vehicleDto){
-        Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(id);
+    public VehicleDto vehicleUpdate(VehicleDto vehicleDto){
+        Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleDto.getId());
         if (vehicle != null){
             vehicle.setCode(vehicleDto.getVehicleCode());
             vehicle.setModelNo(vehicle.getModelNo());
-            vehicle.setVehicleDefect(vehicleDto.getVehicleDefect());
+            vehicle.setId(vehicle.getId());
             vehicleRepository.save(vehicle);
             return vehicleDto;
         }
         return null;
     }
 
-    public boolean vehicleDelete(Long vehicleId, String token){
+    public boolean vehicleDelete(Long vehicleId){
 
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleId);
         if (vehicle != null){
             vehicle.setDeleted(true);
+            vehicle.getVehicleDefect().forEach(
+                    vehicleDefect -> {
+                        vehicleDefect.setDeleted(true);
+                        vehicleDefectRepository.save(vehicleDefect);
+                    }
+            );
             vehicleRepository.save(vehicle);
             return true;
         }

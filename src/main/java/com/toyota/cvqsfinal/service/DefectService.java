@@ -23,11 +23,7 @@ public class DefectService {
 
 
     public DefectDto defectSave(DefectDto defectDto)throws  Exception{
-
-
             byte[] imageData = Base64.getMimeDecoder().decode(defectDto.getImageDto().getData());
-
-
 
             Image image = Image.builder()
                     .contentType(defectDto.getImageDto().getType())
@@ -88,12 +84,13 @@ public class DefectService {
     }
 
     @Transactional
-    public DefectDto updateDefect(Long defectId,DefectDto defectDto){
+    public DefectDto updateDefect(DefectDto defectDto){
 
-        Defect defect = defectRepository.getDefectByIdAndDeletedFalse(defectId);
+        Defect defect = defectRepository.getDefectByIdAndDeletedFalse(defectDto.getId());
         if (defect != null){
             defect.setDefectName(defect.getDefectName());
             defect.getImage().setName(defectDto.getImageDto().getName());
+
 
             byte[] imageData = Base64.getMimeDecoder().decode(defectDto.getImageDto().getData());
 
@@ -101,6 +98,10 @@ public class DefectService {
             defect.getImage().setContentType(defectDto.getImageDto().getType());
             imageRepository.save(defect.getImage());
             defectRepository.save(defect);
+            return DefectDto.builder()
+                    .name(defect.getDefectName())
+                    .imageDto(ImageDto.builder().name(defect.getImage().getName()).data("").type(defect.getImage().getContentType()).build())
+                    .build();
         }
         return null;
     }
