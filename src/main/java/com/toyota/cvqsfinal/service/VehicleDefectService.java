@@ -1,20 +1,23 @@
 package com.toyota.cvqsfinal.service;
 
-import com.toyota.cvqsfinal.dto.DefectDto;
-import com.toyota.cvqsfinal.dto.ImageDto;
 import com.toyota.cvqsfinal.dto.VehicleDefectDto;
-import com.toyota.cvqsfinal.dto.VehicleDto;
-import com.toyota.cvqsfinal.entity.Defect;
-import com.toyota.cvqsfinal.entity.DefectLocation;
-import com.toyota.cvqsfinal.entity.Vehicle;
-import com.toyota.cvqsfinal.entity.VehicleDefect;
+import com.toyota.cvqsfinal.entity.*;
+import com.toyota.cvqsfinal.entity.Image;
 import com.toyota.cvqsfinal.repository.*;
 import com.toyota.cvqsfinal.utility.DtoConvert;
+import com.toyota.cvqsfinal.utility.ImageOperations;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +27,9 @@ import java.util.stream.Collectors;
 public class VehicleDefectService {
 
     private final VehicleService vehicleService;
+
+    public final ImageOperations imageOperations;
+
     private final DefectRepository defectRepository;
     private final DefectLocationRepository defectLocationRepository;
     private final VehicleDefectRepository vehicleDefectRepository;
@@ -118,5 +124,19 @@ public class VehicleDefectService {
                     .build();
         }
         return null;
+    }
+
+    @Transactional
+    public ByteArrayResource getImage(Long vehicleDefecetId){
+        try {
+            VehicleDefect vehicleDefect =  vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(vehicleDefecetId);
+            byte[] imageData = vehicleDefect.getDefect().getImage().getData();
+            ByteArrayResource inputStream2 = new ByteArrayResource(imageOperations.markImage(imageData, vehicleDefect.getDefectLocations()));
+            return inputStream2;
+        }
+        catch (Exception e){
+            return null;
+        }
+
     }
 }

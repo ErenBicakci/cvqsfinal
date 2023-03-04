@@ -23,7 +23,6 @@ public class Defect {
     private String defectName;
 
     @OneToOne
-    @JsonIgnore
     private Image image;
 
     private boolean deleted;
