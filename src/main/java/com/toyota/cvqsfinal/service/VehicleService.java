@@ -77,8 +77,7 @@ public class VehicleService {
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleDto.getId());
         if (vehicle != null){
             vehicle.setCode(vehicleDto.getVehicleCode());
-            vehicle.setModelNo(vehicle.getModelNo());
-            vehicle.setId(vehicle.getId());
+            vehicle.setModelNo(vehicleDto.getModelNo());
             vehicleRepository.save(vehicle);
             return vehicleDto;
         }
