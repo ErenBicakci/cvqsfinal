@@ -18,6 +18,11 @@ import java.util.Base64;
 public class DtoConvert {
 
 
+    /**
+     *  DefectDto nesnesini Defect nesnesine dönüştürür
+     * @param defectDto - Hata bilgileri ve resim bilgileri
+     * @return Defect - Hata bilgileri ve resim bilgileri
+     */
     public Defect defectDtoToDefect(DefectDto defectDto){
         Defect defect = new Defect();
         defect.setId(defectDto.getId());
@@ -36,6 +41,12 @@ public class DtoConvert {
         return defect;
     }
 
+
+    /**
+     *  Defect nesnesini DefectDto nesnesine dönüştürür
+     * @param defect - Hata bilgileri ve resim bilgileri
+     * @return DefectDto - Hata bilgileri ve resim bilgileri
+     */
     public DefectDto defectToDefectDto(Defect defect){
         DefectDto defectDto = new DefectDto();
         defectDto.setId(defect.getId());
@@ -49,6 +60,11 @@ public class DtoConvert {
         return defectDto;
     }
 
+    /**
+     *  VehicleDefectDto nesnesini VehicleDefect nesnesine dönüştürür
+     * @param vehicleDefectDto - Araç hata bilgileri
+     * @return VehicleDefect - Araç hata bilgileri
+     */
     public VehicleDefect vehicleDefectDtoToVehicleDefect(VehicleDefectDto vehicleDefectDto){
 
         VehicleDefect vehicleDefect = new VehicleDefect();
@@ -57,6 +73,12 @@ public class DtoConvert {
         vehicleDefect.setDefect(defectDtoToDefect(vehicleDefectDto.getDefect()));
         return vehicleDefect;
     }
+
+    /**
+     *  VehicleDefect nesnesini VehicleDefectDto nesnesine dönüştürür
+     * @param vehicleDefect - Araç hata bilgileri
+     * @return VehicleDefectDto - Araç hata bilgileri
+     */
 
     public VehicleDefectDto vehicleDefectToVehicleDefectDto(VehicleDefect vehicleDefect){
         VehicleDefectDto vehicleDefectDto = new VehicleDefectDto();
@@ -67,6 +89,11 @@ public class DtoConvert {
     }
 
 
+    /**
+     *  VehicleDto nesnesini Vehicle nesnesine dönüştürür
+     * @param vehicleDto - Araç bilgileri
+     * @return Vehicle - Araç bilgileri
+     */
     public Vehicle vehicleDtoToVehicle(VehicleDto vehicleDto){
         Vehicle vehicle = new Vehicle();
         vehicle.setId(vehicleDto.getId());
@@ -76,6 +103,11 @@ public class DtoConvert {
         return vehicle;
     }
 
+    /**
+     *  Vehicle nesnesini VehicleDto nesnesine dönüştürür
+     * @param vehicle - Araç bilgileri
+     * @return VehicleDto - Araç bilgileri
+     */
     public VehicleDto vehicleToVehicleDto(Vehicle vehicle){
         VehicleDto vehicleDto = new VehicleDto();
         vehicleDto.setId(vehicle.getId());

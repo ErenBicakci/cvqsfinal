@@ -12,10 +12,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+
+
 @Component
 public class ImageOperations {
 
 
+    /**
+     *
+     * @param data - Resim (byte dizisi)
+     * @param locationList - DefectLocation listesi
+     * @return byte[] - Resim (byte dizisi)
+     * @throws IOException
+     */
     public byte[] markImage(byte[] data, List<DefectLocation> locationList) throws IOException {
         InputStream inputStream = new ByteArrayInputStream(data);
         BufferedImage image2 = ImageIO.read(inputStream);
