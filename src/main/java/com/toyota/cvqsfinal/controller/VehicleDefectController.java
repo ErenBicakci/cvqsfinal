@@ -71,7 +71,7 @@ public class VehicleDefectController {
     ResponseEntity<VehicleDefectDto> getVehicleDefect(@PathVariable Long vehicleDefectId){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        log.error(auth.getName()+" GET VEHICLEDEFECT : (VEHICLE CODE) " + vehicleDefectId);
+        log.info(auth.getName()+" GET VEHICLEDEFECT : (VEHICLE CODE) " + vehicleDefectId);
 
         VehicleDefectDto vehicleDefectDto = vehicleDefectService.vehicleDefectGet(vehicleDefectId);
         if (vehicleDefectDto != null){
@@ -82,21 +82,21 @@ public class VehicleDefectController {
     }
 
 
-    @GetMapping(value = "/image/{vehicleDefectId}", produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(value = "/image/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
     @Transactional()
-    public ResponseEntity<Resource> getImage(@PathVariable Long vehicleDefectId) {
+    public ResponseEntity<Resource> getImage(@PathVariable Long id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        log.info(auth.getName() + "Send get image request : (vehicleDefectId) " + vehicleDefectId);
+        log.info(auth.getName() + "Send get image request : (vehicleDefectId) " + id);
 
-        ByteArrayResource byteArrayResource = vehicleDefectService.getImage(vehicleDefectId);
+        ByteArrayResource byteArrayResource = vehicleDefectService.getImage(id);
         if (byteArrayResource != null){
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .contentLength(byteArrayResource.contentLength())
                     .body(byteArrayResource);
         }
-        log.error(auth.getName() + " Image Not Found ! : (VehicleDefectId) " + vehicleDefectId);
+        log.error(auth.getName() + " Image Not Found ! : (VehicleDefectId) " + id);
 
         return null;
     }

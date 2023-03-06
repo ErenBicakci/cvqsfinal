@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetVehiclePageable {
+public class GetVehicleParameters {
 
     private String modelNo;
     private String vehicleCode;

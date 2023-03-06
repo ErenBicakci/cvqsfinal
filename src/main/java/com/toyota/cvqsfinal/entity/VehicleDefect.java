@@ -29,5 +29,8 @@ public class VehicleDefect {
 
     private boolean deleted;
 
+    @OneToOne
+    private Vehicle vehicle;
+
 
 }

@@ -1,6 +1,8 @@
 package com.toyota.cvqsfinal.service;
 
+import com.toyota.cvqsfinal.dto.GetVehicleDefectParameters;
 import com.toyota.cvqsfinal.dto.VehicleDefectDto;
+import com.toyota.cvqsfinal.dto.VehicleDto;
 import com.toyota.cvqsfinal.entity.*;
 import com.toyota.cvqsfinal.entity.Image;
 import com.toyota.cvqsfinal.repository.*;
@@ -10,6 +12,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -54,6 +59,7 @@ public class VehicleDefectService {
                     VehicleDefect.builder()
                             .defectLocations(defectLocations)
                             .defect(defect)
+                            .vehicle(vehicle)
                             .build();
             vehicleDefectRepository.save(newDefect);
 
@@ -131,12 +137,32 @@ public class VehicleDefectService {
         try {
             VehicleDefect vehicleDefect =  vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(vehicleDefecetId);
             byte[] imageData = vehicleDefect.getDefect().getImage().getData();
-            ByteArrayResource inputStream2 = new ByteArrayResource(imageOperations.markImage(imageData, vehicleDefect.getDefectLocations()));
+            ByteArrayResource inputStream2 = new ByteArrayResource(imageOperations.markImage(imageData, vehicleDefect.getDefectLocations().stream().filter(defectLocation -> !defectLocation.isDeleted()).collect(Collectors.toList())));
             return inputStream2;
         }
         catch (Exception e){
             return null;
         }
 
+    }
+
+    @Transactional
+    public List<VehicleDefectDto> getVehicleDefectsWithPagination(GetVehicleDefectParameters getVehicleDefectParameters) {
+
+
+        Sort sort;
+        if (getVehicleDefectParameters.getSortType().equals("ASC")){
+            sort = Sort.by(Sort.Direction.ASC, "id");
+        }
+        else {
+            sort = Sort.by(Sort.Direction.DESC, "id");
+        }
+        Pageable pageable = PageRequest.of(getVehicleDefectParameters.getPage(), getVehicleDefectParameters.getPageSize(), sort);
+
+        Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(getVehicleDefectParameters.getVehicleId());
+        if (vehicle == null)
+            return null;
+
+        return vehicleDefectRepository.findAllByVehicleAndDeletedFalse(vehicle,pageable).stream().filter(vehicleDefect -> vehicleDefect.getDefect().getDefectName().indexOf(getVehicleDefectParameters.getFilterKeyword()) != -1).map(vehicleDefecet -> dtoConvert.vehicleDefectToVehicleDefectDto(vehicleDefecet)).collect(Collectors.toList());
     }
 }

@@ -91,7 +91,7 @@ public class DefectController {
         return ResponseEntity.status(400).body(null);
     }
 
-    @PutMapping("/getdefect/{defectId}")
+    @PutMapping("/updatedefect")
     public ResponseEntity<DefectDto> defectUpdate( @RequestBody DefectDto defectDto)  {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 

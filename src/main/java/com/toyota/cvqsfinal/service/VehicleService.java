@@ -1,12 +1,8 @@
 package com.toyota.cvqsfinal.service;
 
-import com.toyota.cvqsfinal.dto.DefectDto;
-import com.toyota.cvqsfinal.dto.GetVehiclePageable;
-import com.toyota.cvqsfinal.dto.VehicleDefectDto;
+import com.toyota.cvqsfinal.dto.GetVehicleParameters;
 import com.toyota.cvqsfinal.dto.VehicleDto;
-import com.toyota.cvqsfinal.entity.Defect;
 import com.toyota.cvqsfinal.entity.Vehicle;
-import com.toyota.cvqsfinal.entity.VehicleDefect;
 import com.toyota.cvqsfinal.repository.VehicleDefectRepository;
 import com.toyota.cvqsfinal.repository.VehicleRepository;
 import com.toyota.cvqsfinal.utility.DtoConvert;
@@ -101,17 +97,18 @@ public class VehicleService {
         return false;
     }
 
-    public List<Vehicle> getVehiclesWithPagination(GetVehiclePageable getVehiclePageable){
+    @Transactional
+    public List<VehicleDto> getVehiclesWithPagination(GetVehicleParameters getVehicleParameters){
 
         Sort sort;
-        if (getVehiclePageable.getSortType().equals("ASC")){
+        if (getVehicleParameters.getSortType().equals("ASC")){
             sort = Sort.by(Sort.Direction.ASC, "id");
         }
         else {
             sort = Sort.by(Sort.Direction.DESC, "id");
         }
-        Pageable pageable = PageRequest.of(getVehiclePageable.getPage(), getVehiclePageable.getPageSize(), sort);
-        return vehicleRepository.findAllByCodeLikeAndModelNoLikeAndDeletedFalse("%"+getVehiclePageable.getVehicleCode()+"%","%"+getVehiclePageable.getModelNo()+"%",pageable).get().collect(Collectors.toList());
+        Pageable pageable = PageRequest.of(getVehicleParameters.getPage(), getVehicleParameters.getPageSize(), sort);
+        return vehicleRepository.findAllByCodeLikeAndModelNoLikeAndDeletedFalse("%"+ getVehicleParameters.getVehicleCode()+"%","%"+ getVehicleParameters.getModelNo()+"%",pageable).get().collect(Collectors.toList()).stream().map(vehicle -> dtoConvert.vehicleToVehicleDto(vehicle)).collect(Collectors.toList());
     }
 
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(value = "auth",url = "http://localhost:8181/api/login/")
+@FeignClient(value = "auth",url = "http://auth:8181/api/login/")
 public interface AuthClient {
     @PostMapping("/save")
     ResponseEntity<String> save(@RequestBody UserDto userDto);
