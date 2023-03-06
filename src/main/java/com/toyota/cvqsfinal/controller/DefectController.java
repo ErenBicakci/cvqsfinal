@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @RestController
-@RequestMapping("/api/defect")
+@RequestMapping("/api/v1/defect")
 @RequiredArgsConstructor
 public class DefectController {
     private final DefectService defectService;
 
 
-    @PostMapping("/save")
+    @PostMapping
     ResponseEntity<DefectDto> defectsave ( @RequestBody DefectDto defectDto)throws Exception{
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -60,7 +60,7 @@ public class DefectController {
         return null;
     }
 
-    @DeleteMapping(value = "/delete/{defectId}")
+    @DeleteMapping(value = "/{defectId}")
     public void defectDelete(@PathVariable Long defectId){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -76,7 +76,7 @@ public class DefectController {
 
     }
 
-    @GetMapping("/getdefect/{defectId}")
+    @GetMapping("/{defectId}")
     public ResponseEntity<DefectDto> defectGet(@PathVariable Long defectId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -91,7 +91,7 @@ public class DefectController {
         return ResponseEntity.status(400).body(null);
     }
 
-    @PutMapping("/updatedefect")
+    @PutMapping
     public ResponseEntity<DefectDto> defectUpdate( @RequestBody DefectDto defectDto)  {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 

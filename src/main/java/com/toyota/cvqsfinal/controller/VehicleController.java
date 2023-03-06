@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @RestController
-@RequestMapping("/api/vehicle")
+@RequestMapping("/api/v1/vehicle")
 @RequiredArgsConstructor
 public class VehicleController {
 
     private final VehicleService vehicleService;
 
-    @PostMapping("/save")
+    @PostMapping
     ResponseEntity<VehicleDto> saveVehicle(@RequestBody VehicleDto vehicleSaveDto){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -34,7 +34,7 @@ public class VehicleController {
         return  ResponseEntity.status(400).body(null);
     }
 
-    @GetMapping("/getvehicle/{id}")
+    @GetMapping("/{id}")
     ResponseEntity<VehicleDto> getVehicle(@PathVariable Long id){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -49,20 +49,20 @@ public class VehicleController {
     }
 
     
-    @DeleteMapping("/deletevehicle/{id}")
-    void deleteVehicle(@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> deleteVehicle(@PathVariable Long id){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         log.info(auth.getName()+" Send vehicle delete request : (VEHICLE CODE) " + id);
         vehicleService.vehicleDelete(id);
         if (auth.getName() != null){
-            return;
+            return ResponseEntity.ok().build();
         }
         log.error(auth.getName()+" Vehicle Not Found! (id)" + id );
-
+         return ResponseEntity.status(400).body(null);
     }
 
-    @PutMapping("/updatevehicle")
+    @PutMapping
     ResponseEntity<VehicleDto> updateVehicle(@RequestBody VehicleDto vehicleDto){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 

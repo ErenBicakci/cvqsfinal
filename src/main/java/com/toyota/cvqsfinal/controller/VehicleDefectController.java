@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @RestController
-@RequestMapping("/api/vehicledefect")
+@RequestMapping("/api/v1/vehicledefect")
 @RequiredArgsConstructor
 public class VehicleDefectController {
 
     private final VehicleDefectService vehicleDefectService;
 
 
-    @PostMapping("/save/{vehicleId}")
+    @PostMapping("/{vehicleId}")
     ResponseEntity<VehicleDefectDto> saveVehicleDefect(@PathVariable Long vehicleId, @RequestBody VehicleDefectDto vehicleDefectDto)throws Exception{
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -37,22 +37,22 @@ public class VehicleDefectController {
     }
 
 
-    @DeleteMapping("/delete/{vehicleDefectId}")
-    void deleteVehicleDefect(@PathVariable Long vehicleDefectId){
+    @DeleteMapping("/{vehicleDefectId}")
+    ResponseEntity<Void> deleteVehicleDefect(@PathVariable Long vehicleDefectId){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         log.info(auth.getName()+" Send VehicleDefect delete request : (VEHICLEDEFECT CODE) " + vehicleDefectId);
 
         boolean vehicleDto = vehicleDefectService.vehicleDefectDel(vehicleDefectId);
         if (vehicleDto){
-            return;
+            return ResponseEntity.ok().build();
         }
         log.error(auth.getName()+" VEHICLEDEFECT NOT FOUND : (VEHICLE CODE) " + vehicleDefectId);
-
+            return ResponseEntity.status(400).body(null);
 
     }
 
-    @PutMapping("/update")
+    @PutMapping
     ResponseEntity<VehicleDefectDto> updateVehicleDefect(@RequestBody VehicleDefectDto vehicleDefectDto){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -67,7 +67,7 @@ public class VehicleDefectController {
         return ResponseEntity.status(400).body(null);
     }
 
-    @GetMapping("/get/{vehicleDefectId}")
+    @GetMapping("/{vehicleDefectId}")
     ResponseEntity<VehicleDefectDto> getVehicleDefect(@PathVariable Long vehicleDefectId){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -98,6 +98,6 @@ public class VehicleDefectController {
         }
         log.error(auth.getName() + " Image Not Found ! : (VehicleDefectId) " + id);
 
-        return null;
+        return ResponseEntity.status(400).body(null);
     }
 }
