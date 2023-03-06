@@ -31,18 +31,25 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class VehicleDefectService {
 
-    private final VehicleService vehicleService;
-
     public final ImageOperations imageOperations;
 
     private final DefectRepository defectRepository;
     private final DefectLocationRepository defectLocationRepository;
     private final VehicleDefectRepository vehicleDefectRepository;
-    private final ImageRepository imageRepository;
 
     private final VehicleRepository vehicleRepository;
 
     private final DtoConvert dtoConvert;
+
+    /**
+     *
+     * Araç hata kaydetme servisi
+     *
+     * @param vehicleId - Araç id
+     * @param vehicleDefectDto - Araç hata bilgileri
+     * @return VehicleDefectDto - Araç hata bilgileri
+     * @throws Exception
+     */
 
     @Transactional
     public VehicleDefectDto vehicleDefectSave(Long vehicleId, VehicleDefectDto vehicleDefectDto)throws  Exception{
@@ -76,6 +83,15 @@ public class VehicleDefectService {
         return null;
     }
 
+    /**
+     *
+     * Araç hata silme servisi
+     *
+     * @param id - Araç hata id
+     * @return boolean - Araç hata silme işlemi başarılı ise true, başarısız ise false döner
+     * @throws Exception
+     */
+
     @Transactional
     public boolean vehicleDefectDel(Long id){
 
@@ -92,6 +108,16 @@ public class VehicleDefectService {
         }
         return false;
     }
+
+
+    /**
+     *
+     * Araç hata güncelleme servisi
+     *
+     * @param vehicleDefectDto - Güncellenecek araç hata bilgileri
+     * @return VehicleDefectDto - Güncellenen araç hata bilgileri
+     * @throws Exception
+     */
 
     @Transactional
     public VehicleDefectDto vehicleDefectUpdate(VehicleDefectDto vehicleDefectDto) {
@@ -119,6 +145,15 @@ public class VehicleDefectService {
     }
 
 
+    /**
+     *
+     * Araç hata getirme servisi
+     *
+     * @param id - Araç hata id
+     * @return VehicleDefectDto - Araç hata bilgileri
+     * @throws Exception
+     */
+
     @Transactional
     public VehicleDefectDto vehicleDefectGet(Long id) {
         VehicleDefect vehicleDefect = vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(id);
@@ -131,6 +166,17 @@ public class VehicleDefectService {
         }
         return null;
     }
+
+
+
+    /**
+     *
+     * Araç hata resim getirme servisi
+     *
+     * @param vehicleDefecetId - Araç hata id
+     * @return ByteArrayResource - Araç hata resmi byte dizisi
+     * @throws Exception
+     */
 
     @Transactional
     public ByteArrayResource getImage(Long vehicleDefecetId){
@@ -145,6 +191,16 @@ public class VehicleDefectService {
         }
 
     }
+
+
+    /**
+     *
+     * Araç hata listeleme servisi
+     *
+     * @param getVehicleDefectParameters - Araç hata getirme parametreleri
+     * @return List<VehicleDefectDto> - Araç hata bilgileri
+     * @throws Exception
+     */
 
     @Transactional
     public List<VehicleDefectDto> getVehicleDefectsWithPagination(GetVehicleDefectParameters getVehicleDefectParameters) {

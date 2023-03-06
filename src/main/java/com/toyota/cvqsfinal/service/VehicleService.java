@@ -29,6 +29,15 @@ public class VehicleService {
 
     private final DtoConvert dtoConvert;
 
+
+    /**
+     *
+     * Araç kaydetme servisi
+     *
+     * @param vehicleSaveDto - Araç bilgileri
+     * @return VehicleDto - kaydedilen araç bilgileri
+     */
+
     public VehicleDto vehicleSave(VehicleDto vehicleSaveDto){
         if (vehicleRepository.findByCodeAndDeletedFalse(vehicleSaveDto.getVehicleCode()) == null){
             vehicleRepository.save(Vehicle.builder().code(vehicleSaveDto.getVehicleCode()).modelNo(vehicleSaveDto.getModelNo()).build());
@@ -38,6 +47,15 @@ public class VehicleService {
             return null;
         }
     }
+
+
+    /**
+     *
+     * Araç getirme servisi
+     *
+     * @param vehicleId - Araç id
+     * @return VehicleDto - Getirilen araç bilgileri
+     */
 
     @Transactional
     public VehicleDto getVehicleFromId(Long vehicleId){
@@ -57,17 +75,13 @@ public class VehicleService {
 
     }
 
-    public Vehicle getVehicleFromCode(String vehicleCode){
-
-        Vehicle vehicle = vehicleRepository.findByCodeAndDeletedFalse(vehicleCode);
-        if (vehicle == null){
-            return null;
-        }
-        else {
-            return vehicle;
-        }
-
-    }
+    /**
+     *
+     * Araç güncelleme servisi
+     *
+     * @param vehicleDto - Araç bilgileri
+     * @return VehicleDto - Güncellenen araç bilgileri
+     */
 
     public VehicleDto vehicleUpdate(VehicleDto vehicleDto){
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleDto.getId());
@@ -79,6 +93,15 @@ public class VehicleService {
         }
         return null;
     }
+
+
+    /**
+     *
+     * Araç silme servisi
+     *
+     * @param vehicleId - Araç id
+     * @return boolean - Silme işlemi başarılı ise true, başarısız ise false
+     */
 
     public boolean vehicleDelete(Long vehicleId){
 
@@ -96,6 +119,15 @@ public class VehicleService {
         }
         return false;
     }
+
+
+    /**
+     *
+     * Araç listeleme servisi
+     *
+     * @param getVehicleParameters - Getirilecek araç filtreleme, sayfalama ve sıralama bilgileri
+     * @return List<VehicleDto> - Getirilen araç bilgileri
+     */
 
     @Transactional
     public List<VehicleDto> getVehiclesWithPagination(GetVehicleParameters getVehicleParameters){

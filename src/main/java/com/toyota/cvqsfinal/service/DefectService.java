@@ -30,6 +30,14 @@ public class DefectService {
 
     private final DtoConvert dtoConvert;
 
+    /**
+     *
+     * Hata kaydetme servisi
+     *
+     * @param defectDto - Hata bilgileri ve resim bilgileri
+     * @return DefectDto - Hata bilgileri ve resim bilgileri
+     * @throws Exception
+     */
 
     public DefectDto defectSave(DefectDto defectDto)throws  Exception{
             byte[] imageData = Base64.getMimeDecoder().decode(defectDto.getImageDto().getData());
@@ -53,6 +61,14 @@ public class DefectService {
 
     }
 
+    /**
+     *
+     * Hata silme servisi
+     *
+     * @param defectId - Hata id
+     * @return boolean - Hata silme işlemi başarılı ise true, başarısız ise false döner
+     */
+
     @Transactional
     public boolean defectDelete(Long defectId){
         Defect defect = defectRepository.getDefectByIdAndDeletedFalse(defectId);
@@ -65,6 +81,14 @@ public class DefectService {
         }
         return false;
     }
+
+    /**
+     *
+     * Hata getirme servisi
+     *
+     * @param defectId - Hata id
+     * @return DefectDto - hatanın bilgileri ve resmi
+     */
 
     @Transactional
     public DefectDto defectGet(Long defectId){
@@ -79,6 +103,14 @@ public class DefectService {
         return null;
     }
 
+    /**
+     *
+     * Hatanın resmini getirme servisi
+     *
+     * @param defectId - Hata id
+     * @return ByteArrayResource - Hatanın resmini byte dizisi olarak döner
+     */
+
     @Transactional
     public ByteArrayResource getImage(Long defectId){
         try {
@@ -92,6 +124,14 @@ public class DefectService {
         }
 
     }
+
+    /**
+     *
+     * Hata güncelleme servisi
+     *
+     * @param defectDto - Güncellenecek hata bilgileri ve resim bilgileri
+     * @return DefectDto - Güncellenen hata bilgileri ve resim bilgileri
+     */
 
     @Transactional
     public DefectDto updateDefect(DefectDto defectDto){
@@ -115,6 +155,14 @@ public class DefectService {
         }
         return null;
     }
+
+    /**
+     *
+     * Hata listeleme servisi
+     *
+     * @param getDefectParameters - Sayfalama ve filtreleme bilgileri
+     * @return List<DefectDto> - Hata listesi
+     */
 
     @Transactional
     public List<DefectDto> getDefectsWithPagination(GetDefectParameters getDefectParameters){
