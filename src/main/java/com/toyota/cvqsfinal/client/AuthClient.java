@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(value = "auth",url = "http://auth:8181/api/v1/login/")
 public interface AuthClient {
+    
     @PostMapping("/save")
     ResponseEntity<String> save(@RequestBody UserDto userDto);
 

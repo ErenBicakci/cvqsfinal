@@ -36,6 +36,7 @@ public class DefectController {
             return ResponseEntity.ok(defectDto);
         }
 
+        log.warn(auth.getName() + "defect not saved ! : (defectId) " + defectDto.getId());
         return ResponseEntity.status(400).body(null);
 
 
@@ -55,7 +56,7 @@ public class DefectController {
                     .contentLength(byteArrayResource.contentLength())
                     .body(byteArrayResource);
         }
-        log.error(auth.getName() + "defect Image Not Found ! : (defectId) " + defectId);
+        log.warn(auth.getName() + "defect Image Not Found ! : (defectId) " + defectId);
 
         return null;
     }
@@ -71,7 +72,7 @@ public class DefectController {
             return;
         }
 
-        log.error(auth.getName() + "defect not found!  : (defectId) " + defectId);
+        log.warn(auth.getName() + "defect not found!  : (defectId) " + defectId);
 
 
     }
@@ -86,7 +87,7 @@ public class DefectController {
         if (defectDto != null){
             return ResponseEntity.ok(defectDto);
         }
-        log.error(auth.getName() + "defect not found!  : (defectId) " + defectId);
+        log.warn(auth.getName() + "defect not found!  : (defectId) " + defectId);
 
         return ResponseEntity.status(400).body(null);
     }
@@ -103,7 +104,7 @@ public class DefectController {
 
             return ResponseEntity.ok(defectDto);
         }
-        log.error(auth.getName() + "defect not found ! : (defectId) " + defectDto.getId());
+        log.warn(auth.getName() + "defect not found ! : (defectId) " + defectDto.getId());
 
         return ResponseEntity.status(400).body(null);
 

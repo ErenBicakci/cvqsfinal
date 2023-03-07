@@ -48,11 +48,11 @@ public class VehicleDefectService {
      * @param vehicleId - Araç id
      * @param vehicleDefectDto - Araç hata bilgileri
      * @return VehicleDefectDto - Araç hata bilgileri
-     * @throws Exception
      */
 
     @Transactional
-    public VehicleDefectDto vehicleDefectSave(Long vehicleId, VehicleDefectDto vehicleDefectDto)throws  Exception{
+    public VehicleDefectDto vehicleDefectSave(Long vehicleId, VehicleDefectDto vehicleDefectDto){
+        log.debug("vehicleDefectSave methodu çalıştı");
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleId);
         if (vehicle != null){
 
@@ -75,11 +75,13 @@ public class VehicleDefectService {
             vehicleDefects.add(newDefect);
             vehicle.setVehicleDefect(vehicleDefects);
             vehicleRepository.save(vehicle);
+            log.debug("vehicleDefectSave VehicleDefectDto döndü");
             return VehicleDefectDto.builder()
                     .defect(dtoConvert.defectToDefectDto(defect))
                     .defectLocations(defectLocations)
                     .build();
         }
+        log.warn("vehicleDefectSave methodu null döndü");
         return null;
     }
 
@@ -89,12 +91,11 @@ public class VehicleDefectService {
      *
      * @param id - Araç hata id
      * @return boolean - Araç hata silme işlemi başarılı ise true, başarısız ise false döner
-     * @throws Exception
      */
 
     @Transactional
     public boolean vehicleDefectDel(Long id){
-
+        log.debug("vehicleDefectDel methodu çalıştı");
 
         VehicleDefect vehicleDefect = vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(id);
         if (vehicleDefect != null){
@@ -104,8 +105,10 @@ public class VehicleDefectService {
                 defectLocationRepository.save(defectLocation);
             });
             vehicleDefectRepository.save(vehicleDefect);
+            log.debug("vehicleDefectDel methodu true döndü");
             return true;
         }
+        log.warn("vehicleDefectDel methodu false döndü");
         return false;
     }
 
@@ -116,11 +119,11 @@ public class VehicleDefectService {
      *
      * @param vehicleDefectDto - Güncellenecek araç hata bilgileri
      * @return VehicleDefectDto - Güncellenen araç hata bilgileri
-     * @throws Exception
      */
 
     @Transactional
     public VehicleDefectDto vehicleDefectUpdate(VehicleDefectDto vehicleDefectDto) {
+        log.debug("vehicleDefectUpdate methodu çalıştı");
 
         VehicleDefect vehicleDefect = vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(vehicleDefectDto.getId());
         Defect defect = defectRepository.getDefectByIdAndDeletedFalse(vehicleDefectDto.getDefect().getId());
@@ -140,7 +143,7 @@ public class VehicleDefectService {
         vehicleDefect.setDefectLocations(defectLocationsNew);
 
         vehicleDefectRepository.save(vehicleDefect);
-
+        log.debug("vehicleDefectUpdate methodu VehicleDefectDto döndü");
         return VehicleDefectDto.builder().defect(dtoConvert.defectToDefectDto(defect)).defectLocations(vehicleDefectDto.getDefectLocations()).build();
     }
 
@@ -151,19 +154,21 @@ public class VehicleDefectService {
      *
      * @param id - Araç hata id
      * @return VehicleDefectDto - Araç hata bilgileri
-     * @throws Exception
      */
 
     @Transactional
     public VehicleDefectDto vehicleDefectGet(Long id) {
+        log.debug("vehicleDefectGet methodu çalıştı");
         VehicleDefect vehicleDefect = vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(id);
         if (vehicleDefect != null){
+            log.debug("vehicleDefectGet methodu VehicleDefectDto döndü");
             return VehicleDefectDto.builder()
                     .id(vehicleDefect.getId())
                     .defect(dtoConvert.defectToDefectDto(vehicleDefect.getDefect()))
                     .defectLocations(vehicleDefect.getDefectLocations().stream().filter(defectLocation -> !defectLocation.isDeleted()).collect(Collectors.toList()))
                     .build();
         }
+        log.warn("vehicleDefectGet methodu null döndü");
         return null;
     }
 
@@ -175,7 +180,6 @@ public class VehicleDefectService {
      *
      * @param vehicleDefecetId - Araç hata id
      * @return ByteArrayResource - Araç hata resmi byte dizisi
-     * @throws Exception
      */
 
     @Transactional
@@ -199,7 +203,6 @@ public class VehicleDefectService {
      *
      * @param getVehicleDefectParameters - Araç hata getirme parametreleri
      * @return List<VehicleDefectDto> - Araç hata bilgileri
-     * @throws Exception
      */
 
     @Transactional

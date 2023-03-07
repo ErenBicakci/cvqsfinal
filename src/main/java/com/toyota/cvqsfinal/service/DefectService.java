@@ -36,11 +36,19 @@ public class DefectService {
      *
      * @param defectDto - Hata bilgileri ve resim bilgileri
      * @return DefectDto - Hata bilgileri ve resim bilgileri
-     * @throws Exception
      */
 
-    public DefectDto defectSave(DefectDto defectDto)throws  Exception{
-            byte[] imageData = Base64.getMimeDecoder().decode(defectDto.getImageDto().getData());
+    public DefectDto defectSave(DefectDto defectDto){
+        log.debug("defectSave methodu çalıştı");
+        byte[] imageData = null;
+        try {
+             imageData = Base64.getMimeDecoder().decode(defectDto.getImageDto().getData());
+
+        }
+        catch (IllegalArgumentException e){
+            log.warn("defectSave methouna gönderilen resim base64 formatında değil");
+            return null;
+        }
 
             Image image = Image.builder()
                     .contentType(defectDto.getImageDto().getType())
@@ -57,6 +65,7 @@ public class DefectService {
                             .build();
             defectRepository.save(newDefect);
 
+            log.debug("defectSave methodu çalıştı");
             return  DefectDto.builder().imageDto(defectDto.getImageDto()).name(defectDto.getName()).build();
 
     }
@@ -71,6 +80,7 @@ public class DefectService {
 
     @Transactional
     public boolean defectDelete(Long defectId){
+        log.debug("defectDelete methodu çalıştı");
         Defect defect = defectRepository.getDefectByIdAndDeletedFalse(defectId);
         if (defect != null){
             defect.setDeleted(true);
@@ -79,6 +89,7 @@ public class DefectService {
             defectRepository.save(defect);
             return true;
         }
+        log.debug("defectDelete üzerinden false döndü");
         return false;
     }
 
@@ -92,6 +103,7 @@ public class DefectService {
 
     @Transactional
     public DefectDto defectGet(Long defectId){
+        log.debug("defectGet methodu çalıştı");
         Defect defect = defectRepository.getDefectByIdAndDeletedFalse(defectId);
         if (defect != null){
             return DefectDto.builder()
@@ -100,6 +112,7 @@ public class DefectService {
                     .imageDto(ImageDto.builder().id(defect.getImage().getId()).name(defect.getImage().getName()).data("http://localhost:8080/api/defect/image/"+defect.getId()).type(defect.getImage().getContentType()).build())
                     .build();
         }
+        log.debug("defectGet üzerinden null döndü");
         return null;
     }
 
@@ -113,15 +126,10 @@ public class DefectService {
 
     @Transactional
     public ByteArrayResource getImage(Long defectId){
-        try {
-            final ByteArrayResource inputStream = new ByteArrayResource(
-                    defectRepository.getDefectByIdAndDeletedFalse(defectId).getImage().getData()
-            );
+        log.debug("getImage methodu çalıştı");
+            final ByteArrayResource inputStream = new ByteArrayResource(defectRepository.getDefectByIdAndDeletedFalse(defectId).getImage().getData());
+            log.debug("getImage üzerinden ByteArrayResource döndü");
             return inputStream;
-        }
-        catch (Exception e){
-            return null;
-        }
 
     }
 
@@ -135,6 +143,7 @@ public class DefectService {
 
     @Transactional
     public DefectDto updateDefect(DefectDto defectDto){
+        log.debug("updateDefect methodu çalıştı");
 
         Defect defect = defectRepository.getDefectByIdAndDeletedFalse(defectDto.getId());
         if (defect != null){
@@ -142,17 +151,27 @@ public class DefectService {
             defect.getImage().setName(defectDto.getImageDto().getName());
 
 
-            byte[] imageData = Base64.getMimeDecoder().decode(defectDto.getImageDto().getData());
+            byte[] imageData = null;
+            try {
+                imageData = Base64.getMimeDecoder().decode(defectDto.getImageDto().getData());
+
+            }
+            catch (IllegalArgumentException e){
+                log.warn("defectUpdate methouna gönderilen resim base64 formatında değil");
+                return null;
+            }
 
             defect.getImage().setData(imageData);
             defect.getImage().setContentType(defectDto.getImageDto().getType());
             imageRepository.save(defect.getImage());
             defectRepository.save(defect);
+            log.debug("updateDefect üzerinden DefectDto döndü");
             return DefectDto.builder()
                     .name(defect.getDefectName())
                     .imageDto(ImageDto.builder().name(defect.getImage().getName()).data("http://localhost:8080/api/defect/image/"+defect.getId()).type(defect.getImage().getContentType()).build())
                     .build();
         }
+        log.debug("updateDefect üzerinden null döndü");
         return null;
     }
 
@@ -166,7 +185,7 @@ public class DefectService {
 
     @Transactional
     public List<DefectDto> getDefectsWithPagination(GetDefectParameters getDefectParameters){
-
+        log.debug("getDefectsWithPagination methodu çalıştı");
         Sort sort;
         if (getDefectParameters.getSortType().equals("ASC")){
             sort = Sort.by(Sort.Direction.ASC, "id");
@@ -175,6 +194,7 @@ public class DefectService {
             sort = Sort.by(Sort.Direction.DESC, "id");
         }
         Pageable pageable = PageRequest.of(getDefectParameters.getPage(), getDefectParameters.getPageSize(), sort);
+        log.debug("getDefectsWithPagination üzerinden List<DefectDto> döndü");
         return defectRepository.getAllByDefectNameLikeAndDeletedFalse("%"+ getDefectParameters.getFilterKeyword()+"%",pageable).get().collect(Collectors.toList()).stream().map(defect -> dtoConvert.defectToDefectDto(defect)).collect(Collectors.toList());
     }
 

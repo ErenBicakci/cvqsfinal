@@ -29,7 +29,7 @@ public class VehicleController {
             log.info(auth.getName()+" Vehicle Saved : (VEHICLE CODE) " + vehicleSaveDto.getVehicleCode());
             return ResponseEntity.ok(responseObject);
         }
-        log.info(auth.getName()+" Vehicle not be saved : (VEHICLE CODE) " + vehicleSaveDto.getVehicleCode());
+        log.warn(auth.getName()+" Vehicle not be saved : (VEHICLE CODE) " + vehicleSaveDto.getVehicleCode());
 
         return  ResponseEntity.status(400).body(null);
     }
@@ -42,7 +42,7 @@ public class VehicleController {
         if (vehicleDto != null){
             return ResponseEntity.ok(vehicleDto);
         }
-        log.info(auth.getName()+" Vehicle not found : (VEHICLE CODE) " + id);
+        log.warn(auth.getName()+" Vehicle not found : (VEHICLE CODE) " + id);
 
         return ResponseEntity.status(400).body(null);
 
@@ -54,11 +54,11 @@ public class VehicleController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         log.info(auth.getName()+" Send vehicle delete request : (VEHICLE CODE) " + id);
-        vehicleService.vehicleDelete(id);
-        if (auth.getName() != null){
+        boolean bool = vehicleService.vehicleDelete(id);
+        if (bool == true){
             return ResponseEntity.ok().build();
         }
-        log.error(auth.getName()+" Vehicle Not Found! (id)" + id );
+        log.warn(auth.getName()+" Vehicle Not Found! (id)" + id );
          return ResponseEntity.status(400).body(null);
     }
 
@@ -75,7 +75,7 @@ public class VehicleController {
             return ResponseEntity.ok(vehicleDto1);
         }
 
-        log.info(auth.getName()+" Vehicle not found : (id) " + vehicleDto.getId());
+        log.warn(auth.getName()+" Vehicle not found : (id) " + vehicleDto.getId());
 
         return ResponseEntity.status(400).body(null);
 

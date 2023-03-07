@@ -39,11 +39,14 @@ public class VehicleService {
      */
 
     public VehicleDto vehicleSave(VehicleDto vehicleSaveDto){
+        log.debug("vehicleSave methodu çalıştı");
         if (vehicleRepository.findByCodeAndDeletedFalse(vehicleSaveDto.getVehicleCode()) == null){
             vehicleRepository.save(Vehicle.builder().code(vehicleSaveDto.getVehicleCode()).modelNo(vehicleSaveDto.getModelNo()).build());
+            log.debug("vehicleSave methodu VehicleDto döndürdü");
             return VehicleDto.builder().vehicleCode(vehicleSaveDto.getVehicleCode()).modelNo(vehicleSaveDto.getModelNo()).build();
         }
         else {
+            log.warn("vehicleSave methodu null döndürdü");
             return null;
         }
     }
@@ -60,11 +63,14 @@ public class VehicleService {
     @Transactional
     public VehicleDto getVehicleFromId(Long vehicleId){
 
+        log.debug("getVehicleFromId methodu çalıştı");
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleId);
         if (vehicle == null){
+            log.warn("getVehicleFromId methodu null döndürdü");
             return null;
         }
         else {
+            log.debug("getVehicleFromId methodu VehicleDto döndürdü");
             return VehicleDto.builder()
                     .vehicleDefectDtos(vehicle.getVehicleDefect().stream().filter(vehicleDefect -> !vehicleDefect.isDeleted()).collect(Collectors.toList()).stream().map(vehicleDefect -> dtoConvert.vehicleDefectToVehicleDefectDto(vehicleDefect)).collect(Collectors.toList()))
                     .id(vehicle.getId())
@@ -84,13 +90,17 @@ public class VehicleService {
      */
 
     public VehicleDto vehicleUpdate(VehicleDto vehicleDto){
+        log.debug("vehicleUpdate methodu çalıştı");
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleDto.getId());
         if (vehicle != null){
+
             vehicle.setCode(vehicleDto.getVehicleCode());
             vehicle.setModelNo(vehicleDto.getModelNo());
             vehicleRepository.save(vehicle);
+            log.debug("vehicleUpdate methodu VehicleDto döndürdü");
             return vehicleDto;
         }
+        log.warn("vehicleUpdate methodu null döndürdü");
         return null;
     }
 
@@ -104,7 +114,7 @@ public class VehicleService {
      */
 
     public boolean vehicleDelete(Long vehicleId){
-
+        log.debug("vehicleDelete methodu çalıştı");
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleId);
         if (vehicle != null){
             vehicle.setDeleted(true);
@@ -115,8 +125,10 @@ public class VehicleService {
                     }
             );
             vehicleRepository.save(vehicle);
+            log.debug("vehicleDelete methodu true döndürdü");
             return true;
         }
+        log.warn("vehicleDelete methodu false döndürdü");
         return false;
     }
 
@@ -131,7 +143,7 @@ public class VehicleService {
 
     @Transactional
     public List<VehicleDto> getVehiclesWithPagination(GetVehicleParameters getVehicleParameters){
-
+        log.debug("getVehiclesWithPagination methodu çalıştı");
         Sort sort;
         if (getVehicleParameters.getSortType().equals("ASC")){
             sort = Sort.by(Sort.Direction.ASC, "id");
@@ -140,6 +152,7 @@ public class VehicleService {
             sort = Sort.by(Sort.Direction.DESC, "id");
         }
         Pageable pageable = PageRequest.of(getVehicleParameters.getPage(), getVehicleParameters.getPageSize(), sort);
+        log.debug("getVehiclesWithPagination methodu List<VehicleDto> döndürdü");
         return vehicleRepository.findAllByCodeLikeAndModelNoLikeAndDeletedFalse("%"+ getVehicleParameters.getVehicleCode()+"%","%"+ getVehicleParameters.getModelNo()+"%",pageable).get().collect(Collectors.toList()).stream().map(vehicle -> dtoConvert.vehicleToVehicleDto(vehicle)).collect(Collectors.toList());
     }
 

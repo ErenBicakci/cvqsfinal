@@ -33,6 +33,7 @@ public class VehicleDefectController {
         if (vehicleDefectDto1 != null){
             return ResponseEntity.ok(vehicleDefectDto1);
         }
+        log.warn(auth.getName()+" VEHICLEDEFECT NOT SAVED ! : (VEHICLE CODE) " + vehicleDefectDto.getId());
         return ResponseEntity.status(400).body(null);
     }
 
@@ -41,13 +42,13 @@ public class VehicleDefectController {
     ResponseEntity<Void> deleteVehicleDefect(@PathVariable Long vehicleDefectId){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        log.info(auth.getName()+" Send VehicleDefect delete request : (VEHICLEDEFECT CODE) " + vehicleDefectId);
+        log.info(auth.getName()+"Send VehicleDefect delete request : (VEHICLE CODE) " + vehicleDefectId);
 
         boolean vehicleDto = vehicleDefectService.vehicleDefectDel(vehicleDefectId);
         if (vehicleDto){
             return ResponseEntity.ok().build();
         }
-        log.error(auth.getName()+" VEHICLEDEFECT NOT FOUND : (VEHICLE CODE) " + vehicleDefectId);
+        log.warn(auth.getName()+" VEHICLEDEFECT NOT FOUND : (VEHICLE CODE) " + vehicleDefectId);
             return ResponseEntity.status(400).body(null);
 
     }
@@ -62,7 +63,7 @@ public class VehicleDefectController {
         if (vehicleDefectDto1 != null){
             return ResponseEntity.ok(vehicleDefectDto1);
         }
-        log.error(auth.getName()+" VEHICLEDEFECT NOT FOUND : (VEHICLE CODE) " + vehicleDefectDto.getId());
+        log.warn(auth.getName()+" VEHICLEDEFECT NOT FOUND : (VEHICLE CODE) " + vehicleDefectDto.getId());
 
         return ResponseEntity.status(400).body(null);
     }
@@ -77,7 +78,7 @@ public class VehicleDefectController {
         if (vehicleDefectDto != null){
             return ResponseEntity.ok(vehicleDefectDto);
         }
-        log.error(auth.getName()+" VEHICLEDEFECT NOT FOUND : (VEHICLE CODE) " + vehicleDefectDto.getId());
+        log.warn(auth.getName()+" VEHICLEDEFECT NOT FOUND : (VEHICLE CODE) " + vehicleDefectDto.getId());
         return ResponseEntity.status(400).body(null);
     }
 
@@ -96,7 +97,7 @@ public class VehicleDefectController {
                     .contentLength(byteArrayResource.contentLength())
                     .body(byteArrayResource);
         }
-        log.error(auth.getName() + " Image Not Found ! : (VehicleDefectId) " + id);
+        log.warn(auth.getName() + " Image Not Found ! : (VehicleDefectId) " + id);
 
         return ResponseEntity.status(400).body(null);
     }
