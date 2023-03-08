@@ -1,8 +1,7 @@
 FROM maven:3-openjdk-17-slim as build
 COPY src /home/app/src
 COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean install
-COPY target/cvqsfinal-0.0.1-SNAPSHOT.jar /
+COPY target/management-0.0.1-SNAPSHOT.jar /
 EXPOSE 8080
-ADD target/cvqsfinal-0.0.1-SNAPSHOT.jar cvqsfinal.jar
-CMD exec java -jar cvqsfinal.jar
+ADD target/management-0.0.1-SNAPSHOT.jar management.jar
+CMD exec java -jar management-0.0.1-SNAPSHOT.jar

@@ -22,8 +22,6 @@ public class VehicleController {
     ResponseEntity<VehicleDto> saveVehicle(@RequestBody VehicleDto vehicleSaveDto){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-
-
         VehicleDto responseObject = vehicleService.vehicleSave(vehicleSaveDto);
         if (responseObject != null){
             log.info(auth.getName()+" Vehicle Saved : (VEHICLE CODE) " + vehicleSaveDto.getVehicleCode());
