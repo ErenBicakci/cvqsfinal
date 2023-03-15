@@ -1,0 +1,670 @@
+2023-03-15 10:00:46 [main] INFO  com.toyota.auth.AuthApplication - Starting AuthApplication using Java 17.0.6 with PID 21520 (C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice\target\classes started by erenb in C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice)
+2023-03-15 10:00:46 [main] INFO  com.toyota.auth.AuthApplication - The following 1 profile is active: "dev"
+2023-03-15 10:00:46 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-15 10:00:46 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 39 ms. Found 2 JPA repository interfaces.
+2023-03-15 10:00:47 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8181 (http)
+2023-03-15 10:00:47 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-03-15 10:00:47 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-15 10:00:47 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-03-15 10:00:47 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 951 ms
+2023-03-15 10:00:47 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-15 10:00:47 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-03-15 10:00:47 [main] WARN  org.hibernate.orm.deprecation - HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-03-15 10:00:47 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-03-15 10:00:47 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@c472300
+2023-03-15 10:00:47 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-03-15 10:00:47 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-03-15 10:00:48 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-15 10:00:48 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 10:00:48 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-15 10:00:48 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1ddb6abb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6f926d01, org.springframework.security.web.context.SecurityContextHolderFilter@c4455b4, org.springframework.security.web.header.HeaderWriterFilter@70a24463, org.springframework.security.web.authentication.logout.LogoutFilter@44aa5585, com.toyota.auth.config.JwtAuthenticationFilter@c85486, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@556ae220, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@63d9e1a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@c67a89, org.springframework.security.web.session.SessionManagementFilter@40071890, org.springframework.security.web.access.ExceptionTranslationFilter@2b30b627, org.springframework.security.web.access.intercept.AuthorizationFilter@6442cf3e]
+2023-03-15 10:00:48 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8181 (http) with context path ''
+2023-03-15 10:00:48 [main] INFO  com.toyota.auth.AuthApplication - Started AuthApplication in 2.995 seconds (process running for 3.436)
+2023-03-15 10:00:55 [http-nio-8181-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-15 10:00:55 [http-nio-8181-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-03-15 10:00:55 [http-nio-8181-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-03-15 10:00:55 [http-nio-8181-exec-1] INFO  c.t.a.c.AuthenticationController - User save ! : (username) erenbic5
+2023-03-15 10:00:55 [http-nio-8181-exec-1] INFO  c.t.a.service.AuthenticationService - Account creation request  :  (USERNAME) erenbic5
+2023-03-15 10:00:55 [http-nio-8181-exec-1] WARN  c.t.a.service.AuthenticationService - Received a request to create an user with an existing username : (USERNAME) erenbic5
+2023-03-15 10:01:03 [http-nio-8181-exec-3] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic
+2023-03-15 10:01:03 [http-nio-8181-exec-3] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic
+2023-03-15 10:01:03 [http-nio-8181-exec-3] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic
+2023-03-15 10:01:39 [http-nio-8181-exec-5] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljIiwiaWF0IjoxNjc4ODYzNjYzLCJleHAiOjE2NzkwMDc2NjN9.b_u4DrG5074D8oczgPvCLxN6TPH-h7UdvBqb2M4Er_k
+2023-03-15 10:01:43 [http-nio-8181-exec-6] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljIiwiaWF0IjoxNjc4ODYzNjYzLCJleHAiOjE22NzkwMDc2NjN9.b_u4DrG5074D8oczgPvCLxN6TPH-h7UdvBqb2M4Er_k
+2023-03-15 10:01:43 [http-nio-8181-exec-6] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: io.jsonwebtoken.security.SignatureException: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.] with root cause
+io.jsonwebtoken.security.SignatureException: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:399)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:529)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589)
+	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173)
+	at com.toyota.auth.service.JwtService.exportToken(JwtService.java:44)
+	at com.toyota.auth.service.JwtService.findUsername(JwtService.java:34)
+	at com.toyota.auth.service.AuthenticationService.getUserDto(AuthenticationService.java:101)
+	at com.toyota.auth.controller.AuthenticationController.getUserDtoByToken(AuthenticationController.java:50)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1080)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:973)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:705)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:814)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:223)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at com.toyota.auth.config.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:39)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:351)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:400)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:859)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1734)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-03-15 10:02:19 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 10:02:19 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-03-15 10:02:19 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-03-15 10:02:21 [main] INFO  com.toyota.auth.AuthApplication - Starting AuthApplication using Java 17.0.6 with PID 18024 (C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice\target\classes started by erenb in C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice)
+2023-03-15 10:02:21 [main] INFO  com.toyota.auth.AuthApplication - The following 1 profile is active: "dev"
+2023-03-15 10:02:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-15 10:02:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 33 ms. Found 2 JPA repository interfaces.
+2023-03-15 10:02:22 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8181 (http)
+2023-03-15 10:02:22 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-03-15 10:02:22 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-15 10:02:22 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-03-15 10:02:22 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 761 ms
+2023-03-15 10:02:22 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-15 10:02:22 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-03-15 10:02:22 [main] WARN  org.hibernate.orm.deprecation - HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-03-15 10:02:22 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-03-15 10:02:23 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@25567581
+2023-03-15 10:02:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-03-15 10:02:23 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-03-15 10:02:23 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-15 10:02:23 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 10:02:23 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-15 10:02:23 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@56226064, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@646c872a, org.springframework.security.web.context.SecurityContextHolderFilter@51f009ef, org.springframework.security.web.header.HeaderWriterFilter@52ba21e4, org.springframework.security.web.authentication.logout.LogoutFilter@6d658aa8, com.toyota.auth.config.JwtAuthenticationFilter@76b019c4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6c96346b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5c552f08, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1d9bd4d6, org.springframework.security.web.session.SessionManagementFilter@7e9ed4df, org.springframework.security.web.access.ExceptionTranslationFilter@7fdf7359, org.springframework.security.web.access.intercept.AuthorizationFilter@14b4d90b]
+2023-03-15 10:02:24 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8181 (http) with context path ''
+2023-03-15 10:02:24 [main] INFO  com.toyota.auth.AuthApplication - Started AuthApplication in 2.504 seconds (process running for 2.911)
+2023-03-15 10:02:25 [http-nio-8181-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-15 10:02:25 [http-nio-8181-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-03-15 10:02:25 [http-nio-8181-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-03-15 10:02:25 [http-nio-8181-exec-1] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljIiwiaWF0IjoxNjc4ODYzNjYzLCJleHAiOjE22NzkwMDc2NjN9.b_u4DrG5074D8oczgPvCLxN6TPH-h7UdvBqb2M4Er_k
+2023-03-15 10:02:25 [http-nio-8181-exec-1] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: io.jsonwebtoken.security.SignatureException: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.] with root cause
+io.jsonwebtoken.security.SignatureException: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:399)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:529)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589)
+	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173)
+	at com.toyota.auth.service.JwtService.exportToken(JwtService.java:44)
+	at com.toyota.auth.service.JwtService.findUsername(JwtService.java:34)
+	at com.toyota.auth.service.AuthenticationService.getUserDto(AuthenticationService.java:101)
+	at com.toyota.auth.controller.AuthenticationController.getUserDtoByToken(AuthenticationController.java:50)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1080)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:973)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:705)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:814)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:223)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at com.toyota.auth.config.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:39)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:351)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:400)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:859)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1734)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-03-15 10:05:39 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 10:05:39 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-03-15 10:05:39 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-03-15 10:05:41 [main] INFO  com.toyota.auth.AuthApplication - Starting AuthApplication using Java 17.0.6 with PID 13852 (C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice\target\classes started by erenb in C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice)
+2023-03-15 10:05:41 [main] INFO  com.toyota.auth.AuthApplication - The following 1 profile is active: "dev"
+2023-03-15 10:05:42 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-15 10:05:42 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 33 ms. Found 2 JPA repository interfaces.
+2023-03-15 10:05:42 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8181 (http)
+2023-03-15 10:05:42 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-03-15 10:05:42 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-15 10:05:42 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-03-15 10:05:42 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 763 ms
+2023-03-15 10:05:42 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-15 10:05:42 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-03-15 10:05:42 [main] WARN  org.hibernate.orm.deprecation - HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-03-15 10:05:43 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-03-15 10:05:43 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@25567581
+2023-03-15 10:05:43 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-03-15 10:05:43 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-03-15 10:05:43 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-15 10:05:43 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 10:05:44 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-15 10:05:44 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@c3ca482, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6b338591, org.springframework.security.web.context.SecurityContextHolderFilter@2b30b627, org.springframework.security.web.header.HeaderWriterFilter@341df373, org.springframework.security.web.authentication.logout.LogoutFilter@7962c1d5, com.toyota.auth.config.JwtAuthenticationFilter@76b019c4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@70a24463, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@370a935f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@277474fc, org.springframework.security.web.session.SessionManagementFilter@7be1e187, org.springframework.security.web.access.ExceptionTranslationFilter@3a00237d, org.springframework.security.web.access.intercept.AuthorizationFilter@122ea8dc]
+2023-03-15 10:05:44 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8181 (http) with context path ''
+2023-03-15 10:05:44 [main] INFO  com.toyota.auth.AuthApplication - Started AuthApplication in 2.707 seconds (process running for 3.041)
+2023-03-15 10:05:47 [http-nio-8181-exec-6] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-15 10:05:47 [http-nio-8181-exec-6] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-03-15 10:05:47 [http-nio-8181-exec-6] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-03-15 10:05:47 [http-nio-8181-exec-6] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljIiwiaWF0IjoxNjc4ODYzNjYzLCJleHAiOjE22NzkwMDc2NjN9.b_u4DrG5074D8oczgPvCLxN6TPH-h7UdvBqb2M4Er_k
+2023-03-15 10:14:31 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 10:14:31 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-03-15 10:14:31 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-03-15 10:14:34 [main] INFO  com.toyota.auth.AuthApplication - Starting AuthApplication using Java 17.0.6 with PID 4372 (C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice\target\classes started by erenb in C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice)
+2023-03-15 10:14:34 [main] INFO  com.toyota.auth.AuthApplication - The following 1 profile is active: "dev"
+2023-03-15 10:14:34 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-15 10:14:34 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 33 ms. Found 2 JPA repository interfaces.
+2023-03-15 10:14:35 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8181 (http)
+2023-03-15 10:14:35 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-03-15 10:14:35 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-15 10:14:35 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-03-15 10:14:35 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 772 ms
+2023-03-15 10:14:35 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-15 10:14:35 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-03-15 10:14:35 [main] WARN  org.hibernate.orm.deprecation - HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-03-15 10:14:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-03-15 10:14:35 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4e67cfe1
+2023-03-15 10:14:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-03-15 10:14:35 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-03-15 10:14:36 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-15 10:14:36 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 10:14:36 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-15 10:14:36 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6cb417fc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@239bc43f, org.springframework.security.web.context.SecurityContextHolderFilter@1107c465, org.springframework.security.web.header.HeaderWriterFilter@3a00237d, org.springframework.security.web.authentication.logout.LogoutFilter@14b4d90b, com.toyota.auth.config.JwtAuthenticationFilter@2ef1fc8a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2b30b627, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@46eb2260, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@c3ca482, org.springframework.security.web.session.SessionManagementFilter@5c552f08, org.springframework.security.web.access.ExceptionTranslationFilter@6a7ab205, org.springframework.security.web.access.intercept.AuthorizationFilter@74d776fb]
+2023-03-15 10:14:36 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8181 (http) with context path ''
+2023-03-15 10:14:36 [main] INFO  com.toyota.auth.AuthApplication - Started AuthApplication in 2.524 seconds (process running for 2.855)
+2023-03-15 10:14:40 [http-nio-8181-exec-3] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-15 10:14:40 [http-nio-8181-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-03-15 10:14:40 [http-nio-8181-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-03-15 10:14:40 [http-nio-8181-exec-3] INFO  c.t.a.c.AuthenticationController - User save ! : (username) erenbic45
+2023-03-15 10:14:40 [http-nio-8181-exec-3] INFO  c.t.a.service.AuthenticationService - Account creation request  :  (USERNAME) erenbic45
+2023-03-15 10:14:40 [http-nio-8181-exec-3] INFO  c.t.a.service.AuthenticationService - User successfully created : (USERNAME) erenbic45
+2023-03-15 10:14:40 [http-nio-8181-exec-3] INFO  c.t.a.c.AuthenticationController - User saved ! : (username) erenbic45
+2023-03-15 10:14:42 [http-nio-8181-exec-4] INFO  c.t.a.c.AuthenticationController - User save ! : (username) erenbic45
+2023-03-15 10:14:42 [http-nio-8181-exec-4] INFO  c.t.a.service.AuthenticationService - Account creation request  :  (USERNAME) erenbic45
+2023-03-15 10:14:42 [http-nio-8181-exec-4] WARN  c.t.a.service.AuthenticationService - Received a request to create an user with an existing username : (USERNAME) erenbic45
+2023-03-15 10:14:50 [http-nio-8181-exec-2] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) eren5bic
+2023-03-15 10:14:50 [http-nio-8181-exec-2] INFO  c.t.a.service.AuthenticationService - Deleted user login request
+2023-03-15 10:14:50 [http-nio-8181-exec-2] WARN  c.t.a.service.AuthenticationService - Error : com.toyota.auth.advice.UserNotFound: User not found
+2023-03-15 10:14:54 [http-nio-8181-exec-7] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic
+2023-03-15 10:14:54 [http-nio-8181-exec-7] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic
+2023-03-15 10:14:54 [http-nio-8181-exec-7] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic
+2023-03-15 10:14:58 [http-nio-8181-exec-9] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) null
+2023-03-15 10:14:58 [http-nio-8181-exec-9] INFO  c.t.a.service.AuthenticationService - Attempted to login with wrong information : (USERNAME) null (PASSWORD) 102*****
+2023-03-15 10:15:03 [http-nio-8181-exec-10] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic
+2023-03-15 10:15:03 [http-nio-8181-exec-10] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "String.length()" because "password" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "String.length()" because "password" is null
+	at com.toyota.auth.utility.StringManipulation.passwordHide(StringManipulation.java:17)
+	at com.toyota.auth.service.AuthenticationService.auth(AuthenticationService.java:85)
+	at com.toyota.auth.controller.AuthenticationController.auth(AuthenticationController.java:34)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1080)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:973)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:731)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:814)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:223)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at com.toyota.auth.config.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:39)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:351)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:400)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:859)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1734)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-03-15 10:16:23 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 10:16:23 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-03-15 10:16:23 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-03-15 10:17:44 [main] INFO  com.toyota.auth.AuthApplication - Starting AuthApplication using Java 17.0.6 with PID 3000 (C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice\target\classes started by erenb in C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice)
+2023-03-15 10:17:44 [main] INFO  com.toyota.auth.AuthApplication - The following 1 profile is active: "dev"
+2023-03-15 10:17:44 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-15 10:17:44 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 32 ms. Found 2 JPA repository interfaces.
+2023-03-15 10:17:45 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8181 (http)
+2023-03-15 10:17:45 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-03-15 10:17:45 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-15 10:17:45 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-03-15 10:17:45 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 759 ms
+2023-03-15 10:17:45 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-15 10:17:45 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-03-15 10:17:45 [main] WARN  org.hibernate.orm.deprecation - HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-03-15 10:17:45 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-03-15 10:17:45 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5abf6a99
+2023-03-15 10:17:45 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-03-15 10:17:45 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-03-15 10:17:46 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-15 10:17:46 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 10:17:46 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-15 10:17:46 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@56226064, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@646c872a, org.springframework.security.web.context.SecurityContextHolderFilter@51f009ef, org.springframework.security.web.header.HeaderWriterFilter@52ba21e4, org.springframework.security.web.authentication.logout.LogoutFilter@6d658aa8, com.toyota.auth.config.JwtAuthenticationFilter@6a0ee80, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6c96346b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5c552f08, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1d9bd4d6, org.springframework.security.web.session.SessionManagementFilter@7e9ed4df, org.springframework.security.web.access.ExceptionTranslationFilter@7fdf7359, org.springframework.security.web.access.intercept.AuthorizationFilter@14b4d90b]
+2023-03-15 10:17:46 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8181 (http) with context path ''
+2023-03-15 10:17:46 [main] INFO  com.toyota.auth.AuthApplication - Started AuthApplication in 2.521 seconds (process running for 2.94)
+2023-03-15 10:19:41 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 10:19:41 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-03-15 10:19:41 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-03-15 10:19:49 [main] INFO  com.toyota.auth.AuthApplication - Starting AuthApplication using Java 17.0.6 with PID 4240 (C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice\target\classes started by erenb in C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice)
+2023-03-15 10:19:49 [main] INFO  com.toyota.auth.AuthApplication - The following 1 profile is active: "dev"
+2023-03-15 10:19:50 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-15 10:19:50 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 31 ms. Found 2 JPA repository interfaces.
+2023-03-15 10:19:50 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8181 (http)
+2023-03-15 10:19:50 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-03-15 10:19:50 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-15 10:19:50 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-03-15 10:19:50 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 741 ms
+2023-03-15 10:19:50 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-15 10:19:50 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-03-15 10:19:50 [main] WARN  org.hibernate.orm.deprecation - HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-03-15 10:19:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-03-15 10:19:51 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4e67cfe1
+2023-03-15 10:19:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-03-15 10:19:51 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-03-15 10:19:51 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-15 10:19:51 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 10:19:51 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-15 10:19:52 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6cb417fc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@239bc43f, org.springframework.security.web.context.SecurityContextHolderFilter@1107c465, org.springframework.security.web.header.HeaderWriterFilter@3a00237d, org.springframework.security.web.authentication.logout.LogoutFilter@14b4d90b, com.toyota.auth.config.JwtAuthenticationFilter@2ef1fc8a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2b30b627, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@46eb2260, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@c3ca482, org.springframework.security.web.session.SessionManagementFilter@5c552f08, org.springframework.security.web.access.ExceptionTranslationFilter@6a7ab205, org.springframework.security.web.access.intercept.AuthorizationFilter@74d776fb]
+2023-03-15 10:19:52 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8181 (http) with context path ''
+2023-03-15 10:19:52 [main] INFO  com.toyota.auth.AuthApplication - Started AuthApplication in 2.483 seconds (process running for 2.83)
+2023-03-15 10:19:58 [http-nio-8181-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-15 10:19:58 [http-nio-8181-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-03-15 10:19:58 [http-nio-8181-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-03-15 10:19:58 [http-nio-8181-exec-2] INFO  c.t.a.c.AuthenticationController - User save ! : (username) erenbic45
+2023-03-15 10:19:58 [http-nio-8181-exec-2] INFO  c.t.a.service.AuthenticationService - Account creation request  :  (USERNAME) erenbic45
+2023-03-15 10:19:59 [http-nio-8181-exec-2] WARN  c.t.a.service.AuthenticationService - Received a request to create an user with an existing username : (USERNAME) erenbic45
+2023-03-15 10:20:01 [http-nio-8181-exec-5] INFO  c.t.a.c.AuthenticationController - User save ! : (username) erenbic445
+2023-03-15 10:20:01 [http-nio-8181-exec-5] INFO  c.t.a.service.AuthenticationService - Account creation request  :  (USERNAME) erenbic445
+2023-03-15 10:20:01 [http-nio-8181-exec-5] INFO  c.t.a.service.AuthenticationService - User successfully created : (USERNAME) erenbic445
+2023-03-15 10:20:01 [http-nio-8181-exec-5] INFO  c.t.a.c.AuthenticationController - User saved ! : (username) erenbic445
+2023-03-15 10:20:03 [http-nio-8181-exec-4] INFO  c.t.a.c.AuthenticationController - User save ! : (username) erenbic445
+2023-03-15 10:20:03 [http-nio-8181-exec-4] INFO  c.t.a.service.AuthenticationService - Account creation request  :  (USERNAME) erenbic445
+2023-03-15 10:20:03 [http-nio-8181-exec-4] WARN  c.t.a.service.AuthenticationService - Received a request to create an user with an existing username : (USERNAME) erenbic445
+2023-03-15 10:20:07 [http-nio-8181-exec-7] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:20:07 [http-nio-8181-exec-7] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:20:07 [http-nio-8181-exec-7] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:20:08 [http-nio-8181-exec-8] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:20:08 [http-nio-8181-exec-8] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:20:08 [http-nio-8181-exec-8] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:20:09 [http-nio-8181-exec-9] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:20:09 [http-nio-8181-exec-9] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:20:09 [http-nio-8181-exec-9] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:20:09 [http-nio-8181-exec-10] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:20:10 [http-nio-8181-exec-10] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:20:10 [http-nio-8181-exec-10] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:20:10 [http-nio-8181-exec-1] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:20:10 [http-nio-8181-exec-1] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:20:10 [http-nio-8181-exec-1] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:20:10 [http-nio-8181-exec-2] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:20:11 [http-nio-8181-exec-2] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:20:11 [http-nio-8181-exec-2] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:20:11 [http-nio-8181-exec-3] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:20:11 [http-nio-8181-exec-3] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:20:11 [http-nio-8181-exec-3] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:20:11 [http-nio-8181-exec-5] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:20:11 [http-nio-8181-exec-5] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:20:11 [http-nio-8181-exec-5] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:20:12 [http-nio-8181-exec-4] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:20:12 [http-nio-8181-exec-4] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:20:12 [http-nio-8181-exec-4] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:20:12 [http-nio-8181-exec-6] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:20:13 [http-nio-8181-exec-6] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:20:13 [http-nio-8181-exec-6] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:20:13 [http-nio-8181-exec-7] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:20:13 [http-nio-8181-exec-7] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:20:13 [http-nio-8181-exec-7] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:20:14 [http-nio-8181-exec-8] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:20:14 [http-nio-8181-exec-8] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:20:14 [http-nio-8181-exec-8] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:20:19 [http-nio-8181-exec-9] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:20:19 [http-nio-8181-exec-9] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:20:19 [http-nio-8181-exec-9] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:26:56 [http-nio-8181-exec-2] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic445
+2023-03-15 10:26:56 [http-nio-8181-exec-2] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic445
+2023-03-15 10:26:56 [http-nio-8181-exec-2] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic445
+2023-03-15 10:27:26 [http-nio-8181-exec-3] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:27:27 [http-nio-8181-exec-5] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:27:30 [http-nio-8181-exec-4] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:27:30 [http-nio-8181-exec-6] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:27:35 [http-nio-8181-exec-7] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:27:35 [http-nio-8181-exec-8] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:31:10 [http-nio-8181-exec-1] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:31:10 [http-nio-8181-exec-2] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:31:16 [http-nio-8181-exec-3] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:31:16 [http-nio-8181-exec-3] WARN  c.t.a.service.AuthenticationService - Deleted user login request
+2023-03-15 10:31:32 [http-nio-8181-exec-4] INFO  c.t.a.c.AuthenticationController - User save ! : (username) erenbic445
+2023-03-15 10:31:32 [http-nio-8181-exec-4] INFO  c.t.a.service.AuthenticationService - Account creation request  :  (USERNAME) erenbic445
+2023-03-15 10:31:32 [http-nio-8181-exec-4] INFO  c.t.a.service.AuthenticationService - User successfully created : (USERNAME) erenbic445
+2023-03-15 10:31:32 [http-nio-8181-exec-4] INFO  c.t.a.c.AuthenticationController - User saved ! : (username) erenbic445
+2023-03-15 10:31:36 [http-nio-8181-exec-6] INFO  c.t.a.c.AuthenticationController - User save ! : (username) erenbic445
+2023-03-15 10:31:36 [http-nio-8181-exec-6] INFO  c.t.a.service.AuthenticationService - Account creation request  :  (USERNAME) erenbic445
+2023-03-15 10:31:36 [http-nio-8181-exec-6] WARN  c.t.a.service.AuthenticationService - Received a request to create an user with an existing username : (USERNAME) erenbic445
+2023-03-15 10:32:41 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 10:32:41 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-03-15 10:32:41 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-03-15 10:32:44 [main] INFO  com.toyota.auth.AuthApplication - Starting AuthApplication using Java 17.0.6 with PID 15556 (C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice\target\classes started by erenb in C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice)
+2023-03-15 10:32:44 [main] INFO  com.toyota.auth.AuthApplication - The following 1 profile is active: "dev"
+2023-03-15 10:32:44 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-15 10:32:44 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 2 JPA repository interfaces.
+2023-03-15 10:32:45 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8181 (http)
+2023-03-15 10:32:45 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-03-15 10:32:45 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-15 10:32:45 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-03-15 10:32:45 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 773 ms
+2023-03-15 10:32:45 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-15 10:32:45 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-03-15 10:32:45 [main] WARN  org.hibernate.orm.deprecation - HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-03-15 10:32:45 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-03-15 10:32:45 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4e67cfe1
+2023-03-15 10:32:45 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-03-15 10:32:45 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-03-15 10:32:46 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-15 10:32:46 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 10:32:46 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-15 10:32:46 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6cb417fc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@239bc43f, org.springframework.security.web.context.SecurityContextHolderFilter@1107c465, org.springframework.security.web.header.HeaderWriterFilter@3a00237d, org.springframework.security.web.authentication.logout.LogoutFilter@14b4d90b, com.toyota.auth.config.JwtAuthenticationFilter@2ef1fc8a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2b30b627, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@46eb2260, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@c3ca482, org.springframework.security.web.session.SessionManagementFilter@5c552f08, org.springframework.security.web.access.ExceptionTranslationFilter@6a7ab205, org.springframework.security.web.access.intercept.AuthorizationFilter@74d776fb]
+2023-03-15 10:32:46 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8181 (http) with context path ''
+2023-03-15 10:32:46 [main] INFO  com.toyota.auth.AuthApplication - Started AuthApplication in 2.569 seconds (process running for 2.913)
+2023-03-15 10:32:52 [http-nio-8181-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-15 10:32:52 [http-nio-8181-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-03-15 10:32:52 [http-nio-8181-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-03-15 10:32:52 [http-nio-8181-exec-1] INFO  c.t.a.c.AuthenticationController - User save ! : (username) erenbic4445
+2023-03-15 10:32:52 [http-nio-8181-exec-1] INFO  c.t.a.service.AuthenticationService - Account creation request  :  (USERNAME) erenbic4445
+2023-03-15 10:32:52 [http-nio-8181-exec-1] INFO  c.t.a.service.AuthenticationService - User successfully created : (USERNAME) erenbic4445
+2023-03-15 10:32:52 [http-nio-8181-exec-1] INFO  c.t.a.c.AuthenticationController - User saved ! : (username) erenbic4445
+2023-03-15 10:32:53 [http-nio-8181-exec-3] INFO  c.t.a.c.AuthenticationController - User save ! : (username) erenbic4445
+2023-03-15 10:32:53 [http-nio-8181-exec-3] INFO  c.t.a.service.AuthenticationService - Account creation request  :  (USERNAME) erenbic4445
+2023-03-15 10:32:53 [http-nio-8181-exec-3] WARN  c.t.a.service.AuthenticationService - Received a request to create an user with an existing username : (USERNAME) erenbic4445
+2023-03-15 10:33:03 [http-nio-8181-exec-10] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic4445
+2023-03-15 10:33:04 [http-nio-8181-exec-10] INFO  c.t.a.service.AuthenticationService - User Signed In : (USERNAME) erenbic4445
+2023-03-15 10:33:04 [http-nio-8181-exec-10] INFO  c.t.a.c.AuthenticationController - User authenticated ! : (username) erenbic4445
+2023-03-15 10:33:11 [http-nio-8181-exec-6] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ0NSIsImlhdCI6MTY3ODg2NTU4NCwiZXhwIjoxNjc5MDA5NTg0fQ.HC-hFY0phokD7aKRIvzJy_T1Pg4XyNsyj8s_fwfkVMQ
+2023-03-15 10:33:12 [http-nio-8181-exec-7] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ0NSIsImlhdCI6MTY3ODg2NTU4NCwiZXhwIjoxNjc5MDA5NTg0fQ.HC-hFY0phokD7aKRIvzJy_T1Pg4XyNsyj8s_fwfkVMQ
+2023-03-15 10:33:14 [http-nio-8181-exec-8] INFO  c.t.a.c.AuthenticationController - User save ! : (username) erenbic4445
+2023-03-15 10:33:14 [http-nio-8181-exec-8] INFO  c.t.a.service.AuthenticationService - Account creation request  :  (USERNAME) erenbic4445
+2023-03-15 10:33:14 [http-nio-8181-exec-8] WARN  c.t.a.service.AuthenticationService - Received a request to create an user with an existing username : (USERNAME) erenbic4445
+2023-03-15 10:33:15 [http-nio-8181-exec-4] INFO  c.t.a.c.AuthenticationController - User save ! : (username) erenbic4445
+2023-03-15 10:33:15 [http-nio-8181-exec-4] INFO  c.t.a.service.AuthenticationService - Account creation request  :  (USERNAME) erenbic4445
+2023-03-15 10:33:15 [http-nio-8181-exec-4] WARN  c.t.a.service.AuthenticationService - Received a request to create an user with an existing username : (USERNAME) erenbic4445
+2023-03-15 10:33:16 [http-nio-8181-exec-1] INFO  c.t.a.c.AuthenticationController - User authentication ! : (username) erenbic4445
+2023-03-15 10:33:16 [http-nio-8181-exec-1] INFO  c.t.a.service.AuthenticationService - Deleted user login request
+2023-03-15 10:33:16 [http-nio-8181-exec-1] WARN  c.t.a.service.AuthenticationService - Error : com.toyota.auth.exception.UserNotFoundException: User not found
+2023-03-15 10:34:52 [http-nio-8181-exec-5] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:34:52 [http-nio-8181-exec-10] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:34:58 [http-nio-8181-exec-6] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0Ij33oxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:36:03 [http-nio-8181-exec-7] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0Ij33oxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:37:52 [http-nio-8181-exec-8] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0Ij33oxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:38:44 [http-nio-8181-exec-9] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:38:44 [http-nio-8181-exec-4] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:38:55 [http-nio-8181-exec-2] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:38:55 [http-nio-8181-exec-1] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:38:59 [http-nio-8181-exec-3] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:38:59 [http-nio-8181-exec-5] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:40:49 [http-nio-8181-exec-6] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:40:49 [http-nio-8181-exec-7] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:40:55 [http-nio-8181-exec-8] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:40:55 [http-nio-8181-exec-9] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:41:10 [http-nio-8181-exec-4] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:41:10 [http-nio-8181-exec-2] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:41:14 [http-nio-8181-exec-1] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:41:14 [http-nio-8181-exec-3] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:41:20 [http-nio-8181-exec-5] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 10:41:20 [http-nio-8181-exec-10] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcmVuYmljNDQ1IiwiaWF0IjoxNjc4ODY1MjE2LCJleHAiOjE2NzkwMDkyMTZ9.FB_lXf5k9AfTyy_VdxtZQz2r_aC6JW4J7zABiNGNIuk
+2023-03-15 17:04:35 [main] INFO  com.toyota.auth.AuthApplication - Starting AuthApplication using Java 17.0.6 with PID 832 (C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice\target\classes started by erenb in C:\Users\erenb\OneDrive\Masaüstü\CVQS-microservice\authservice)
+2023-03-15 17:04:35 [main] INFO  com.toyota.auth.AuthApplication - The following 1 profile is active: "dev"
+2023-03-15 17:04:36 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-15 17:04:36 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 40 ms. Found 2 JPA repository interfaces.
+2023-03-15 17:04:36 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8181 (http)
+2023-03-15 17:04:36 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-03-15 17:04:36 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-03-15 17:04:36 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-03-15 17:04:36 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 936 ms
+2023-03-15 17:04:36 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-15 17:04:36 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-03-15 17:04:36 [main] WARN  org.hibernate.orm.deprecation - HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-03-15 17:04:36 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-03-15 17:04:37 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5abf6a99
+2023-03-15 17:04:37 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-03-15 17:04:37 [main] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-03-15 17:04:37 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-15 17:04:37 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 17:04:38 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-15 17:04:38 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@56226064, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@646c872a, org.springframework.security.web.context.SecurityContextHolderFilter@51f009ef, org.springframework.security.web.header.HeaderWriterFilter@52ba21e4, org.springframework.security.web.authentication.logout.LogoutFilter@6d658aa8, com.toyota.auth.config.JwtAuthenticationFilter@6a0ee80, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6c96346b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5c552f08, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1d9bd4d6, org.springframework.security.web.session.SessionManagementFilter@7e9ed4df, org.springframework.security.web.access.ExceptionTranslationFilter@7fdf7359, org.springframework.security.web.access.intercept.AuthorizationFilter@14b4d90b]
+2023-03-15 17:04:38 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8181 (http) with context path ''
+2023-03-15 17:04:38 [main] INFO  com.toyota.auth.AuthApplication - Started AuthApplication in 3.164 seconds (process running for 3.61)
+2023-03-15 17:04:42 [http-nio-8181-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-15 17:04:42 [http-nio-8181-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-03-15 17:04:42 [http-nio-8181-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-03-15 17:04:42 [http-nio-8181-exec-2] INFO  c.t.a.c.AuthenticationController - User save ! : (username) yusufbasbug
+2023-03-15 17:04:42 [http-nio-8181-exec-2] INFO  c.t.a.service.AuthenticationService - Account creation request  :  (USERNAME) yusufbasbug
+2023-03-15 17:04:42 [http-nio-8181-exec-2] INFO  c.t.a.service.AuthenticationService - User successfully created : (USERNAME) yusufbasbug
+2023-03-15 17:04:42 [http-nio-8181-exec-2] INFO  c.t.a.c.AuthenticationController - User saved ! : (username) yusufbasbug
+2023-03-15 17:04:49 [http-nio-8181-exec-3] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5dXN1ZmJhc2J1ZyIsImlhdCI6MTY3ODg4OTA4MiwiZXhwIjoxNjc5MDMzMDgyfQ.ggobGzow9KBfNlIXeHPQ5N5FF34TaChTIA7khJsY-PE
+2023-03-15 17:04:49 [http-nio-8181-exec-5] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5dXN1ZmJhc2J1ZyIsImlhdCI6MTY3ODg4OTA4MiwiZXhwIjoxNjc5MDMzMDgyfQ.ggobGzow9KBfNlIXeHPQ5N5FF34TaChTIA7khJsY-PE
+2023-03-15 17:04:54 [http-nio-8181-exec-8] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5dXN1ZmJhc2J1ZyIsImlhdCI6MTY3ODg4OTA4MiwiZXhwIjoxNjc5MDMzMDgyfQ.ggobGzow9KBfNlIXeHPQ5N5FF34TaChTIA7khJsY-PE
+2023-03-15 17:04:54 [http-nio-8181-exec-6] INFO  c.t.a.c.AuthenticationController - User get by token ! : (token) eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5dXN1ZmJhc2J1ZyIsImlhdCI6MTY3ODg4OTA4MiwiZXhwIjoxNjc5MDMzMDgyfQ.ggobGzow9KBfNlIXeHPQ5N5FF34TaChTIA7khJsY-PE
+2023-03-15 17:06:23 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-15 17:06:23 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-03-15 17:06:23 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

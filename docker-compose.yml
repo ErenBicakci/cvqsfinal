@@ -1,0 +1,63 @@
+version: '20.10.22'
+services:
+  postgres:
+    container_name: postgresql
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-cvqstestdb}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dbtestpassword}
+
+  auth:
+    depends_on:
+      - postgres
+    build: ./authservice/
+    ports:
+      - 8181:8181
+    environment:
+      PROFILE: dev
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cvqstestdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: dbtestpassword
+    volumes:
+      - ./authservice/m2:/root/.m2
+    stdin_open: true
+    tty: true
+    container_name: auth
+
+  cvqs:
+    depends_on:
+      - postgres
+    build: ./cvqs/
+    ports:
+      - 8080:8080
+    environment:
+      PROFILE: dev
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cvqstestdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: dbtestpassword
+    volumes:
+      - ./cvqs/m2:/root/.m2
+    stdin_open: true
+    tty: true
+    container_name: defect
+
+  management:
+    depends_on:
+      - postgres
+    build: ./management/
+    ports:
+      - 8282:8282
+    environment:
+      PROFILE: dev
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cvqstestdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: dbtestpassword
+    volumes:
+      - ./cvqs/m2:/root/.m2
+    stdin_open: true
+    tty: true
+    container_name: management
+
