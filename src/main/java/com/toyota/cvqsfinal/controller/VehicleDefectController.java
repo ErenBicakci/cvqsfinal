@@ -30,11 +30,9 @@ public class VehicleDefectController {
         log.info(auth.getName()+" VehicleDefect Saved");
 
         VehicleDefectDto vehicleDefectDto1 = vehicleDefectService.vehicleDefectSave(vehicleId,vehicleDefectDto);
-        if (vehicleDefectDto1 != null){
+
             return ResponseEntity.ok(vehicleDefectDto1);
-        }
-        log.warn(auth.getName()+" VEHICLEDEFECT NOT SAVED ! : (VEHICLE CODE) " + vehicleDefectDto.getId());
-        return ResponseEntity.status(400).body(null);
+
     }
 
 
@@ -45,11 +43,9 @@ public class VehicleDefectController {
         log.info(auth.getName()+"Send VehicleDefect delete request : (VEHICLE CODE) " + vehicleDefectId);
 
         boolean vehicleDto = vehicleDefectService.vehicleDefectDel(vehicleDefectId);
-        if (vehicleDto){
-            return ResponseEntity.ok().build();
-        }
-        log.warn(auth.getName()+" VEHICLEDEFECT NOT FOUND : (VEHICLE CODE) " + vehicleDefectId);
-            return ResponseEntity.status(400).body(null);
+
+        return ResponseEntity.ok().build();
+
 
     }
 
@@ -60,12 +56,10 @@ public class VehicleDefectController {
         log.info(auth.getName()+"Send VehicleDefect update request : (VEHICLE CODE) " + vehicleDefectDto.getId());
 
         VehicleDefectDto vehicleDefectDto1 = vehicleDefectService.vehicleDefectUpdate(vehicleDefectDto);
-        if (vehicleDefectDto1 != null){
-            return ResponseEntity.ok(vehicleDefectDto1);
-        }
-        log.warn(auth.getName()+" VEHICLEDEFECT NOT FOUND : (VEHICLE CODE) " + vehicleDefectDto.getId());
 
-        return ResponseEntity.status(400).body(null);
+            return ResponseEntity.ok(vehicleDefectDto1);
+
+
     }
 
     @GetMapping("/{vehicleDefectId}")
@@ -75,11 +69,10 @@ public class VehicleDefectController {
         log.info(auth.getName()+" GET VEHICLEDEFECT : (VEHICLE CODE) " + vehicleDefectId);
 
         VehicleDefectDto vehicleDefectDto = vehicleDefectService.vehicleDefectGet(vehicleDefectId);
-        if (vehicleDefectDto != null){
-            return ResponseEntity.ok(vehicleDefectDto);
-        }
-        log.warn(auth.getName()+" VEHICLEDEFECT NOT FOUND : (VEHICLE CODE) " + vehicleDefectDto.getId());
-        return ResponseEntity.status(400).body(null);
+
+        return ResponseEntity.ok(vehicleDefectDto);
+
+
     }
 
 
@@ -91,14 +84,11 @@ public class VehicleDefectController {
         log.info(auth.getName() + "Send get image request : (vehicleDefectId) " + id);
 
         ByteArrayResource byteArrayResource = vehicleDefectService.getImage(id);
-        if (byteArrayResource != null){
+
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .contentLength(byteArrayResource.contentLength())
                     .body(byteArrayResource);
-        }
-        log.warn(auth.getName() + " Image Not Found ! : (VehicleDefectId) " + id);
 
-        return ResponseEntity.status(400).body(null);
     }
 }

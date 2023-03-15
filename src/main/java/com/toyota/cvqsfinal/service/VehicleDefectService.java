@@ -5,6 +5,10 @@ import com.toyota.cvqsfinal.dto.VehicleDefectDto;
 import com.toyota.cvqsfinal.dto.VehicleDto;
 import com.toyota.cvqsfinal.entity.*;
 import com.toyota.cvqsfinal.entity.Image;
+import com.toyota.cvqsfinal.exception.DefectNotFoundException;
+import com.toyota.cvqsfinal.exception.GenericException;
+import com.toyota.cvqsfinal.exception.VehicleDefectNotFoundException;
+import com.toyota.cvqsfinal.exception.VehicleNotFoundException;
 import com.toyota.cvqsfinal.repository.*;
 import com.toyota.cvqsfinal.utility.DtoConvert;
 import com.toyota.cvqsfinal.utility.ImageOperations;
@@ -82,7 +86,7 @@ public class VehicleDefectService {
                     .build();
         }
         log.warn("vehicleDefectSave methodu null döndü");
-        return null;
+        throw new VehicleDefectNotFoundException("Araç bulunamadı");
     }
 
     /**
@@ -109,7 +113,7 @@ public class VehicleDefectService {
             return true;
         }
         log.warn("vehicleDefectDel methodu false döndü");
-        return false;
+        throw new VehicleDefectNotFoundException("Araç bulunamadı");
     }
 
 
@@ -123,10 +127,21 @@ public class VehicleDefectService {
 
     @Transactional
     public VehicleDefectDto vehicleDefectUpdate(VehicleDefectDto vehicleDefectDto) {
+
         log.debug("vehicleDefectUpdate methodu çalıştı");
 
         VehicleDefect vehicleDefect = vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(vehicleDefectDto.getId());
         Defect defect = defectRepository.getDefectByIdAndDeletedFalse(vehicleDefectDto.getDefect().getId());
+
+        if (vehicleDefect == null ){
+            log.warn("vehicleDefectUpdate methodu null döndü");
+            throw new VehicleDefectNotFoundException("Araç Hatası bulunamadı");
+        }
+        if (defect == null ){
+            log.warn("vehicleDefectUpdate methodu null döndü");
+            throw new DefectNotFoundException("Hata bulunamadı");
+        }
+
         vehicleDefect.setDefect(defect);
 
         vehicleDefect.getDefectLocations().stream().forEach(defectLocation -> {
@@ -169,7 +184,7 @@ public class VehicleDefectService {
                     .build();
         }
         log.warn("vehicleDefectGet methodu null döndü");
-        return null;
+        throw new VehicleDefectNotFoundException("Araç bulunamadı");
     }
 
 
@@ -191,7 +206,7 @@ public class VehicleDefectService {
             return inputStream2;
         }
         catch (Exception e){
-            return null;
+            throw new GenericException("Resim getirilirken hata oluştu");
         }
 
     }
@@ -220,7 +235,7 @@ public class VehicleDefectService {
 
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(getVehicleDefectParameters.getVehicleId());
         if (vehicle == null)
-            return null;
+            throw new VehicleNotFoundException("Araç bulunamadı");
 
         return vehicleDefectRepository.findAllByVehicleAndDeletedFalse(vehicle,pageable).stream().filter(vehicleDefect -> vehicleDefect.getDefect().getDefectName().indexOf(getVehicleDefectParameters.getFilterKeyword()) != -1).map(vehicleDefecet -> dtoConvert.vehicleDefectToVehicleDefectDto(vehicleDefecet)).collect(Collectors.toList());
     }

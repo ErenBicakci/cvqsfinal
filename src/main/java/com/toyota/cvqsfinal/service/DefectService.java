@@ -5,6 +5,7 @@ import com.toyota.cvqsfinal.dto.GetDefectParameters;
 import com.toyota.cvqsfinal.dto.GetVehicleParameters;
 import com.toyota.cvqsfinal.dto.ImageDto;
 import com.toyota.cvqsfinal.entity.*;
+import com.toyota.cvqsfinal.exception.DefectNotFoundException;
 import com.toyota.cvqsfinal.repository.*;
 import com.toyota.cvqsfinal.utility.DtoConvert;
 import jakarta.transaction.Transactional;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,7 +49,7 @@ public class DefectService {
         }
         catch (IllegalArgumentException e){
             log.warn("defectSave methouna gönderilen resim base64 formatında değil");
-            return null;
+            throw new IllegalArgumentException("Resim base64 formatında değil");
         }
 
             Image image = Image.builder()
@@ -90,7 +92,7 @@ public class DefectService {
             return true;
         }
         log.debug("defectDelete üzerinden false döndü");
-        return false;
+        throw new DefectNotFoundException("Hata bulunamadı");
     }
 
     /**
@@ -112,8 +114,7 @@ public class DefectService {
                     .imageDto(ImageDto.builder().id(defect.getImage().getId()).name(defect.getImage().getName()).data("http://localhost:8080/api/defect/image/"+defect.getId()).type(defect.getImage().getContentType()).build())
                     .build();
         }
-        log.debug("defectGet üzerinden null döndü");
-        return null;
+        throw new DefectNotFoundException("Hata bulunamadı");
     }
 
     /**
@@ -158,7 +159,7 @@ public class DefectService {
             }
             catch (IllegalArgumentException e){
                 log.warn("defectUpdate methouna gönderilen resim base64 formatında değil");
-                return null;
+                throw new IllegalArgumentException("Resim base64 formatında değil");
             }
 
             defect.getImage().setData(imageData);
@@ -172,7 +173,7 @@ public class DefectService {
                     .build();
         }
         log.debug("updateDefect üzerinden null döndü");
-        return null;
+        throw new DefectNotFoundException("Hata bulunamadı");
     }
 
     /**

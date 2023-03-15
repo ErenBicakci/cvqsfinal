@@ -3,6 +3,8 @@ package com.toyota.cvqsfinal.service;
 import com.toyota.cvqsfinal.dto.GetVehicleParameters;
 import com.toyota.cvqsfinal.dto.VehicleDto;
 import com.toyota.cvqsfinal.entity.Vehicle;
+import com.toyota.cvqsfinal.exception.GenericException;
+import com.toyota.cvqsfinal.exception.VehicleNotFoundException;
 import com.toyota.cvqsfinal.repository.VehicleDefectRepository;
 import com.toyota.cvqsfinal.repository.VehicleRepository;
 import com.toyota.cvqsfinal.utility.DtoConvert;
@@ -47,7 +49,7 @@ public class VehicleService {
         }
         else {
             log.warn("vehicleSave methodu null döndürdü");
-            return null;
+            throw new GenericException("Araç zaten kayıtlı");
         }
     }
 
@@ -67,7 +69,7 @@ public class VehicleService {
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleId);
         if (vehicle == null){
             log.warn("getVehicleFromId methodu null döndürdü");
-            return null;
+            throw new VehicleNotFoundException("Araç bulunamadı");
         }
         else {
             log.debug("getVehicleFromId methodu VehicleDto döndürdü");
@@ -101,7 +103,7 @@ public class VehicleService {
             return vehicleDto;
         }
         log.warn("vehicleUpdate methodu null döndürdü");
-        return null;
+        throw new VehicleNotFoundException("Araç bulunamadı");
     }
 
 
@@ -129,7 +131,7 @@ public class VehicleService {
             return true;
         }
         log.warn("vehicleDelete methodu false döndürdü");
-        return false;
+        throw new VehicleNotFoundException("Araç bulunamadı");
     }
 
 
