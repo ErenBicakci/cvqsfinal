@@ -30,7 +30,7 @@ services:
   cvqs:
     depends_on:
       - postgres
-    build: ./cvqs/
+    build: ./Main/
     ports:
       - 8080:8080
     environment:
@@ -60,4 +60,16 @@ services:
     stdin_open: true
     tty: true
     container_name: management
+
+  eurekaserver:
+    build: ./eurekaserver/
+    ports:
+      - 8761:8761
+    environment:
+      PROFILE: dev
+    volumes:
+      - ./cvqs/m2:/root/.m2
+    stdin_open: true
+    tty: true
+    container_name: eurekaserver
 
