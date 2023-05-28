@@ -1,6 +1,7 @@
 package com.toyota.auth.controller;
 
 import com.toyota.auth.dto.UserDto;
+import com.toyota.auth.log.CustomLogInfo;
 import com.toyota.auth.service.AuthenticationService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
@@ -19,26 +20,24 @@ public class AuthenticationController {
     }
 
 
+    @CustomLogInfo
     @PostMapping("/save")
     public ResponseEntity<String> save (@RequestBody UserDto userDto){
-        log.info("User save ! : (username) " + userDto.getUsername());
         String responseObject = authenticationService.save(userDto);
-        log.info("User saved ! : (username) " + userDto.getUsername());
         return ResponseEntity.ok(responseObject);
     }
 
 
+    @CustomLogInfo
     @PostMapping("/auth")
     public ResponseEntity<String> auth(@RequestBody UserDto userDto){
-        log.info("User authentication ! : (username) " + userDto.getUsername());
         String responseObject = authenticationService.auth(userDto);
-        log.info("User authenticated ! : (username) " + userDto.getUsername());
         return ResponseEntity.ok(responseObject);
     }
 
+    @CustomLogInfo
     @GetMapping("/getUser")
     public ResponseEntity<UserDto> getUserDtoByToken(@RequestParam String token){
-        log.info("User get by token ! : (token) " + token);
         return ResponseEntity.ok(authenticationService.getUserDto(token));
     }
 

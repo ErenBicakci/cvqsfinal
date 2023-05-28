@@ -10,9 +10,20 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dbtestpassword}
 
+  eurekaserver:
+    build: ./eurekaserver/
+    ports:
+      - 8761:8761
+    environment:
+      PROFILE: dev
+    volumes:
+      - ./cvqs/m2:/root/.m2
+    container_name: eurekaserver
+
   auth:
     depends_on:
       - postgres
+      - eurekaserver
     build: ./authservice/
     ports:
       - 8181:8181
@@ -23,13 +34,12 @@ services:
       SPRING_DATASOURCE_PASSWORD: dbtestpassword
     volumes:
       - ./authservice/m2:/root/.m2
-    stdin_open: true
-    tty: true
     container_name: auth
 
   cvqs:
     depends_on:
       - postgres
+      - eurekaserver
     build: ./Main/
     ports:
       - 8080:8080
@@ -40,13 +50,12 @@ services:
       SPRING_DATASOURCE_PASSWORD: dbtestpassword
     volumes:
       - ./cvqs/m2:/root/.m2
-    stdin_open: true
-    tty: true
-    container_name: defect
+    container_name: cvqs
 
   management:
     depends_on:
       - postgres
+      - eurekaserver
     build: ./management/
     ports:
       - 8282:8282
@@ -57,19 +66,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: dbtestpassword
     volumes:
       - ./cvqs/m2:/root/.m2
-    stdin_open: true
-    tty: true
     container_name: management
 
-  eurekaserver:
-    build: ./eurekaserver/
-    ports:
-      - 8761:8761
-    environment:
-      PROFILE: dev
-    volumes:
-      - ./cvqs/m2:/root/.m2
-    stdin_open: true
-    tty: true
-    container_name: eurekaserver
+
 

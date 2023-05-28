@@ -1,5 +1,6 @@
 package com.toyota.management.controller;
 
+import com.toyota.management.log.CustomLogInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class DashboardController {
 
 
-        @GetMapping
-        public ResponseEntity<String> getDashboard(){
-            log.info("Dashboard get !");
-            return ResponseEntity.ok("Dashboard");
-        }
+
+    @CustomLogInfo
+    @GetMapping
+    public ResponseEntity<String> getDashboard(){
+        return ResponseEntity.ok("Dashboard");
+    }
 }

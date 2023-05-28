@@ -6,6 +6,7 @@ import com.toyota.management.entity.Role;
 import com.toyota.management.entity.User;
 import com.toyota.management.exception.GenericException;
 import com.toyota.management.exception.UserNotFoundException;
+import com.toyota.management.log.CustomLogDebug;
 import com.toyota.management.repository.RoleRepository;
 import com.toyota.management.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +28,15 @@ public class UserManagementService {
     private final RoleRepository roleRepository;
 
 
-
+    /**
+     *
+     * Get Users with filter and sort parameters
+     *
+     * @param parameters - GetUserParameters  - page, pageSize, sortType, filterKeyword
+     * @return List<UserDto> - UserDto List (id, nameSurname, username, roles)
+     */
+    @CustomLogDebug
     public List<UserDto> getUsers(GetUserParameters parameters){
-
         Sort sort;
         if (parameters.getSortType().equals("ASC")){
             sort = Sort.by(Sort.Direction.ASC, "id");
@@ -42,6 +49,14 @@ public class UserManagementService {
 
     }
 
+    /**
+     *
+     * Delete User with username
+     *
+     * @param username - String  - username
+     * @return if user deleted return true
+     */
+    @CustomLogDebug
     public boolean deleteUser(String username){
 
         User user = userRepository.findByUsernameAndDeletedFalse(username);
@@ -54,6 +69,14 @@ public class UserManagementService {
 
     }
 
+    /**
+     *
+     * Get User with username
+     *
+     * @param username - String  - username
+     * @return UserDto - UserDto (id, nameSurname, username, roles)
+     */
+    @CustomLogDebug
     public UserDto getUser(String username){
 
         User user = userRepository.findByUsernameAndDeletedFalse(username);
@@ -63,6 +86,15 @@ public class UserManagementService {
         throw new UserNotFoundException("User Not Found!");
     }
 
+
+    /**
+     *
+     * Update User with UserDto
+     *
+     * @param nameSurnameDto - UserDto  - id, nameSurname, username, roles
+     * @return UserDto - UserDto (id, nameSurname, username, roles)
+     */
+    @CustomLogDebug
     public UserDto updateUser(UserDto nameSurnameDto){
 
         User user = userRepository.findByUsernameAndDeletedFalse(nameSurnameDto.getUsername());
@@ -74,6 +106,16 @@ public class UserManagementService {
         throw new UserNotFoundException("User Not Found!");
     }
 
+
+    /**
+     *
+     * add Role to User with username and role
+     *
+     * @param username - String  - username
+     * @param role - String  - role
+     * @return UserDto - UserDto (id, nameSurname, username, roles)
+     */
+    @CustomLogDebug
     public UserDto userAddRole(String username,String role){
         if (roleRepository.findByName(role) == null){
             throw new GenericException("Role not available!");
@@ -81,7 +123,6 @@ public class UserManagementService {
         User user = userRepository.findByUsernameAndDeletedFalse(username);
         if (user == null)
         {
-            log.debug("Username Not Found!");
             throw new UserNotFoundException("User Not Found!");
         }
         List<Role> roles = new ArrayList<>();
@@ -100,16 +141,24 @@ public class UserManagementService {
         return UserDto.builder().roles(user.getRoles()).nameSurname(user.getNameSurname()).username(user.getUsername()).build();
     }
 
+
+
+    /**
+     *
+     * delete Role to User with username and role
+     *
+     * @param username - String  - username
+     * @param role - String  - role
+     * @return if user deleted return true
+     */
+    @CustomLogDebug
     public boolean userDelRole(String username,String role){
         if (roleRepository.findByName(role) == null){
-            log.info("Role not available!");
             throw new GenericException("Role not available!");
         }
-
         User user = userRepository.findByUsernameAndDeletedFalse(username);
 
         if (user == null){
-            log.info("Username Not Found!");
             throw new UserNotFoundException("User Not Found!");
         }
 
@@ -118,7 +167,6 @@ public class UserManagementService {
         for (int i = 0;i < user.getRoles().size();i++){
             if (role.equals(user.getRoles().get(i).getName())){
                 if (user.getRoles().size() == 1){
-                    log.info("User must have at least 1 role");
                     throw  new GenericException("User must have at least 1 role");
                 }
                 else {
@@ -131,13 +179,11 @@ public class UserManagementService {
             }
         }
         if (counter ==0){
-            log.debug("User does not have this role");
             throw  new GenericException("User does not have this role");
 
         }
         user.setRoles(roles);
         userRepository.save(user);
-        log.debug("Role Deleted");
         return true;
     }
 }

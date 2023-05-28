@@ -15,12 +15,8 @@ public class DataLoad implements ApplicationRunner {
         this.roleRepository = roleRepository;
     }
 
-    /**
-     *
-     * Uygulama ayağa kalkarken eğer Roller yok ise Rolleri Oluşturur
-     *
-     *
-     */
+
+    //if role table is empty, create required roles
     @Override
     public void run(ApplicationArguments args) throws Exception {
         //Role Save

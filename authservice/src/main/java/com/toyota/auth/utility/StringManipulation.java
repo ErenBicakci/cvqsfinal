@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 public class StringManipulation {
 
     /**
-     * Girilen şifrenin ilk 3 elemanı hariç saklar
+     * Password hide
      *
-     * @param password
-     * @return Saklanmış metin döner
+     * @param password - String
+     * @return hiddenPassword - String
      */
     public String passwordHide(String password){
         String hiddenPassword = "";

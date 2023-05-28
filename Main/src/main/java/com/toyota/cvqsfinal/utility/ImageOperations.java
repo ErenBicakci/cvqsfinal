@@ -19,10 +19,10 @@ public class ImageOperations {
 
 
     /**
-     *
-     * @param data - Resim (byte dizisi)
-     * @param locationList - DefectLocation listesi
-     * @return byte[] - Resim (byte dizisi)
+     * Mark image with defect location
+     * @param data - Image (byte array)
+     * @param locationList - Defect location list
+     * @return byte[] - Image (byte array)
      * @throws IOException
      */
     public byte[] markImage(byte[] data, List<DefectLocation> locationList) throws IOException {

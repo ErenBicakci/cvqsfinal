@@ -19,9 +19,9 @@ public class DtoConvert {
 
 
     /**
-     *  DefectDto nesnesini Defect nesnesine dönüştürür
-     * @param defectDto - Hata bilgileri ve resim bilgileri
-     * @return Defect - Hata bilgileri ve resim bilgileri
+     *  DefectDto convert to Defect
+     * @param defectDto - DefectDto (info and image)
+     * @return Defect - Defect (info and image)
      */
     public Defect defectDtoToDefect(DefectDto defectDto){
         Defect defect = new Defect();
@@ -43,9 +43,9 @@ public class DtoConvert {
 
 
     /**
-     *  Defect nesnesini DefectDto nesnesine dönüştürür
-     * @param defect - Hata bilgileri ve resim bilgileri
-     * @return DefectDto - Hata bilgileri ve resim bilgileri
+     *  Defect convert to DefectDto
+     * @param defect - Defect (info and image)
+     * @return DefectDto - DefectDto (info and image)
      */
     public DefectDto defectToDefectDto(Defect defect){
         DefectDto defectDto = new DefectDto();
@@ -61,9 +61,9 @@ public class DtoConvert {
     }
 
     /**
-     *  VehicleDefectDto nesnesini VehicleDefect nesnesine dönüştürür
-     * @param vehicleDefectDto - Araç hata bilgileri
-     * @return VehicleDefect - Araç hata bilgileri
+     * VehicleDefectDto convert to VehicleDefect
+     * @param vehicleDefectDto - VehicleDefectDto (info and image)
+     * @return VehicleDefect - VehicleDefect (info and image)
      */
     public VehicleDefect vehicleDefectDtoToVehicleDefect(VehicleDefectDto vehicleDefectDto){
 
@@ -75,9 +75,9 @@ public class DtoConvert {
     }
 
     /**
-     *  VehicleDefect nesnesini VehicleDefectDto nesnesine dönüştürür
-     * @param vehicleDefect - Araç hata bilgileri
-     * @return VehicleDefectDto - Araç hata bilgileri
+     *  VehicleDefect convert to VehicleDefectDto
+     * @param vehicleDefect - VehicleDefect (info and image)
+     * @return VehicleDefectDto - VehicleDefectDto (info and image)
      */
 
     public VehicleDefectDto vehicleDefectToVehicleDefectDto(VehicleDefect vehicleDefect){
@@ -90,9 +90,9 @@ public class DtoConvert {
 
 
     /**
-     *  VehicleDto nesnesini Vehicle nesnesine dönüştürür
-     * @param vehicleDto - Araç bilgileri
-     * @return Vehicle - Araç bilgileri
+     *  VehicleDto convert to Vehicle
+     * @param vehicleDto - VehicleDto (info and image)
+     * @return Vehicle - Vehicle (info and image)
      */
     public Vehicle vehicleDtoToVehicle(VehicleDto vehicleDto){
         Vehicle vehicle = new Vehicle();
@@ -104,9 +104,9 @@ public class DtoConvert {
     }
 
     /**
-     *  Vehicle nesnesini VehicleDto nesnesine dönüştürür
-     * @param vehicle - Araç bilgileri
-     * @return VehicleDto - Araç bilgileri
+     *  Vehicle convert to VehicleDto
+     * @param vehicle -Vehicle (info and image)
+     * @return VehicleDto - VehicleDto (info and image)
      */
     public VehicleDto vehicleToVehicleDto(Vehicle vehicle){
         VehicleDto vehicleDto = new VehicleDto();

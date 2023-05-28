@@ -2,13 +2,13 @@ package com.toyota.cvqsfinal.service;
 
 import com.toyota.cvqsfinal.dto.GetVehicleDefectParameters;
 import com.toyota.cvqsfinal.dto.VehicleDefectDto;
-import com.toyota.cvqsfinal.dto.VehicleDto;
 import com.toyota.cvqsfinal.entity.*;
-import com.toyota.cvqsfinal.entity.Image;
 import com.toyota.cvqsfinal.exception.DefectNotFoundException;
 import com.toyota.cvqsfinal.exception.GenericException;
 import com.toyota.cvqsfinal.exception.VehicleDefectNotFoundException;
 import com.toyota.cvqsfinal.exception.VehicleNotFoundException;
+import com.toyota.cvqsfinal.log.CustomLogDebug;
+import com.toyota.cvqsfinal.log.CustomLogDebugWithoutParameters;
 import com.toyota.cvqsfinal.repository.*;
 import com.toyota.cvqsfinal.utility.DtoConvert;
 import com.toyota.cvqsfinal.utility.ImageOperations;
@@ -20,13 +20,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,23 +40,20 @@ public class VehicleDefectService {
 
     /**
      *
-     * Araç hata kaydetme servisi
+     * VehicleDefect save service
      *
-     * @param vehicleId - Araç id
-     * @param vehicleDefectDto - Araç hata bilgileri
-     * @return VehicleDefectDto - Araç hata bilgileri
+     * @param vehicleId - Vehicle id
+     * @param vehicleDefectDto - VehicleDefectDto (info and image)
+     * @return VehicleDefectDto - VehicleDefectDto (info and image)
      */
-
+    @CustomLogDebug
     @Transactional
     public VehicleDefectDto vehicleDefectSave(Long vehicleId, VehicleDefectDto vehicleDefectDto){
-        log.debug("vehicleDefectSave methodu çalıştı");
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleId);
         if (vehicle != null){
 
             List<DefectLocation> defectLocations = vehicleDefectDto.getDefectLocations();
-
             defectLocationRepository.saveAll(defectLocations);
-
             Defect defect = defectRepository.getDefectByIdAndDeletedFalse(vehicleDefectDto.getDefect().getId());
 
             VehicleDefect newDefect =
@@ -74,32 +64,28 @@ public class VehicleDefectService {
                             .build();
             vehicleDefectRepository.save(newDefect);
 
-
             List<VehicleDefect> vehicleDefects = vehicle.getVehicleDefect();
             vehicleDefects.add(newDefect);
             vehicle.setVehicleDefect(vehicleDefects);
             vehicleRepository.save(vehicle);
-            log.debug("vehicleDefectSave VehicleDefectDto döndü");
             return VehicleDefectDto.builder()
                     .defect(dtoConvert.defectToDefectDto(defect))
                     .defectLocations(defectLocations)
                     .build();
         }
-        log.warn("vehicleDefectSave methodu null döndü");
-        throw new VehicleDefectNotFoundException("Araç bulunamadı");
+        throw new VehicleDefectNotFoundException("Vehicle not found");
     }
 
     /**
      *
-     * Araç hata silme servisi
+     * VehicleDefect delete service
      *
-     * @param id - Araç hata id
-     * @return boolean - Araç hata silme işlemi başarılı ise true, başarısız ise false döner
+     * @param id - VehicleDefect id
+     * @return boolean - if deleted true
      */
-
+    @CustomLogDebug
     @Transactional
     public boolean vehicleDefectDel(Long id){
-        log.debug("vehicleDefectDel methodu çalıştı");
 
         VehicleDefect vehicleDefect = vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(id);
         if (vehicleDefect != null){
@@ -109,37 +95,32 @@ public class VehicleDefectService {
                 defectLocationRepository.save(defectLocation);
             });
             vehicleDefectRepository.save(vehicleDefect);
-            log.debug("vehicleDefectDel methodu true döndü");
             return true;
         }
-        log.warn("vehicleDefectDel methodu false döndü");
-        throw new VehicleDefectNotFoundException("Araç bulunamadı");
+        throw new VehicleDefectNotFoundException("Vehicle Defect not found");
     }
 
 
     /**
      *
-     * Araç hata güncelleme servisi
+     * VehicleDefect update service
      *
-     * @param vehicleDefectDto - Güncellenecek araç hata bilgileri
-     * @return VehicleDefectDto - Güncellenen araç hata bilgileri
+     * @param vehicleDefectDto - VehicleDefectDto (info and image)
+     * @return VehicleDefectDto - VehicleDefectDto (info and image)
      */
-
+    @CustomLogDebug
     @Transactional
     public VehicleDefectDto vehicleDefectUpdate(VehicleDefectDto vehicleDefectDto) {
 
-        log.debug("vehicleDefectUpdate methodu çalıştı");
 
         VehicleDefect vehicleDefect = vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(vehicleDefectDto.getId());
         Defect defect = defectRepository.getDefectByIdAndDeletedFalse(vehicleDefectDto.getDefect().getId());
 
         if (vehicleDefect == null ){
-            log.warn("vehicleDefectUpdate methodu null döndü");
-            throw new VehicleDefectNotFoundException("Araç Hatası bulunamadı");
+            throw new VehicleDefectNotFoundException("Vehicle Defect not found");
         }
         if (defect == null ){
-            log.warn("vehicleDefectUpdate methodu null döndü");
-            throw new DefectNotFoundException("Hata bulunamadı");
+            throw new DefectNotFoundException("Defect not found");
         }
 
         vehicleDefect.setDefect(defect);
@@ -149,54 +130,46 @@ public class VehicleDefectService {
             defectLocationRepository.save(defectLocation);
         });
 
-
         defectLocationRepository.saveAll(vehicleDefectDto.getDefectLocations());
-
         List<DefectLocation> defectLocationsNew = vehicleDefect.getDefectLocations();
         defectLocationsNew.addAll(vehicleDefectDto.getDefectLocations());
-
         vehicleDefect.setDefectLocations(defectLocationsNew);
-
         vehicleDefectRepository.save(vehicleDefect);
-        log.debug("vehicleDefectUpdate methodu VehicleDefectDto döndü");
         return VehicleDefectDto.builder().defect(dtoConvert.defectToDefectDto(defect)).defectLocations(vehicleDefectDto.getDefectLocations()).build();
     }
 
 
     /**
      *
-     * Araç hata getirme servisi
+     * VehicleDefect get service
      *
-     * @param id - Araç hata id
-     * @return VehicleDefectDto - Araç hata bilgileri
+     * @param id - VehicleDefect id
+     * @return VehicleDefectDto - VehicleDefectDto (info and image)
      */
-
+    @CustomLogDebug
     @Transactional
     public VehicleDefectDto vehicleDefectGet(Long id) {
-        log.debug("vehicleDefectGet methodu çalıştı");
         VehicleDefect vehicleDefect = vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(id);
         if (vehicleDefect != null){
-            log.debug("vehicleDefectGet methodu VehicleDefectDto döndü");
             return VehicleDefectDto.builder()
                     .id(vehicleDefect.getId())
                     .defect(dtoConvert.defectToDefectDto(vehicleDefect.getDefect()))
                     .defectLocations(vehicleDefect.getDefectLocations().stream().filter(defectLocation -> !defectLocation.isDeleted()).collect(Collectors.toList()))
                     .build();
         }
-        log.warn("vehicleDefectGet methodu null döndü");
-        throw new VehicleDefectNotFoundException("Araç bulunamadı");
+        throw new VehicleDefectNotFoundException("Vehicle Defect not found");
     }
 
 
 
     /**
      *
-     * Araç hata resim getirme servisi
+     * Get vehicle defect image
      *
-     * @param vehicleDefecetId - Araç hata id
-     * @return ByteArrayResource - Araç hata resmi byte dizisi
+     * @param vehicleDefecetId - VehicleDefect id
+     * @return ByteArrayResource - VehicleDefect image data
      */
-
+    @CustomLogDebugWithoutParameters
     @Transactional
     public ByteArrayResource getImage(Long vehicleDefecetId){
         try {
@@ -206,7 +179,7 @@ public class VehicleDefectService {
             return inputStream2;
         }
         catch (Exception e){
-            throw new GenericException("Resim getirilirken hata oluştu");
+            throw new GenericException("Error while getting image");
         }
 
     }
@@ -214,12 +187,12 @@ public class VehicleDefectService {
 
     /**
      *
-     * Araç hata listeleme servisi
+     * VehicleDefect list service with pagination and sorting
      *
-     * @param getVehicleDefectParameters - Araç hata getirme parametreleri
-     * @return List<VehicleDefectDto> - Araç hata bilgileri
+     * @param getVehicleDefectParameters - GetVehicleDefectParameters (page, pageSize, sortType, vehicleId)
+     * @return List<VehicleDefectDto> - VehicleDefectDto list (info and image)
      */
-
+    @CustomLogDebug
     @Transactional
     public List<VehicleDefectDto> getVehicleDefectsWithPagination(GetVehicleDefectParameters getVehicleDefectParameters) {
 
@@ -235,7 +208,7 @@ public class VehicleDefectService {
 
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(getVehicleDefectParameters.getVehicleId());
         if (vehicle == null)
-            throw new VehicleNotFoundException("Araç bulunamadı");
+            throw new VehicleNotFoundException("Vehicle not found");
 
         return vehicleDefectRepository.findAllByVehicleAndDeletedFalse(vehicle,pageable).stream().filter(vehicleDefect -> vehicleDefect.getDefect().getDefectName().indexOf(getVehicleDefectParameters.getFilterKeyword()) != -1).map(vehicleDefecet -> dtoConvert.vehicleDefectToVehicleDefectDto(vehicleDefecet)).collect(Collectors.toList());
     }

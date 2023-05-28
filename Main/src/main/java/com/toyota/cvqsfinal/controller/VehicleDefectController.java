@@ -1,6 +1,8 @@
 package com.toyota.cvqsfinal.controller;
 
 import com.toyota.cvqsfinal.dto.VehicleDefectDto;
+import com.toyota.cvqsfinal.log.CustomLogInfo;
+import com.toyota.cvqsfinal.log.CustomLogInfoWithoutParameters;
 import com.toyota.cvqsfinal.service.VehicleDefectService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,73 +24,55 @@ public class VehicleDefectController {
 
     private final VehicleDefectService vehicleDefectService;
 
-
+    @CustomLogInfo
     @PostMapping("/{vehicleId}")
-    ResponseEntity<VehicleDefectDto> saveVehicleDefect(@PathVariable Long vehicleId, @RequestBody VehicleDefectDto vehicleDefectDto)throws Exception{
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        log.info(auth.getName()+" VehicleDefect Saved");
+    ResponseEntity<VehicleDefectDto> saveVehicleDefect(@PathVariable Long vehicleId, @RequestBody VehicleDefectDto vehicleDefectDto){
 
         VehicleDefectDto vehicleDefectDto1 = vehicleDefectService.vehicleDefectSave(vehicleId,vehicleDefectDto);
-
-            return ResponseEntity.ok(vehicleDefectDto1);
+        return ResponseEntity.ok(vehicleDefectDto1);
 
     }
 
-
+    @CustomLogInfo
     @DeleteMapping("/{vehicleDefectId}")
-    ResponseEntity<Void> deleteVehicleDefect(@PathVariable Long vehicleDefectId){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    ResponseEntity<Boolean> deleteVehicleDefect(@PathVariable Long vehicleDefectId){
 
-        log.info(auth.getName()+"Send VehicleDefect delete request : (VEHICLE CODE) " + vehicleDefectId);
 
         boolean vehicleDto = vehicleDefectService.vehicleDefectDel(vehicleDefectId);
 
-        return ResponseEntity.ok().build();
+        if (vehicleDto == false){
+            return ResponseEntity.status(400).body(false);
+        }
+        return ResponseEntity.ok(true);
 
 
     }
 
+    @CustomLogInfo
     @PutMapping
     ResponseEntity<VehicleDefectDto> updateVehicleDefect(@RequestBody VehicleDefectDto vehicleDefectDto){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        log.info(auth.getName()+"Send VehicleDefect update request : (VEHICLE CODE) " + vehicleDefectDto.getId());
 
         VehicleDefectDto vehicleDefectDto1 = vehicleDefectService.vehicleDefectUpdate(vehicleDefectDto);
-
-            return ResponseEntity.ok(vehicleDefectDto1);
-
-
+        return ResponseEntity.ok(vehicleDefectDto1);
     }
 
+    @CustomLogInfo
     @GetMapping("/{vehicleDefectId}")
     ResponseEntity<VehicleDefectDto> getVehicleDefect(@PathVariable Long vehicleDefectId){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        log.info(auth.getName()+" GET VEHICLEDEFECT : (VEHICLE CODE) " + vehicleDefectId);
 
         VehicleDefectDto vehicleDefectDto = vehicleDefectService.vehicleDefectGet(vehicleDefectId);
-
         return ResponseEntity.ok(vehicleDefectDto);
-
-
     }
 
-
+    @CustomLogInfoWithoutParameters
     @GetMapping(value = "/image/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
     @Transactional()
     public ResponseEntity<Resource> getImage(@PathVariable Long id) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        log.info(auth.getName() + "Send get image request : (vehicleDefectId) " + id);
 
         ByteArrayResource byteArrayResource = vehicleDefectService.getImage(id);
-
-            return ResponseEntity
+        return ResponseEntity
                     .status(HttpStatus.OK)
                     .contentLength(byteArrayResource.contentLength())
                     .body(byteArrayResource);
-
     }
 }

@@ -5,6 +5,7 @@ import com.toyota.cvqsfinal.dto.VehicleDto;
 import com.toyota.cvqsfinal.entity.Vehicle;
 import com.toyota.cvqsfinal.exception.GenericException;
 import com.toyota.cvqsfinal.exception.VehicleNotFoundException;
+import com.toyota.cvqsfinal.log.CustomLogDebug;
 import com.toyota.cvqsfinal.repository.VehicleDefectRepository;
 import com.toyota.cvqsfinal.repository.VehicleRepository;
 import com.toyota.cvqsfinal.utility.DtoConvert;
@@ -34,45 +35,39 @@ public class VehicleService {
 
     /**
      *
-     * Araç kaydetme servisi
+     * Vehicle save service
      *
-     * @param vehicleSaveDto - Araç bilgileri
-     * @return VehicleDto - kaydedilen araç bilgileri
+     * @param vehicleSaveDto - VehicleDto (info)
+     * @return VehicleDto - VehicleDto (info)
      */
-
+    @CustomLogDebug
     public VehicleDto vehicleSave(VehicleDto vehicleSaveDto){
-        log.debug("vehicleSave methodu çalıştı");
         if (vehicleRepository.findByCodeAndDeletedFalse(vehicleSaveDto.getVehicleCode()) == null){
-            vehicleRepository.save(Vehicle.builder().code(vehicleSaveDto.getVehicleCode()).modelNo(vehicleSaveDto.getModelNo()).build());
-            log.debug("vehicleSave methodu VehicleDto döndürdü");
-            return VehicleDto.builder().vehicleCode(vehicleSaveDto.getVehicleCode()).modelNo(vehicleSaveDto.getModelNo()).build();
+            Vehicle vehicle = vehicleRepository.save(Vehicle.builder().code(vehicleSaveDto.getVehicleCode()).modelNo(vehicleSaveDto.getModelNo()).build());
+            return VehicleDto.builder().id(vehicle.getId()).vehicleCode(vehicleSaveDto.getVehicleCode()).modelNo(vehicleSaveDto.getModelNo()).build();
         }
         else {
-            log.warn("vehicleSave methodu null döndürdü");
-            throw new GenericException("Araç zaten kayıtlı");
+            throw new GenericException("Vehicle code already exists");
         }
     }
 
 
     /**
      *
-     * Araç getirme servisi
+     * Get vehicle vehicleId service
      *
-     * @param vehicleId - Araç id
-     * @return VehicleDto - Getirilen araç bilgileri
+     * @param vehicleId - Vehicle id
+     * @return VehicleDto - VehicleDto (info)
      */
-
+    @CustomLogDebug
     @Transactional
     public VehicleDto getVehicleFromId(Long vehicleId){
 
-        log.debug("getVehicleFromId methodu çalıştı");
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleId);
         if (vehicle == null){
-            log.warn("getVehicleFromId methodu null döndürdü");
-            throw new VehicleNotFoundException("Araç bulunamadı");
+            throw new VehicleNotFoundException("Vehicle not found");
         }
         else {
-            log.debug("getVehicleFromId methodu VehicleDto döndürdü");
             return VehicleDto.builder()
                     .vehicleDefectDtos(vehicle.getVehicleDefect().stream().filter(vehicleDefect -> !vehicleDefect.isDeleted()).collect(Collectors.toList()).stream().map(vehicleDefect -> dtoConvert.vehicleDefectToVehicleDefectDto(vehicleDefect)).collect(Collectors.toList()))
                     .id(vehicle.getId())
@@ -80,43 +75,37 @@ public class VehicleService {
                     .modelNo(vehicle.getModelNo())
                     .build();
         }
-
     }
 
     /**
      *
-     * Araç güncelleme servisi
+     * Vehicle update service
      *
-     * @param vehicleDto - Araç bilgileri
-     * @return VehicleDto - Güncellenen araç bilgileri
+     * @param vehicleDto - VehicleDto (info)
+     * @return VehicleDto - VehicleDto (info)
      */
-
+    @CustomLogDebug
     public VehicleDto vehicleUpdate(VehicleDto vehicleDto){
-        log.debug("vehicleUpdate methodu çalıştı");
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleDto.getId());
         if (vehicle != null){
-
             vehicle.setCode(vehicleDto.getVehicleCode());
             vehicle.setModelNo(vehicleDto.getModelNo());
             vehicleRepository.save(vehicle);
-            log.debug("vehicleUpdate methodu VehicleDto döndürdü");
             return vehicleDto;
         }
-        log.warn("vehicleUpdate methodu null döndürdü");
-        throw new VehicleNotFoundException("Araç bulunamadı");
+        throw new VehicleNotFoundException("Vehicle not found");
     }
 
 
     /**
      *
-     * Araç silme servisi
+     * Vehicle delete service
      *
-     * @param vehicleId - Araç id
-     * @return boolean - Silme işlemi başarılı ise true, başarısız ise false
+     * @param vehicleId - Vehicle id
+     * @return boolean - if vehicle deleted true else false
      */
-
+    @CustomLogDebug
     public boolean vehicleDelete(Long vehicleId){
-        log.debug("vehicleDelete methodu çalıştı");
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleId);
         if (vehicle != null){
             vehicle.setDeleted(true);
@@ -127,25 +116,22 @@ public class VehicleService {
                     }
             );
             vehicleRepository.save(vehicle);
-            log.debug("vehicleDelete methodu true döndürdü");
             return true;
         }
-        log.warn("vehicleDelete methodu false döndürdü");
-        throw new VehicleNotFoundException("Araç bulunamadı");
+        throw new VehicleNotFoundException("Vehicle not found");
     }
 
 
     /**
      *
-     * Araç listeleme servisi
+     * Vehicle list service with pagination and sorting
      *
-     * @param getVehicleParameters - Getirilecek araç filtreleme, sayfalama ve sıralama bilgileri
-     * @return List<VehicleDto> - Getirilen araç bilgileri
+     * @param getVehicleParameters - GetVehicleParameters (info) - page, pageSize, sortType, vehicleCode, modelNo
+     * @return List<VehicleDto> - VehicleDto (info)
      */
-
+    @CustomLogDebug
     @Transactional
     public List<VehicleDto> getVehiclesWithPagination(GetVehicleParameters getVehicleParameters){
-        log.debug("getVehiclesWithPagination methodu çalıştı");
         Sort sort;
         if (getVehicleParameters.getSortType().equals("ASC")){
             sort = Sort.by(Sort.Direction.ASC, "id");
@@ -154,7 +140,6 @@ public class VehicleService {
             sort = Sort.by(Sort.Direction.DESC, "id");
         }
         Pageable pageable = PageRequest.of(getVehicleParameters.getPage(), getVehicleParameters.getPageSize(), sort);
-        log.debug("getVehiclesWithPagination methodu List<VehicleDto> döndürdü");
         return vehicleRepository.findAllByCodeLikeAndModelNoLikeAndDeletedFalse("%"+ getVehicleParameters.getVehicleCode()+"%","%"+ getVehicleParameters.getModelNo()+"%",pageable).get().collect(Collectors.toList()).stream().map(vehicle -> dtoConvert.vehicleToVehicleDto(vehicle)).collect(Collectors.toList());
     }
 

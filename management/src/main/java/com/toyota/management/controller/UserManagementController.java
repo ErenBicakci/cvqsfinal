@@ -6,8 +6,6 @@ import com.toyota.management.service.UserManagementService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,65 +19,50 @@ public class UserManagementController {
 
     @GetMapping("/user/showusers")
     private ResponseEntity<List<UserDto>> showUsers(@RequestParam String filterKeyword, @RequestParam int page, @RequestParam int pageSize, @RequestParam String sortType){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         GetUserParameters getUserParameters = GetUserParameters.builder()
                 .filterKeyword(filterKeyword)
                 .page(page)
                 .pageSize(pageSize)
                 .sortType(sortType)
                 .build();
-        log.info(auth.getName() + "Send show users request");
         return ResponseEntity.ok(userManagementService.getUsers(getUserParameters));
     }
-
     @DeleteMapping("/user/{username}")
-    private ResponseEntity<Void> deleteUser(@PathVariable String username){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        log.info(auth.getName() + "Send delete user request : (username) " + username);
+    private ResponseEntity<Boolean> deleteUser(@PathVariable String username){
         boolean status = userManagementService.deleteUser(username);
-        log.info(auth.getName() + "User Deleted ! : (username) " + username);
-        return ResponseEntity.ok().build();
-
+        if (status){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.status(400).body(false);
 
     }
-
     @GetMapping("/user/{username}")
     private ResponseEntity<UserDto> getUser(@PathVariable String username){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        log.info(auth.getName() + "Send get user request : (username) " + username);
-
         UserDto responseObject = userManagementService.getUser(username);
-        log.info(auth.getName() + "User Found ! : (username) " + username);
         return ResponseEntity.ok(responseObject);
 
     }
 
     @PutMapping("/user/updateuser")
     private ResponseEntity<UserDto> updateuser(@RequestBody UserDto nameSurnameDto){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        log.info(auth.getName() + "Send update user request : (username) " + nameSurnameDto.getUsername());
         UserDto responseObject = userManagementService.updateUser(nameSurnameDto);
-        log.info(auth.getName() + "User Updated ! : (username) " + nameSurnameDto.getUsername());
         return ResponseEntity.ok(responseObject);
 
     }
 
     @PostMapping("/role/{username}/{role}")
     private ResponseEntity<UserDto> userAddRole(@PathVariable String username,@PathVariable String role){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        log.info(auth.getName() + "Send add role request : (username) " + username + " (role) " + role);
         UserDto responseObject = userManagementService.userAddRole(username,role);
-        log.info(auth.getName() + "Role Added ! : (username) " + username + " (role) " + role);
         return ResponseEntity.ok(responseObject);
     }
 
     @DeleteMapping("/role/{username}/{role}")
     private ResponseEntity<Void> userDelRole(@PathVariable String username,@PathVariable String role) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        log.info(auth.getName() + "Send delete role request : (username) " + username + " (role) " + role);
         boolean status = userManagementService.userDelRole(username, role);
-        log.info(auth.getName() + "Role Deleted ! : (username) " + username + " (role) " + role);
-        return ResponseEntity.ok().build();
+        if (status) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.status(400).build();
+
     }
 }
