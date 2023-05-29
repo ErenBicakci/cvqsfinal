@@ -50,7 +50,7 @@ public class ListingController {
         return ResponseEntity.ok(defectService.getDefectsWithPagination(getDefectParameters));
     }
     @CustomLogInfo
-    @PostMapping("/getvehicledefects")
+    @GetMapping("/getvehicledefects")
     ResponseEntity<List<VehicleDefectDto>> getDefects(@RequestParam String filterKeyword, @RequestParam int page, @RequestParam int pageSize, @RequestParam String sortType,@RequestParam Long vehicleId){
 
         GetVehicleDefectParameters getVehicleDefectParameters = GetVehicleDefectParameters.builder()
