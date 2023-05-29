@@ -9,6 +9,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-cvqstestdb}
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dbtestpassword}
+    volumes:
+      - db-data:/var/lib/postgresql/data
 
   eurekaserver:
     build: ./eurekaserver/
@@ -16,8 +18,6 @@ services:
       - 8761:8761
     environment:
       PROFILE: dev
-    volumes:
-      - ./cvqs/m2:/root/.m2
     container_name: eurekaserver
 
   auth:
@@ -32,8 +32,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cvqstestdb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: dbtestpassword
-    volumes:
-      - ./authservice/m2:/root/.m2
     container_name: auth
 
   cvqs:
@@ -48,8 +46,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cvqstestdb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: dbtestpassword
-    volumes:
-      - ./cvqs/m2:/root/.m2
     container_name: cvqs
 
   management:
@@ -64,9 +60,9 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cvqstestdb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: dbtestpassword
-    volumes:
-      - ./cvqs/m2:/root/.m2
     container_name: management
 
 
 
+volumes:
+  db-data:
