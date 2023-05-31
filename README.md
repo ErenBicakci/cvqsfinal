@@ -153,3 +153,15 @@ RESPONSE
 ]
 ```
   
+## DOCKER-COMPOSE VE DOCKERFILE
+
+DOCKERFILE :
+
+![DOCKERFILE](https://i.imgur.com/iZ3dXvz.png)
+
+DOCKER-COMPOSE :
+
+- Öncelikle veritabanı konteynırı ayağa kaldırılır. Bu konteynırın dinleyeceği port veritabanı ismi, kullanıcı ismi ve kullanıcı şifresi belirtilir. Konteynır silinip tekrar kullanılmaya başlandığında verileri kaybolmaması için veriler ‘‘db-data’’ isimli volümde tutulur.
+
+![DOCKERFILE](https://i.imgur.com/7wi7TP2.png)
+    
