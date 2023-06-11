@@ -22,7 +22,7 @@ USER - ROLE
 MICROSERVICE ARCHITECTURE
 
 
-![MICROSERVICE](https://i.imgur.com/a5EUq0r.png)
+![MICROSERVICE](https://i.imgur.com/TR2lEpl.png)
 ## API
 
 Requests and Examples are shared in the Postman Collection.
