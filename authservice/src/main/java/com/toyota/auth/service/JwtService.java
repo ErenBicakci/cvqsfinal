@@ -1,22 +1,16 @@
 package com.toyota.auth.service;
 
-import com.toyota.auth.dto.UserDto;
-import com.toyota.auth.repository.UserRepository;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.security.Key;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.function.Function;
@@ -26,7 +20,7 @@ import java.util.function.Function;
 public class JwtService {
 
 
-    private String SECRET_KEY = "secretKEYCVQSAPP123Z232321232sszasecretKEYCVQSAPP123Z232321232sszasecretKEYCVQSAPP123Z232321232ssza";
+    private final String SECRET_KEY = "secretKEYCVQSAPP123Z232321232sszasecretKEYCVQSAPP123Z232321232sszasecretKEYCVQSAPP123Z232321232ssza";
 
 
 

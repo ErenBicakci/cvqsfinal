@@ -46,16 +46,16 @@ public class AuthenticationService {
      * @param  userDto - User Information
      * @return  String - JWT
      */
-    @CustomLogDebug
 
+    @CustomLogDebug
     public String save(UserDto userDto) {
         Optional<User> user1 = userRepository.findByUsername(userDto.getUsername());
         if (user1.isEmpty()){
-
             User user = User.builder().username(userDto.getUsername()).password(encoder().encode(userDto.getPassword())).nameSurname(userDto.getNameSurname())
                     .roles(roleRepository.findAllByName("ROLE_ADMIN")).deleted(false).build();
 
             userRepository.save(user);
+
             var token = jwtService.generateToken(user);
             return token;
         }

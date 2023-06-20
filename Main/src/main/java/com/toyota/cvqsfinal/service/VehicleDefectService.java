@@ -13,7 +13,6 @@ import com.toyota.cvqsfinal.repository.*;
 import com.toyota.cvqsfinal.utility.DtoConvert;
 import com.toyota.cvqsfinal.utility.ImageOperations;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.PageRequest;
@@ -25,7 +24,6 @@ import java.util.stream.Collectors;
 
 @Log4j2
 @Service
-@RequiredArgsConstructor
 public class VehicleDefectService {
 
     public final ImageOperations imageOperations;
@@ -38,17 +36,25 @@ public class VehicleDefectService {
 
     private final DtoConvert dtoConvert;
 
+    public VehicleDefectService(ImageOperations imageOperations, DefectRepository defectRepository, DefectLocationRepository defectLocationRepository, VehicleDefectRepository vehicleDefectRepository, VehicleRepository vehicleRepository, DtoConvert dtoConvert) {
+        this.imageOperations = imageOperations;
+        this.defectRepository = defectRepository;
+        this.defectLocationRepository = defectLocationRepository;
+        this.vehicleDefectRepository = vehicleDefectRepository;
+        this.vehicleRepository = vehicleRepository;
+        this.dtoConvert = dtoConvert;
+    }
+
     /**
      *
      * VehicleDefect save service
      *
-     * @param vehicleId - Vehicle id
      * @param vehicleDefectDto - VehicleDefectDto (info and image)
      * @return VehicleDefectDto - VehicleDefectDto (info and image)
      */
     @CustomLogDebug
     @Transactional
-    public VehicleDefectDto vehicleDefectSave(Long vehicleId, VehicleDefectDto vehicleDefectDto){
+    public VehicleDefectDto vehicleDefectSave(VehicleDefectDto vehicleDefectDto,Long vehicleId){
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleId);
         if (vehicle != null){
 
@@ -56,6 +62,9 @@ public class VehicleDefectService {
             defectLocationRepository.saveAll(defectLocations);
             Defect defect = defectRepository.getDefectByIdAndDeletedFalse(vehicleDefectDto.getDefect().getId());
 
+            if (defect == null){
+                throw new DefectNotFoundException("Defect not found");
+            }
             VehicleDefect newDefect =
                     VehicleDefect.builder()
                             .defectLocations(defectLocations)
@@ -66,6 +75,8 @@ public class VehicleDefectService {
 
             List<VehicleDefect> vehicleDefects = vehicle.getVehicleDefect();
             vehicleDefects.add(newDefect);
+
+
             vehicle.setVehicleDefect(vehicleDefects);
             vehicleRepository.save(vehicle);
             return VehicleDefectDto.builder()
@@ -88,6 +99,7 @@ public class VehicleDefectService {
     public boolean vehicleDefectDel(Long id){
 
         VehicleDefect vehicleDefect = vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(id);
+
         if (vehicleDefect != null){
             vehicleDefect.setDeleted(true);
             vehicleDefect.getDefectLocations().forEach(defectLocation -> {
@@ -125,7 +137,7 @@ public class VehicleDefectService {
 
         vehicleDefect.setDefect(defect);
 
-        vehicleDefect.getDefectLocations().stream().forEach(defectLocation -> {
+        vehicleDefect.getDefectLocations().forEach(defectLocation -> {
             defectLocation.setDeleted(true);
             defectLocationRepository.save(defectLocation);
         });
@@ -175,8 +187,7 @@ public class VehicleDefectService {
         try {
             VehicleDefect vehicleDefect =  vehicleDefectRepository.getVehicleDefectByIdAndDeletedFalse(vehicleDefecetId);
             byte[] imageData = vehicleDefect.getDefect().getImage().getData();
-            ByteArrayResource inputStream2 = new ByteArrayResource(imageOperations.markImage(imageData, vehicleDefect.getDefectLocations().stream().filter(defectLocation -> !defectLocation.isDeleted()).collect(Collectors.toList())));
-            return inputStream2;
+            return new ByteArrayResource(imageOperations.markImage(imageData, vehicleDefect.getDefectLocations().stream().filter(defectLocation -> !defectLocation.isDeleted()).collect(Collectors.toList())));
         }
         catch (Exception e){
             throw new GenericException("Error while getting image");
@@ -194,7 +205,7 @@ public class VehicleDefectService {
      */
     @CustomLogDebug
     @Transactional
-    public List<VehicleDefectDto> getVehicleDefectsWithPagination(GetVehicleDefectParameters getVehicleDefectParameters) {
+    public List<VehicleDefectDto> getVehicleDefectsFromVehicleWithPagination(GetVehicleDefectParameters getVehicleDefectParameters) {
 
 
         Sort sort;
@@ -207,9 +218,32 @@ public class VehicleDefectService {
         Pageable pageable = PageRequest.of(getVehicleDefectParameters.getPage(), getVehicleDefectParameters.getPageSize(), sort);
 
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(getVehicleDefectParameters.getVehicleId());
+
         if (vehicle == null)
             throw new VehicleNotFoundException("Vehicle not found");
-
         return vehicleDefectRepository.findAllByVehicleAndDeletedFalse(vehicle,pageable).stream().filter(vehicleDefect -> vehicleDefect.getDefect().getDefectName().indexOf(getVehicleDefectParameters.getFilterKeyword()) != -1).map(vehicleDefecet -> dtoConvert.vehicleDefectToVehicleDefectDto(vehicleDefecet)).collect(Collectors.toList());
     }
+
+
+
+    @CustomLogDebug
+    @Transactional
+    public List<VehicleDefectDto> getVehicleDefectsWithPagination(GetVehicleDefectParameters getVehicleDefectParameters) {
+
+
+        Sort sort;
+        if (getVehicleDefectParameters.getSortType().equals("ASC")){
+            sort = Sort.by(Sort.Direction.ASC, "id");
+        }
+        else {
+            sort = Sort.by(Sort.Direction.DESC, "id");
+        }
+        Pageable pageable = PageRequest.of(getVehicleDefectParameters.getPage(), getVehicleDefectParameters.getPageSize(), sort);
+
+        return vehicleDefectRepository.findAllVehicleDefectByDeletedFalse(pageable).stream().map(vehicleDefecet -> dtoConvert.vehicleDefectToVehicleDefectDto(vehicleDefecet)).collect(Collectors.toList());
+    }
+
+
+
+
 }

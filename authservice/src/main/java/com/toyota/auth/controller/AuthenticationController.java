@@ -5,8 +5,6 @@ import com.toyota.auth.log.CustomLogInfo;
 import com.toyota.auth.service.AuthenticationService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @Log4j2
@@ -20,9 +18,9 @@ public class AuthenticationController {
     }
 
 
-    @CustomLogInfo
     @PostMapping("/save")
     public ResponseEntity<String> save (@RequestBody UserDto userDto){
+        System.out.println("userDto = " + userDto);
         String responseObject = authenticationService.save(userDto);
         return ResponseEntity.ok(responseObject);
     }

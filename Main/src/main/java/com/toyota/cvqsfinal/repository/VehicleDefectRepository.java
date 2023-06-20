@@ -10,4 +10,5 @@ public interface VehicleDefectRepository extends JpaRepository<VehicleDefect,Lon
     VehicleDefect getVehicleDefectByIdAndDeletedFalse(Long id);
 
     Page<VehicleDefect> findAllByVehicleAndDeletedFalse(Vehicle vehicle, Pageable pageable);
+    Page<VehicleDefect> findAllVehicleDefectByDeletedFalse(Pageable pageable);
 }

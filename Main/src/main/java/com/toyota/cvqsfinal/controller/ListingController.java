@@ -50,8 +50,8 @@ public class ListingController {
         return ResponseEntity.ok(defectService.getDefectsWithPagination(getDefectParameters));
     }
     @CustomLogInfo
-    @GetMapping("/getvehicledefects")
-    ResponseEntity<List<VehicleDefectDto>> getDefects(@RequestParam String filterKeyword, @RequestParam int page, @RequestParam int pageSize, @RequestParam String sortType,@RequestParam Long vehicleId){
+    @GetMapping("/getvehicledefectsfromvehicle")
+    ResponseEntity<List<VehicleDefectDto>> getVehicleDefectsFromVehicle(@RequestParam String filterKeyword, @RequestParam int page, @RequestParam int pageSize, @RequestParam String sortType,@RequestParam Long vehicleId){
 
         GetVehicleDefectParameters getVehicleDefectParameters = GetVehicleDefectParameters.builder()
                 .filterKeyword(filterKeyword)
@@ -60,6 +60,25 @@ public class ListingController {
                 .sortType(sortType)
                 .vehicleId(vehicleId)
                 .build();
+        return ResponseEntity.ok(vehicleDefectService.getVehicleDefectsFromVehicleWithPagination(getVehicleDefectParameters));
+    }
+
+
+    @CustomLogInfo
+    @GetMapping("/getvehicledefects")
+    ResponseEntity<List<VehicleDefectDto>> getVehicleDefects(@RequestParam String filterKeyword, @RequestParam int page, @RequestParam int pageSize, @RequestParam String sortType){
+
+        GetVehicleDefectParameters getVehicleDefectParameters = GetVehicleDefectParameters.builder()
+                .filterKeyword(filterKeyword)
+                .page(page)
+                .pageSize(pageSize)
+                .sortType(sortType)
+                .build();
         return ResponseEntity.ok(vehicleDefectService.getVehicleDefectsWithPagination(getVehicleDefectParameters));
     }
+
+
+
+
+
 }

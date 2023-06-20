@@ -18,7 +18,7 @@ public class DataLoad implements ApplicationRunner {
 
     //if role table is empty, create required roles
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         //Role Save
 
         if (roleRepository.findAll().size() == 0){

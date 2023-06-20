@@ -1,14 +1,11 @@
 package com.toyota.cvqsfinal.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.toyota.cvqsfinal.dto.DefectDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @Builder

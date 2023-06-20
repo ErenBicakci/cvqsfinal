@@ -35,7 +35,6 @@ public class DtoConvert {
                         .name(defectDto.getImageDto().getName())
                         .data(imageData)
                         .build());
-
         defect.setDefectName(defectDto.getName());
 
         return defect;

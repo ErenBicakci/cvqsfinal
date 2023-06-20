@@ -1,6 +1,5 @@
 package com.toyota.auth.utility;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,10 +1,6 @@
 package com.toyota.cvqsfinal.dto;
 
-import com.toyota.cvqsfinal.entity.Defect;
 import com.toyota.cvqsfinal.entity.DefectLocation;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

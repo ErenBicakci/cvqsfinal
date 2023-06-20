@@ -42,7 +42,7 @@ public class VehicleController {
     ResponseEntity<Boolean> deleteVehicle(@PathVariable Long id){
 
         boolean bool = vehicleService.vehicleDelete(id);
-        if (bool == true){
+        if (bool){
             return ResponseEntity.ok(true);
         }
          return ResponseEntity.status(400).body(false);

@@ -1,12 +1,9 @@
 package com.toyota.cvqsfinal.dto;
 
-import com.toyota.cvqsfinal.entity.VehicleDefect;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.NonNull;
 
 import java.util.List;
 

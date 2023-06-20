@@ -12,8 +12,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @Log4j2
@@ -28,7 +26,8 @@ public class VehicleDefectController {
     @PostMapping("/{vehicleId}")
     ResponseEntity<VehicleDefectDto> saveVehicleDefect(@PathVariable Long vehicleId, @RequestBody VehicleDefectDto vehicleDefectDto){
 
-        VehicleDefectDto vehicleDefectDto1 = vehicleDefectService.vehicleDefectSave(vehicleId,vehicleDefectDto);
+        vehicleDefectDto.setId(vehicleId);
+        VehicleDefectDto vehicleDefectDto1 = vehicleDefectService.vehicleDefectSave(vehicleDefectDto, vehicleId);
         return ResponseEntity.ok(vehicleDefectDto1);
 
     }
@@ -40,7 +39,7 @@ public class VehicleDefectController {
 
         boolean vehicleDto = vehicleDefectService.vehicleDefectDel(vehicleDefectId);
 
-        if (vehicleDto == false){
+        if (!vehicleDto){
             return ResponseEntity.status(400).body(false);
         }
         return ResponseEntity.ok(true);

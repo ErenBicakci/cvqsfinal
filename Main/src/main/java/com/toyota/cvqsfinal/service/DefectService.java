@@ -52,7 +52,7 @@ public class DefectService {
             Image image = Image.builder()
                     .contentType(defectDto.getImageDto().getType())
                     .data(imageData)
-                    .name(defectDto.getName())
+                    .name(defectDto.getImageDto().getName())
                     .build();
 
             imageRepository.save(image);
@@ -167,7 +167,7 @@ public class DefectService {
      * Defect list get service with pagination and filter
      *
      * @param getDefectParameters - GetDefectParameters (page, pageSize, sortType, filterKeyword)
-     * @return List<DefectDto> - Defect list with pagination and filter
+     * @return List<DefectDto> - Defect list with pagination, filter and sort
      */
     @CustomLogDebug
     @Transactional

@@ -45,7 +45,7 @@ public class UserManagementService {
             sort = Sort.by(Sort.Direction.DESC, "id");
         }
         Pageable pageable = PageRequest.of(parameters.getPage(), parameters.getPageSize(), sort);
-        return userRepository.findAllByNameSurnameLikeAndDeletedFalse("%"+parameters.getFilterKeyword()+"%",pageable).get().collect(Collectors.toList()).stream().map(user -> UserDto.builder().id(user.getId()).roles(user.getRoles()).nameSurname(user.getNameSurname()).username(user.getUsername()).build()).collect(Collectors.toList());
+        return userRepository.findAllByNameSurnameLikeAndDeletedFalse("%"+parameters.getFilterKeyword()+"%",pageable).get().toList().stream().map(user -> UserDto.builder().id(user.getId()).roles(user.getRoles()).nameSurname(user.getNameSurname()).username(user.getUsername()).build()).collect(Collectors.toList());
 
     }
 
@@ -60,7 +60,7 @@ public class UserManagementService {
     public boolean deleteUser(String username){
 
         User user = userRepository.findByUsernameAndDeletedFalse(username);
-        if (user == null && user.isDeleted()){
+        if (user == null || user.isDeleted()){
             throw new UserNotFoundException("User Not Found!");
         }
         user.setDeleted(true);
@@ -171,7 +171,6 @@ public class UserManagementService {
                 }
                 else {
                     counter++;
-                    continue;
                 }
             }
             else {

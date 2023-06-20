@@ -23,7 +23,7 @@ public class ImageOperations {
      * @param data - Image (byte array)
      * @param locationList - Defect location list
      * @return byte[] - Image (byte array)
-     * @throws IOException
+     * @throws IOException - IOException
      */
     public byte[] markImage(byte[] data, List<DefectLocation> locationList) throws IOException {
         InputStream inputStream = new ByteArrayInputStream(data);
@@ -44,7 +44,6 @@ public class ImageOperations {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image2, "jpg", baos);
-        byte[] imageInByte = baos.toByteArray();
-        return imageInByte;
+        return baos.toByteArray();
     }
 }
