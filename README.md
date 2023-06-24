@@ -1,7 +1,7 @@
 
 # CVQS Back-End Project
 
-CVQS Backend project is a tool error logging application developed with microservice architecture.
+The CVQS Backend project allows to record defects that occur during the vehicle manufacturing process. It is developed using microservice architecture.
 
 
 
