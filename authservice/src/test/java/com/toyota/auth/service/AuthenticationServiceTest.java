@@ -12,8 +12,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
 @ExtendWith(MockitoExtension.class)
 class AuthenticationServiceTest {
 

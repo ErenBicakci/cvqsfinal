@@ -20,7 +20,6 @@ public class AuthenticationController {
 
     @PostMapping("/save")
     public ResponseEntity<String> save (@RequestBody UserDto userDto){
-        System.out.println("userDto = " + userDto);
         String responseObject = authenticationService.save(userDto);
         return ResponseEntity.ok(responseObject);
     }

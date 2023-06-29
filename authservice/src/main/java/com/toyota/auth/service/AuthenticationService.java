@@ -75,8 +75,8 @@ public class AuthenticationService {
             if (user == null){
                 throw new UserNotFoundException("User not found");
             }
+            System.out.println(userRequest.getPassword());
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userRequest.getUsername(),userRequest.getPassword()));
-
             String token = jwtService.generateToken(user);
             return token;
         }
