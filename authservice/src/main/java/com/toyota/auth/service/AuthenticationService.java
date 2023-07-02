@@ -7,7 +7,6 @@ import com.toyota.auth.exception.UserNotFoundException;
 import com.toyota.auth.log.CustomLogDebug;
 import com.toyota.auth.repository.RoleRepository;
 import com.toyota.auth.repository.UserRepository;
-import com.toyota.auth.utility.StringManipulation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,14 +24,12 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final RoleRepository roleRepository;
-    private final StringManipulation stringManipulation;
 
-    public AuthenticationService(UserRepository userRepository, JwtService jwtService, AuthenticationManager authenticationManager, RoleRepository roleRepository, StringManipulation stringManipulation) {
+    public AuthenticationService(UserRepository userRepository, JwtService jwtService, AuthenticationManager authenticationManager, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
         this.roleRepository = roleRepository;
-        this.stringManipulation = stringManipulation;
     }
 
 
@@ -55,9 +52,7 @@ public class AuthenticationService {
                     .roles(roleRepository.findAllByName("ROLE_ADMIN")).deleted(false).build();
 
             userRepository.save(user);
-
-            var token = jwtService.generateToken(user);
-            return token;
+            return jwtService.generateToken(user);
         }
         throw new UserAlreadyExistException("User already exists");
     }
@@ -77,8 +72,7 @@ public class AuthenticationService {
             }
             System.out.println(userRequest.getPassword());
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userRequest.getUsername(),userRequest.getPassword()));
-            String token = jwtService.generateToken(user);
-            return token;
+            return jwtService.generateToken(user);
         }
         catch (AuthenticationException e){
             throw new UserNotFoundException("User not found");

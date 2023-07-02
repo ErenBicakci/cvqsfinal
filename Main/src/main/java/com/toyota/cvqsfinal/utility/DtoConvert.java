@@ -59,19 +59,6 @@ public class DtoConvert {
         return defectDto;
     }
 
-    /**
-     * VehicleDefectDto convert to VehicleDefect
-     * @param vehicleDefectDto - VehicleDefectDto (info and image)
-     * @return VehicleDefect - VehicleDefect (info and image)
-     */
-    public VehicleDefect vehicleDefectDtoToVehicleDefect(VehicleDefectDto vehicleDefectDto){
-
-        VehicleDefect vehicleDefect = new VehicleDefect();
-        vehicleDefect.setId(vehicleDefectDto.getId());
-        vehicleDefect.setDefectLocations(vehicleDefectDto.getDefectLocations());
-        vehicleDefect.setDefect(defectDtoToDefect(vehicleDefectDto.getDefect()));
-        return vehicleDefect;
-    }
 
     /**
      *  VehicleDefect convert to VehicleDefectDto
@@ -87,20 +74,6 @@ public class DtoConvert {
         return vehicleDefectDto;
     }
 
-
-    /**
-     *  VehicleDto convert to Vehicle
-     * @param vehicleDto - VehicleDto (info and image)
-     * @return Vehicle - Vehicle (info and image)
-     */
-    public Vehicle vehicleDtoToVehicle(VehicleDto vehicleDto){
-        Vehicle vehicle = new Vehicle();
-        vehicle.setId(vehicleDto.getId());
-        vehicle.setCode(vehicleDto.getVehicleCode());
-        vehicle.setModelNo(vehicleDto.getModelNo());
-        vehicle.setVehicleDefect(vehicleDto.getVehicleDefectDtos().stream().map(this::vehicleDefectDtoToVehicleDefect).toList());
-        return vehicle;
-    }
 
     /**
      *  Vehicle convert to VehicleDto

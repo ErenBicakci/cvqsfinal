@@ -19,7 +19,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.Base64;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Log4j2
@@ -40,7 +39,7 @@ public class DefectService {
 
     @CustomLogDebugWithoutParameters
     public boolean defectSave(DefectDto defectDto){
-        byte[] imageData = null;
+        byte[] imageData;
         try {
              imageData = Base64.getMimeDecoder().decode(defectDto.getImageDto().getData());
 
@@ -121,8 +120,7 @@ public class DefectService {
     @CustomLogDebugWithoutParameters
     @Transactional
     public ByteArrayResource getImage(Long defectId){
-        final ByteArrayResource inputStream = new ByteArrayResource(defectRepository.getDefectByIdAndDeletedFalse(defectId).getImage().getData());
-        return inputStream;
+        return new ByteArrayResource(defectRepository.getDefectByIdAndDeletedFalse(defectId).getImage().getData());
     }
 
     /**
@@ -141,7 +139,7 @@ public class DefectService {
             defect.setDefectName(defectDto.getName());
             defect.getImage().setName(defectDto.getImageDto().getName());
 
-            byte[] imageData = null;
+            byte[] imageData;
             try {
                 imageData = Base64.getMimeDecoder().decode(defectDto.getImageDto().getData());
 
@@ -180,7 +178,10 @@ public class DefectService {
             sort = Sort.by(Sort.Direction.DESC, "id");
         }
         Pageable pageable = PageRequest.of(getDefectParameters.getPage(), getDefectParameters.getPageSize(), sort);
-        return defectRepository.getAllByDefectNameLikeAndDeletedFalse("%"+ getDefectParameters.getFilterKeyword()+"%",pageable).get().collect(Collectors.toList()).stream().map(defect -> dtoConvert.defectToDefectDto(defect)).collect(Collectors.toList());
+        return defectRepository.getAllByDefectNameLikeAndDeletedFalse("%"+ getDefectParameters.getFilterKeyword()+"%",pageable)
+                .get()
+                .map(dtoConvert::defectToDefectDto).toList();
+
     }
 
 }

@@ -30,7 +30,7 @@ class AuthenticationServiceTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        authenticationService = new AuthenticationService(userRepository, jwtService, authenticationManager, roleRepository, null);
+        authenticationService = new AuthenticationService(userRepository, jwtService, authenticationManager, roleRepository);
     }
     @Test
     public void testSave() {

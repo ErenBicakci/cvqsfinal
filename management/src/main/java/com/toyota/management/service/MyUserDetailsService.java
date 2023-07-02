@@ -19,6 +19,7 @@ public class MyUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String token) throws UsernameNotFoundException {
 
         UserDto userDto = authClient.getUserByToken(token).getBody();
+        assert userDto != null;
         return User.builder()
                 .username(userDto.getUsername())
                 .password(userDto.getPassword())

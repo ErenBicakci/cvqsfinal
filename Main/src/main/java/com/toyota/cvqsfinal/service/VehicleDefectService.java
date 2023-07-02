@@ -221,7 +221,12 @@ public class VehicleDefectService {
 
         if (vehicle == null)
             throw new VehicleNotFoundException("Vehicle not found");
-        return vehicleDefectRepository.findAllByVehicleAndDeletedFalse(vehicle,pageable).stream().filter(vehicleDefect -> vehicleDefect.getDefect().getDefectName().indexOf(getVehicleDefectParameters.getFilterKeyword()) != -1).map(vehicleDefecet -> dtoConvert.vehicleDefectToVehicleDefectDto(vehicleDefecet)).collect(Collectors.toList());
+        return vehicleDefectRepository
+                .findAllByVehicleAndDeletedFalse(vehicle,pageable)
+                .stream()
+                .filter(vehicleDefect -> vehicleDefect.getDefect().getDefectName().contains(getVehicleDefectParameters.getFilterKeyword()))
+                .map(dtoConvert::vehicleDefectToVehicleDefectDto)
+                .toList();
     }
 
 
@@ -240,7 +245,11 @@ public class VehicleDefectService {
         }
         Pageable pageable = PageRequest.of(getVehicleDefectParameters.getPage(), getVehicleDefectParameters.getPageSize(), sort);
 
-        return vehicleDefectRepository.findAllVehicleDefectByDeletedFalse(pageable).stream().map(vehicleDefecet -> dtoConvert.vehicleDefectToVehicleDefectDto(vehicleDefecet)).collect(Collectors.toList());
+        return vehicleDefectRepository
+                .findAllVehicleDefectByDeletedFalse(pageable)
+                .stream()
+                .map(dtoConvert::vehicleDefectToVehicleDefectDto)
+                .toList();
     }
 
 

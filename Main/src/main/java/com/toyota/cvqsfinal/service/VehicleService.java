@@ -69,7 +69,12 @@ public class VehicleService {
         else {
 
             return VehicleDto.builder()
-                    .vehicleDefectDtos(vehicle.getVehicleDefect().stream().filter(vehicleDefect -> !vehicleDefect.isDeleted()).toList().stream().map(vehicleDefect -> dtoConvert.vehicleDefectToVehicleDefectDto(vehicleDefect)).collect(Collectors.toList()))
+                    .vehicleDefectDtos(vehicle.getVehicleDefect()
+                            .stream()
+                            .filter(vehicleDefect -> !vehicleDefect.isDeleted())
+                            .map(dtoConvert::vehicleDefectToVehicleDefectDto)
+                            .collect(Collectors.toList()))
+
                     .id(vehicle.getId())
                     .vehicleCode(vehicle.getCode())
                     .modelNo(vehicle.getModelNo())
@@ -140,7 +145,11 @@ public class VehicleService {
             sort = Sort.by(Sort.Direction.DESC, "id");
         }
         Pageable pageable = PageRequest.of(getVehicleParameters.getPage(), getVehicleParameters.getPageSize(), sort);
-        return vehicleRepository.findAllByCodeLikeAndModelNoLikeAndDeletedFalse("%"+ getVehicleParameters.getVehicleCode()+"%","%"+ getVehicleParameters.getModelNo()+"%",pageable).get().toList().stream().map(vehicle -> dtoConvert.vehicleToVehicleDto(vehicle)).collect(Collectors.toList());
+        return vehicleRepository
+                .findAllByCodeLikeAndModelNoLikeAndDeletedFalse("%"+ getVehicleParameters.getVehicleCode()+"%","%"+ getVehicleParameters.getModelNo()+"%",pageable)
+                .get()
+                .map(dtoConvert::vehicleToVehicleDto)
+                .toList();
     }
 
 }

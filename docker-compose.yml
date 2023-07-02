@@ -12,6 +12,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
+
   eurekaserver:
     build: ./eurekaserver/
     ports:
@@ -33,6 +34,8 @@ services:
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: dbtestpassword
     container_name: auth
+    volumes:
+      - logs:/logs
 
   cvqs:
     depends_on:
@@ -47,6 +50,8 @@ services:
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: dbtestpassword
     container_name: cvqs
+    volumes:
+      - logs:/logs
 
   management:
     depends_on:
@@ -61,8 +66,11 @@ services:
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: dbtestpassword
     container_name: management
+    volumes:
+      - logs:/logs
 
 
 
 volumes:
   db-data:
+  logs:

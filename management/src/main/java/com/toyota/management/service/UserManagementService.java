@@ -59,10 +59,8 @@ public class UserManagementService {
     @CustomLogDebug
     public boolean deleteUser(String username){
 
-        User user = userRepository.findByUsernameAndDeletedFalse(username);
-        if (user == null || user.isDeleted()){
-            throw new UserNotFoundException("User Not Found!");
-        }
+        User user = userRepository.findByUsernameAndDeletedFalse(username).orElseThrow(() -> new UserNotFoundException("User Not Found!"));
+
         user.setDeleted(true);
         userRepository.save(user);
         return true;
@@ -79,11 +77,14 @@ public class UserManagementService {
     @CustomLogDebug
     public UserDto getUser(String username){
 
-        User user = userRepository.findByUsernameAndDeletedFalse(username);
-        if (user != null){
-            return UserDto.builder().id(user.getId()).roles(user.getRoles()).nameSurname(user.getNameSurname()).username(user.getUsername()).build();
-        }
-        throw new UserNotFoundException("User Not Found!");
+        User user = userRepository.findByUsernameAndDeletedFalse(username).orElseThrow(() -> new UserNotFoundException("User Not Found!"));
+        return UserDto
+                .builder()
+                .id(user.getId())
+                .roles(user.getRoles())
+                .nameSurname(user.getNameSurname())
+                .username(user.getUsername())
+                .build();
     }
 
 
@@ -97,13 +98,12 @@ public class UserManagementService {
     @CustomLogDebug
     public UserDto updateUser(UserDto nameSurnameDto){
 
-        User user = userRepository.findByUsernameAndDeletedFalse(nameSurnameDto.getUsername());
-        if (user != null){
+        User user = userRepository.findByUsernameAndDeletedFalse(nameSurnameDto.getUsername()).orElseThrow(() -> new UserNotFoundException("User Not Found!"));
+
             user.setNameSurname(nameSurnameDto.getNameSurname());
             userRepository.save(user);
             return UserDto.builder().roles(user.getRoles()).nameSurname(user.getNameSurname()).username(user.getUsername()).build();
-        }
-        throw new UserNotFoundException("User Not Found!");
+
     }
 
 
@@ -117,14 +117,9 @@ public class UserManagementService {
      */
     @CustomLogDebug
     public UserDto userAddRole(String username,String role){
-        if (roleRepository.findByName(role) == null){
-            throw new GenericException("Role not available!");
-        }
-        User user = userRepository.findByUsernameAndDeletedFalse(username);
-        if (user == null)
-        {
-            throw new UserNotFoundException("User Not Found!");
-        }
+        Role roleObject = roleRepository.findByName(role).orElseThrow(() -> new GenericException("Role not available!"));
+
+        User user = userRepository.findByUsernameAndDeletedFalse(username).orElseThrow(() -> new UserNotFoundException("User Not Found!"));
         List<Role> roles = new ArrayList<>();
         for (int i = 0;i < user.getRoles().size();i++){
             if (role.equals(user.getRoles().get(i).getName())){
@@ -135,7 +130,9 @@ public class UserManagementService {
             }
         }
 
-        roles.add(roleRepository.findByName(role));
+
+
+        roles.add(roleObject);
         user.setRoles(roles);
         userRepository.save(user);
         return UserDto.builder().roles(user.getRoles()).nameSurname(user.getNameSurname()).username(user.getUsername()).build();
@@ -153,14 +150,11 @@ public class UserManagementService {
      */
     @CustomLogDebug
     public boolean userDelRole(String username,String role){
-        if (roleRepository.findByName(role) == null){
-            throw new GenericException("Role not available!");
-        }
-        User user = userRepository.findByUsernameAndDeletedFalse(username);
 
-        if (user == null){
-            throw new UserNotFoundException("User Not Found!");
-        }
+        roleRepository.findByName(role).orElseThrow(() -> new GenericException("Role not available!"));
+
+        User user = userRepository.findByUsernameAndDeletedFalse(username).orElseThrow(() -> new UserNotFoundException("User Not Found!"));
+
 
         List<Role> roles = new ArrayList<>();
         int counter = 0;
