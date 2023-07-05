@@ -7,9 +7,11 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Log4j2
 @RestController
-@RequestMapping("/api/v1/login")
+@RequestMapping("/api/v1/auth")
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
@@ -18,24 +20,24 @@ public class AuthenticationController {
     }
 
 
-    @PostMapping("/save")
-    public ResponseEntity<String> save (@RequestBody UserDto userDto){
-        String responseObject = authenticationService.save(userDto);
-        return ResponseEntity.ok(responseObject);
+    @CustomLogInfo
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUser(@RequestBody UserDto userDto){
+        return ResponseEntity.ok(authenticationService.registerUser(userDto));
     }
 
 
     @CustomLogInfo
-    @PostMapping("/auth")
-    public ResponseEntity<String> auth(@RequestBody UserDto userDto){
-        String responseObject = authenticationService.auth(userDto);
-        return ResponseEntity.ok(responseObject);
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(@RequestBody UserDto userDto){
+        return ResponseEntity.ok(authenticationService.auth(userDto));
     }
 
     @CustomLogInfo
-    @GetMapping("/getUser")
-    public ResponseEntity<UserDto> getUserDtoByToken(@RequestParam String token){
-        return ResponseEntity.ok(authenticationService.getUserDto(token));
+    @GetMapping("/getroles")
+    public List<String> getRoles(@RequestParam String username){
+        return authenticationService.getUserRoles(username);
     }
+
 
 }

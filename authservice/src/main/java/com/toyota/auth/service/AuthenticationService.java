@@ -4,6 +4,7 @@ import com.toyota.auth.exception.UserAlreadyExistException;
 import com.toyota.auth.dto.UserDto;
 import com.toyota.auth.entity.User;
 import com.toyota.auth.exception.UserNotFoundException;
+import com.toyota.auth.jwt.JwtService;
 import com.toyota.auth.log.CustomLogDebug;
 import com.toyota.auth.repository.RoleRepository;
 import com.toyota.auth.repository.UserRepository;
@@ -15,7 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Log4j2
 @Service
@@ -23,6 +25,7 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
     private final RoleRepository roleRepository;
 
     public AuthenticationService(UserRepository userRepository, JwtService jwtService, AuthenticationManager authenticationManager, RoleRepository roleRepository) {
@@ -45,9 +48,9 @@ public class AuthenticationService {
      */
 
     @CustomLogDebug
-    public String save(UserDto userDto) {
-        Optional<User> user1 = userRepository.findByUsername(userDto.getUsername());
-        if (user1.isEmpty()){
+    public String registerUser(UserDto userDto) {
+        User user1 = userRepository.findByUsername(userDto.getUsername()).orElse(null);
+        if (user1 == null){
             User user = User.builder().username(userDto.getUsername()).password(encoder().encode(userDto.getPassword())).nameSurname(userDto.getNameSurname())
                     .roles(roleRepository.findAllByName("ROLE_ADMIN")).deleted(false).build();
 
@@ -66,11 +69,7 @@ public class AuthenticationService {
     @CustomLogDebug
     public String auth(UserDto userRequest) {
         try {
-            User user = userRepository.findByUsernameAndDeletedFalse(userRequest.getUsername());
-            if (user == null){
-                throw new UserNotFoundException("User not found");
-            }
-            System.out.println(userRequest.getPassword());
+            User user = userRepository.findByUsernameAndDeletedFalse(userRequest.getUsername()).orElseThrow(() -> new UserNotFoundException("User not found"));
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userRequest.getUsername(),userRequest.getPassword()));
             return jwtService.generateToken(user);
         }
@@ -80,17 +79,26 @@ public class AuthenticationService {
 
     }
 
+
+
+
     /**
-     * Get User Information  with JWT
-     * @param  token - JWT
-     * @return  UserDto - User Information
+     * Get User Roles with username
+     * @param username
+     * @return List<String> - User Roles
      */
+
     @CustomLogDebug
-    public UserDto getUserDto(String token){
-        User user = userRepository.findByUsernameAndDeletedFalse(jwtService.findUsername(token));
-        if (user == null){
-            throw new UserNotFoundException("User not found");
+    public List<String> getUserRoles(String username) {
+
+        User user =userRepository.findByUsernameAndDeletedFalse(username).orElse(null);
+
+        if (user != null){
+            List<String> roles = user.getRoles().stream().map(x -> x.getName()).toList();
+            return roles;
         }
-        return UserDto.builder().username(user.getUsername()).nameSurname(user.getNameSurname()).roles(user.getRoles()).build();
+
+        return new ArrayList<>();
     }
+
 }

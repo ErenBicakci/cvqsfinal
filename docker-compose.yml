@@ -12,19 +12,9 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
-
-  eurekaserver:
-    build: ./eurekaserver/
-    ports:
-      - 8761:8761
-    environment:
-      PROFILE: dev
-    container_name: eurekaserver
-
   auth:
     depends_on:
       - postgres
-      - eurekaserver
     build: ./authservice/
     ports:
       - 8181:8181
@@ -40,7 +30,6 @@ services:
   cvqs:
     depends_on:
       - postgres
-      - eurekaserver
     build: ./Main/
     ports:
       - 8080:8080
@@ -56,7 +45,6 @@ services:
   management:
     depends_on:
       - postgres
-      - eurekaserver
     build: ./management/
     ports:
       - 8282:8282
