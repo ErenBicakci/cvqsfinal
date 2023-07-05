@@ -161,13 +161,15 @@ DOCKERFILE :
 
 DOCKER-COMPOSE :
 
+- First, the database container is initialized. The port database name, user name and user password that this container will listen to are specified. When the container is deleted and used again, the data is kept in the volume named "db-data" so that the data is not lost.
+
 ![DOCKER-COMPOSE](https://i.imgur.com/7wi7TP2.png)
 
 ### 🔨 Run the App
 
 ### Docker Compose
 
-1. Download your project from this link `[https://github.com/Rapter1990/cqrs-example](https://github.com/ErenBicakci/cvqsfinal)`
+1. Download your project from this link `[https://github.com/ErenBicakci/cvqsfinal]`
 2. Go to the management folder :  `cd management`
 3. Run this command : `mvn clean install`
 4. Go back to previous folder : `cd ..`
