@@ -161,7 +161,39 @@ DOCKERFILE :
 
 DOCKER-COMPOSE :
 
-- First, the database container is initialized. The port database name, user name and user password that this container will listen to are specified. When the container is deleted and used again, the data is kept in the volume named "db-data" so that the data is not lost.
-
 ![DOCKER-COMPOSE](https://i.imgur.com/7wi7TP2.png)
+
+### 🔨 Run the App
+
+### Docker Compose
+
+1. Download your project from this link `[https://github.com/Rapter1990/cqrs-example](https://github.com/ErenBicakci/cvqsfinal)`
+2. Go to the management folder :  `cd management`
+3. Run this command : `mvn clean install`
+4. Go back to previous folder : `cd ..`
+5. Go to the main folder :  `cd main`
+6. Run this command : `mvn clean install`
+7. Go back to previous folder : `cd ..`
+8. Go to the authservice folder :  `cd authservice`
+9. Run this command : `mvn clean install`
+10. Go back to previous folder : `cd ..`
+11. Run docker-compose though this command `docker-compose up`
+12. Send any request via postman address
+13. Show postgresql tables
+```
+    -> docker exec -it postgres psql -U cvqstestdb
+    -> \c cvqstestdb
+    -> \dt
+    Sample output
+    Schema |      Name       | Type  |  Owner
+    --------+-----------------+-------+----------
+    public | defect          | table | postgres
+    public | defect_location | table | postgres
+    public | image           | table | postgres
+    public | role_table      | table | postgres
+    public | user_role       | table | postgres
+    public | user_table      | table | postgres
+    public | vehicle         | table | postgres
+    public | vehicle_defect  | table | postgres
+```
     
