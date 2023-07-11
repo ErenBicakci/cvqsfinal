@@ -7,6 +7,7 @@ import com.toyota.cvqsfinal.entity.Defect;
 import com.toyota.cvqsfinal.entity.Image;
 import com.toyota.cvqsfinal.repository.DefectRepository;
 import com.toyota.cvqsfinal.repository.ImageRepository;
+import com.toyota.cvqsfinal.repository.VehicleDefectRepository;
 import com.toyota.cvqsfinal.utility.DtoConvert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,13 +32,18 @@ class DefectServiceTest {
      @Spy
      private DtoConvert dtoConvert;
 
+     @Mock
+     private VehicleDefectService vehicleDefectService;
+
+     @Mock
+     private VehicleDefectRepository vehicleDefectRepository;
 
     private DefectService defectService;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        defectService = new DefectService(imageRepository, defectRepository, dtoConvert);
+        defectService = new DefectService(imageRepository, defectRepository, dtoConvert,vehicleDefectService,vehicleDefectRepository);
     }
     @Test
     void testDefectSave() {
@@ -61,6 +67,7 @@ class DefectServiceTest {
         image.setDeleted(true);
         Mockito.verify(defectRepository, Mockito.times(1)).save(defect);
         Mockito.verify(imageRepository, Mockito.times(1)).save(image);
+        Mockito.verify(vehicleDefectRepository, Mockito.times(1)).findVehicleDefectsByDefectId(1L);
     }
 
     @Test

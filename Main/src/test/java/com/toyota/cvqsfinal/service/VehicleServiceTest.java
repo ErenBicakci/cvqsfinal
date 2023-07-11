@@ -34,11 +34,13 @@ class VehicleServiceTest {
     @Spy
     private DtoConvert dtoConvert;
 
+    @Mock
+    private VehicleDefectService vehicleDefectService;
     private VehicleService vehicleService;
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        vehicleService = new VehicleService(vehicleRepository, vehicleDefectRepository, dtoConvert);
+        vehicleService = new VehicleService(vehicleRepository, vehicleDefectRepository, dtoConvert, vehicleDefectService);
     }
 
     @Test

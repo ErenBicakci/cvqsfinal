@@ -28,6 +28,8 @@ public class DefectService {
     private final ImageRepository imageRepository;
     private final DefectRepository defectRepository;
     private final DtoConvert dtoConvert;
+    private final VehicleDefectService vehicleDefectService;
+    private final VehicleDefectRepository vehicleDefectRepository;
 
     /**
      *
@@ -83,6 +85,11 @@ public class DefectService {
             defect.getImage().setDeleted(true);
             imageRepository.save(defect.getImage());
             defectRepository.save(defect);
+
+            vehicleDefectRepository.findVehicleDefectsByDefectId(defectId).stream().filter(vehicleDefect -> !vehicleDefect.isDeleted()).forEach(vehicleDefect -> {
+                vehicleDefectService.vehicleDefectDel(vehicleDefect.getId());
+            });
+
             return true;
         }
         throw new DefectNotFoundException("Defect not found");

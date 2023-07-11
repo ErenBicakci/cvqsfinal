@@ -3,6 +3,7 @@ package com.toyota.cvqsfinal.service;
 import com.toyota.cvqsfinal.dto.GetVehicleParameters;
 import com.toyota.cvqsfinal.dto.VehicleDto;
 import com.toyota.cvqsfinal.entity.Vehicle;
+import com.toyota.cvqsfinal.entity.VehicleDefect;
 import com.toyota.cvqsfinal.exception.GenericException;
 import com.toyota.cvqsfinal.exception.VehicleNotFoundException;
 import com.toyota.cvqsfinal.log.CustomLogDebug;
@@ -31,6 +32,8 @@ public class VehicleService {
     private final VehicleDefectRepository vehicleDefectRepository;
 
     private final DtoConvert dtoConvert;
+
+    private final VehicleDefectService vehicleDefectService;
 
 
     /**
@@ -109,17 +112,14 @@ public class VehicleService {
      * @param vehicleId - Vehicle id
      * @return boolean - if vehicle deleted true else false
      */
+
     @CustomLogDebug
+    @Transactional
     public boolean vehicleDelete(Long vehicleId){
         Vehicle vehicle = vehicleRepository.findByIdAndDeletedFalse(vehicleId);
         if (vehicle != null){
+            vehicle.getVehicleDefect().stream().filter(vehicleDefect -> !vehicleDefect.isDeleted()).forEach(vehicleDefect -> vehicleDefectService.vehicleDefectDel(vehicleDefect.getId()));
             vehicle.setDeleted(true);
-            vehicle.getVehicleDefect().forEach(
-                    vehicleDefect -> {
-                        vehicleDefect.setDeleted(true);
-                        vehicleDefectRepository.save(vehicleDefect);
-                    }
-            );
             vehicleRepository.save(vehicle);
             return true;
         }
