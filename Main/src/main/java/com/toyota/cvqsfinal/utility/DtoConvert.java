@@ -67,6 +67,9 @@ public class DtoConvert {
      */
 
     public VehicleDefectDto vehicleDefectToVehicleDefectDto(VehicleDefect vehicleDefect){
+        if (vehicleDefect.isDeleted()){
+            return null;
+        }
         VehicleDefectDto vehicleDefectDto = new VehicleDefectDto();
         vehicleDefectDto.setId(vehicleDefect.getId());
         vehicleDefectDto.setDefectLocations(vehicleDefect.getDefectLocations());
@@ -85,7 +88,7 @@ public class DtoConvert {
         vehicleDto.setId(vehicle.getId());
         vehicleDto.setVehicleCode(vehicle.getCode());
         vehicleDto.setModelNo(vehicle.getModelNo());
-        vehicleDto.setVehicleDefectDtos(vehicle.getVehicleDefect().stream().map(this::vehicleDefectToVehicleDefectDto).toList());
+        vehicleDto.setVehicleDefectDtos(vehicle.getVehicleDefect().stream().map(this::vehicleDefectToVehicleDefectDto).filter(vehicleDefectDto -> vehicleDefectDto != null).toList());
         return vehicleDto;
     }
 }

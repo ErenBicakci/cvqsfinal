@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,7 +49,9 @@ class AuthenticationServiceTest {
 
     @Test
     public void testAuth(){
-        User user = User.builder().username("testuser").password("testpassword").nameSurname("Test User").build();
+        List<Role> roles = new ArrayList<>();
+        roles.add(Role.builder().name("ROLE_ADMIN").build());
+        User user = User.builder().username("testuser").password("testpassword").roles(roles).nameSurname("Test User").build();
         Mockito.when(userRepository.findByUsernameAndDeletedFalse("testuser")).thenReturn(Optional.of(user));
         Mockito.when(authenticationManager.authenticate(ArgumentMatchers.any(UsernamePasswordAuthenticationToken.class))).thenReturn(null);
         UserDto userDto = UserDto.builder().username("testuser").password("testpassword").nameSurname("Test User").build();
