@@ -44,7 +44,7 @@ public class VehicleService {
      */
     @CustomLogDebug
     public VehicleDto vehicleSave(VehicleDto vehicleSaveDto){
-        if (vehicleRepository.findByCodeAndDeletedFalse(vehicleSaveDto.getVehicleCode()) == null){
+        if (vehicleRepository.findVehicleByCode(vehicleSaveDto.getVehicleCode()) == null){
             Vehicle vehicle = vehicleRepository.save(Vehicle.builder().code(vehicleSaveDto.getVehicleCode()).modelNo(vehicleSaveDto.getModelNo()).build());
             return VehicleDto.builder().id(vehicle.getId()).vehicleCode(vehicleSaveDto.getVehicleCode()).modelNo(vehicleSaveDto.getModelNo()).build();
         }

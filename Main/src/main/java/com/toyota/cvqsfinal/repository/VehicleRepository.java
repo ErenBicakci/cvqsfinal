@@ -11,7 +11,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle,Long> {
 
     Page<Vehicle> findAllByCodeLikeAndModelNoLikeAndDeletedFalse(String code,String modelNo, Pageable pageable);
 
-    Vehicle findByCodeAndDeletedFalse(String code);
+    Vehicle findVehicleByCode(String code);
     Vehicle findByIdAndDeletedFalse(Long id);
 
 
