@@ -1,6 +1,8 @@
 package com.toyota.management.jwt;
 
 import com.toyota.management.client.ManagementClient;
+import com.toyota.management.dto.TokenControl;
+import com.toyota.management.entity.Role;
 import com.toyota.management.exception.GenericException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -18,18 +20,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
 
-    private final JwtService jwtService;
+
     private final ManagementClient managementClient;
 
 
 
-    public JwtAuthenticationFilter(JwtService jwtService, ManagementClient managementClient) {
-        this.jwtService = jwtService;
+    public JwtAuthenticationFilter( ManagementClient managementClient) {
+
 
         this.managementClient = managementClient;
     }
@@ -40,23 +46,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
 
             String jwt = parseJwt(req);
+            TokenControl tokenControl = managementClient.getAuthorities(jwt);
+            if (jwt != null && tokenControl.isStatus()) {
 
-            if (jwt != null && jwtService.validateJwtToken(jwt)) {
 
-                String username = jwtService.findUsername(jwt);
                 List<SimpleGrantedAuthority> authorities=new ArrayList<>();
-                for(String rolename : managementClient.getAuthorities(username)){
-                    authorities.add(new SimpleGrantedAuthority(rolename));
+
+
+                for(Role role : tokenControl.getRoles()){
+                    authorities.add(new SimpleGrantedAuthority(role.getName()));
                 }
 
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        username, null, authorities);
+                        tokenControl.getUsername(), null, authorities);
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-                throw new GenericException("Token is not valid" + e.getMessage());
+            throw new GenericException("Token is not valid" + e.getMessage());
         }
 
         chain.doFilter(req, res);

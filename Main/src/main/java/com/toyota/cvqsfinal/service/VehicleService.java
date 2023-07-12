@@ -3,7 +3,6 @@ package com.toyota.cvqsfinal.service;
 import com.toyota.cvqsfinal.dto.GetVehicleParameters;
 import com.toyota.cvqsfinal.dto.VehicleDto;
 import com.toyota.cvqsfinal.entity.Vehicle;
-import com.toyota.cvqsfinal.entity.VehicleDefect;
 import com.toyota.cvqsfinal.exception.GenericException;
 import com.toyota.cvqsfinal.exception.VehicleNotFoundException;
 import com.toyota.cvqsfinal.log.CustomLogDebug;

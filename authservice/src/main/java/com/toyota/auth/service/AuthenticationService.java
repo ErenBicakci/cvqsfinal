@@ -1,5 +1,7 @@
 package com.toyota.auth.service;
 
+import com.toyota.auth.dto.TokenControl;
+import com.toyota.auth.entity.Role;
 import com.toyota.auth.exception.UserAlreadyExistException;
 import com.toyota.auth.dto.UserDto;
 import com.toyota.auth.entity.User;
@@ -16,7 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
@@ -84,21 +85,26 @@ public class AuthenticationService {
 
     /**
      * Get User Roles with username
-     * @param username
+     * @param token - JWT
      * @return List<String> - User Roles
      */
 
     @CustomLogDebug
-    public List<String> getUserRoles(String username) {
+    public TokenControl validateToken(String token) {
+        try {
+            String username = jwtService.findUsername(token);
+            User user =userRepository.findByUsernameAndDeletedFalse(username).orElse(null);
 
-        User user =userRepository.findByUsernameAndDeletedFalse(username).orElse(null);
+            if (user != null){
+                List<Role> roles = user.getRoles();
 
-        if (user != null){
-            List<String> roles = user.getRoles().stream().map(x -> x.getName()).toList();
-            return roles;
+                return TokenControl.builder().status(jwtService.validateJwtToken(token)).username(username).roles(roles).build();
+            }
         }
+        catch (Exception e){
+        }
+        return new TokenControl();
 
-        return new ArrayList<>();
     }
 
 }

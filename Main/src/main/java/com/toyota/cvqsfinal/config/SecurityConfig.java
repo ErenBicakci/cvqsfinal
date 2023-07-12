@@ -26,7 +26,7 @@ public class SecurityConfig {
         return httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/listing/**").hasAuthority("ROLE_TEAMLEADER")
-                .requestMatchers("/api/v1/vehicle/**").hasAuthority("ROLE_OPERATOR")
+                .requestMatchers("/api/v1/vehicle/**").hasAuthority  ("ROLE_OPERATOR")
                 .requestMatchers("/api/v1/defect/**").hasAuthority("ROLE_OPERATOR")
                 .requestMatchers("/api/v1/vehicledefect/**").hasAuthority("ROLE_OPERATOR")
                 .anyRequest().permitAll()

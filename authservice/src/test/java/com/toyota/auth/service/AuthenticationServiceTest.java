@@ -1,4 +1,5 @@
 package com.toyota.auth.service;
+import com.toyota.auth.dto.TokenControl;
 import com.toyota.auth.dto.UserDto;
 import com.toyota.auth.entity.Role;
 import com.toyota.auth.entity.User;
@@ -60,15 +61,17 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    public void testGetRoles(){
+    public void testValidateToken(){
 
         List<Role> roles = List.of(Role.builder().name("ROLE_ADMIN").build(), Role.builder().name("ROLE_USER").build(), Role.builder().name("ROLE_TEAMLEADER").build());
-        User user = User.builder().username("testuser").password("testpassword").nameSurname("Test User").roles(roles).build();
+        User user = User.builder().username("testuser").password("testpassword").roles(roles).nameSurname("Test User").build();
         Mockito.when(userRepository.findByUsernameAndDeletedFalse("testuser")).thenReturn(Optional.of(user));
-        List<String> userRoles = authenticationService.getUserRoles(user.getUsername());
-        assertEquals(roles.get(0).getName(), userRoles.get(0));
-        assertEquals(roles.get(1).getName(), userRoles.get(1));
-        assertEquals(roles.get(2).getName(), userRoles.get(2));
+        TokenControl tokenControl = authenticationService.validateToken(jwtService.generateToken(user));
+        assertEquals(roles.get(0).getName(), tokenControl.getRoles().get(0).getName());
+        assertEquals(roles.get(1).getName(), tokenControl.getRoles().get(1).getName());
+        assertEquals(roles.get(2).getName(), tokenControl.getRoles().get(2).getName());
+        assertEquals(user.getUsername(), tokenControl.getUsername());
+        assertEquals(true, tokenControl.isStatus());
     }
 
 }

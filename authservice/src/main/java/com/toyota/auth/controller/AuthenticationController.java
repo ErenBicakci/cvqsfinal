@@ -1,5 +1,6 @@
 package com.toyota.auth.controller;
 
+import com.toyota.auth.dto.TokenControl;
 import com.toyota.auth.dto.UserDto;
 import com.toyota.auth.log.CustomLogInfo;
 import com.toyota.auth.service.AuthenticationService;
@@ -34,9 +35,9 @@ public class AuthenticationController {
     }
 
     @CustomLogInfo
-    @GetMapping("/getroles")
-    public List<String> getRoles(@RequestParam String username){
-        return authenticationService.getUserRoles(username);
+    @GetMapping("/validate")
+    public TokenControl getRoles(@RequestParam String jwtToken){
+        return authenticationService.validateToken(jwtToken);
     }
 
 

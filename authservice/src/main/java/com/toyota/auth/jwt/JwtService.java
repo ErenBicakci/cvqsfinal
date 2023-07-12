@@ -59,13 +59,6 @@ public class JwtService {
                 .compact();
     }
 
-    public String[] getRoleNamesFromJwtToken(String token) {
-        if(token.startsWith("Bearer")){
-            token = token.substring(7);
-        }
-        String username=Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getIssuer();
-        return  username.split(" ");
-    }
 
 
     public boolean validateJwtToken(String authToken) {

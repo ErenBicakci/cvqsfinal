@@ -1,14 +1,14 @@
 package com.toyota.cvqsfinal.jwt;
 
 import com.toyota.cvqsfinal.client.ManagementClient;
+import com.toyota.cvqsfinal.dto.TokenControl;
+import com.toyota.cvqsfinal.entity.Role;
 import com.toyota.cvqsfinal.exception.GenericException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.hibernate.mapping.Collection;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -25,13 +25,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
 
-    private final JwtService jwtService;
+
     private final ManagementClient managementClient;
 
 
 
-    public JwtAuthenticationFilter(JwtService jwtService, ManagementClient managementClient) {
-        this.jwtService = jwtService;
+    public JwtAuthenticationFilter( ManagementClient managementClient) {
+
 
         this.managementClient = managementClient;
     }
@@ -42,17 +42,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
 
             String jwt = parseJwt(req);
+            TokenControl tokenControl = managementClient.getAuthorities(jwt);
+            if (jwt != null && tokenControl.isStatus()) {
 
-            if (jwt != null && jwtService.validateJwtToken(jwt)) {
 
-                String username = jwtService.findUsername(jwt);
                 List<SimpleGrantedAuthority> authorities=new ArrayList<>();
-                for(String rolename : managementClient.getAuthorities(username)){
-                    authorities.add(new SimpleGrantedAuthority(rolename));
+
+
+                for(Role role : tokenControl.getRoles()){
+                    authorities.add(new SimpleGrantedAuthority(role.getName()));
                 }
 
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        username, null, authorities);
+                        tokenControl.getUsername(), null, authorities);
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
