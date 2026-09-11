@@ -1,5 +1,9 @@
 
-# CVQS Back-End Project
+# CVQS (Central Vehicle Quality System) - Back-End Project
+
+> [!NOTE]
+> **Academic Milestone / University 2nd Year Project (2023)**  
+> This project was developed during my sophomore year (2nd year of university) as a hands-on exploration of Java & Spring Boot microservice architectures, containerization (Docker Compose), AOP-based logging, and industrial vehicle defect tracking. Preserved as an early engineering milestone.
 
 The CVQS Backend project allows to record defects that occur during the vehicle manufacturing process. It is developed using microservice architecture.
 

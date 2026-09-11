@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Logs
+**/logs/
+*.log
+*.log.*
+*.gz
+
+# Local cache / Docker
+**/m2/
